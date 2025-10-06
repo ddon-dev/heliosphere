@@ -60,6 +60,7 @@ func dead(_dead):
 	).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	animationMain.play("dead")
 	await animationMain.animation_finished
+	GameManager.enemyExploded.emit()
 	var explosion = EXPLOSION.instantiate()
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position

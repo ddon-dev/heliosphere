@@ -95,6 +95,7 @@ func dead(_dead):
 	animationMain.play("dead")
 	shoot_anim.play("RESET")
 	await animationMain.animation_finished
+	GameManager.enemyExploded.emit()
 	var explosion = EXPLOSION.instantiate()
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position

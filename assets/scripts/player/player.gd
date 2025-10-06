@@ -202,6 +202,7 @@ func death(_death):
 			time_til_respawn.start()
 	
 func death_explosions():
+	GameManager.playerExploding.emit()
 	var small_boom = EXPLOSION_SMALL.instantiate()
 	get_parent().add_child(small_boom)
 	small_boom.global_position = global_position

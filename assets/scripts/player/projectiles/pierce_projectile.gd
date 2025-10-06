@@ -16,6 +16,7 @@ func _physics_process(delta: float) -> void:
 	global_position += direction * speed * delta
 	
 func hit():
+	GameManager.enemyHit.emit()
 	GameManager.ultCharge += 3
 	var particles = PARTICLES.instantiate()
 	get_parent().add_child(particles)

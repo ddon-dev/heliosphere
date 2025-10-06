@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://5m0c4rhkrs8k"]
 
 [ext_resource type="Texture2D" uid="uid://cdwimxjfbnfx5" path="res://assets/sprites/enemies/shooter/projectile0.png" id="1_e2sq5"]
-[ext_resource type="Script" uid="uid://cjhgfkgiql64p" path="res://assets/scripts/enemies/enemy_projectile.gd" id="1_jw3qg"]
+[ext_resource type="Script" uid="uid://cjhgfkgiql64p" path="res://assets/scripts/enemies/projectiles/enemy_projectile.gd" id="1_jw3qg"]
 [ext_resource type="Script" uid="uid://b6edpkqidu6u4" path="res://assets/scripts/enemies/hitbox.gd" id="3_vklgp"]
 
 [sub_resource type="Curve" id="Curve_rirfm"]

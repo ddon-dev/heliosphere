@@ -6,6 +6,7 @@ extends Node2D
 @onready var ultBeam: PackedScene = preload("uid://cjktfoqagv4e6")
 
 func fire():
+	GameManager.ultFiring.emit()
 	var ult = ultBeam.instantiate()
 	get_parent().add_child(ult)
 	ult.position = spawn_point.position

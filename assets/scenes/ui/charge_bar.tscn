@@ -1,0 +1,206 @@
+[gd_scene load_steps=17 format=3 uid="uid://dc0nl1yw616j1"]
+
+[ext_resource type="Texture2D" uid="uid://c4nmmoa7qc5jn" path="res://assets/sprites/ui/chargebar.png" id="1_vamc5"]
+[ext_resource type="Texture2D" uid="uid://ddfqkr5w0xq5u" path="res://assets/sprites/ui/chargebar_fill.png" id="2_8pqik"]
+[ext_resource type="Script" uid="uid://sb3ocsj1mukh" path="res://ult_charge_bar.gd" id="3_ogehh"]
+[ext_resource type="FontFile" uid="uid://ckcf1ufa4ixa5" path="res://assets/fonts/ChunkyDunk.ttf" id="4_37ypk"]
+[ext_resource type="Script" uid="uid://c1nunsgmicevp" path="res://assets/scenes/ui/charge_text.gd" id="5_d5l4r"]
+
+[sub_resource type="Animation" id="Animation_x6575"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.14901961, 0.7176471, 0.9098039, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0871f"]
+resource_name = "charge_cd"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9999999, 1.9999999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.2886, 0.65715, 0.78, 0.88235295), Color(0.44820002, 0.51705, 0.54, 0.88235295), Color(0.2886, 0.65715, 0.78, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_e1ekg"]
+resource_name = "charge_full"
+length = 3.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000007, 0.6, 0.8000001, 1, 1.2, 1.4000001, 1.6000001, 1.8000001, 1.9999999, 2.1999998, 2.4, 2.6, 2.8000002, 3, 3.2000003, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(4.235506e-06, 0.77704203, 0.9973677, 0.88235295), Color(0, 0.4500003, 1, 0.88235295), Color(0, 0.116666794, 1, 0.88235295), Color(0.2166667, 0, 1, 0.88235295), Color(0.5500002, 0, 1, 0.88235295), Color(0.8833332, 0, 1, 0.88235295), Color(1, 0, 0.7833333, 0.88235295), Color(1, 0, 0.4499998, 0.88235295), Color(1, 0, 0.116666794, 0.88235295), Color(1, 0.2166667, 0, 0.88235295), Color(1, 0.55, 0, 0.88235295), Color(1, 0.8833333, 0, 0.88235295), Color(0.7833333, 1, 0, 0.88235295), Color(0.45000005, 1, 0, 0.88235295), Color(0.116666794, 1, 0, 0.88235295), Color(0, 1, 0.2166667, 0.88235295), Color(0, 1, 0.5500002, 0.88235295), Color(0, 1, 0.88333344, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_s1n25"]
+resource_name = "charging"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.14901961, 0.7254902, 0.92156863, 0.88235295), Color(0.39, 0.84749997, 1, 0.88235295), Color(0.14901961, 0.7254902, 0.92156863, 0.88235295)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e1ekg"]
+_data = {
+&"RESET": SubResource("Animation_x6575"),
+&"charge_cd": SubResource("Animation_0871f"),
+&"charge_full": SubResource("Animation_e1ekg"),
+&"charging": SubResource("Animation_s1n25")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_0871f"]
+font = ExtResource("4_37ypk")
+font_size = 32
+shadow_size = 5
+shadow_color = Color(0.14720003, 0.7268, 0.92, 0.88235295)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_faq8n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.14720003, 0.7268, 0.92, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_a707y"]
+resource_name = "charge_cd"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.2886, 0.65715, 0.78, 0.88235295), Color(0.44820002, 0.51705, 0.54, 0.88235295), Color(0.2886, 0.65715, 0.78, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_10n3l"]
+resource_name = "charge_full"
+length = 3.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000004, 0.6, 0.8000001, 1, 1.2, 1.4000001, 1.6000001, 1.8000001, 2, 2.2, 2.4, 2.6000001, 2.8000002, 3, 3.2000003, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(4.235506e-06, 0.77704203, 0.9973677, 0.88235295), Color(0, 0.4500003, 1, 0.88235295), Color(0, 0.116666794, 1, 0.88235295), Color(0.2166667, 0, 1, 0.88235295), Color(0.5500002, 0, 1, 0.88235295), Color(0.8833332, 0, 1, 0.88235295), Color(1, 0, 0.7833333, 0.88235295), Color(1, 0, 0.4499998, 0.88235295), Color(1, 0, 0.116666794, 0.88235295), Color(1, 0.2166667, 0, 0.88235295), Color(1, 0.55, 0, 0.88235295), Color(1, 0.8833333, 0, 0.88235295), Color(0.7833333, 1, 0, 0.88235295), Color(0.45000005, 1, 0, 0.88235295), Color(0.116666794, 1, 0, 0.88235295), Color(0, 1, 0.2166667, 0.88235295), Color(0, 1, 0.5500002, 0.88235295), Color(0, 1, 0.88333344, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_pshpe"]
+resource_name = "charging"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.14901961, 0.7254902, 0.92156863, 0.88235295), Color(0.46, 0.805, 0.92, 0.88235295), Color(0.14901961, 0.7254902, 0.92156863, 0.88235295)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_10n3l"]
+_data = {
+&"RESET": SubResource("Animation_faq8n"),
+&"charge_cd": SubResource("Animation_a707y"),
+&"charge_full": SubResource("Animation_10n3l"),
+&"charging": SubResource("Animation_pshpe")
+}
+
+[node name="TextureProgressBar" type="TextureProgressBar" node_paths=PackedStringArray("charge_fill_animations", "time_add_charge")]
+size_flags_horizontal = 8
+size_flags_vertical = 8
+value = 50.0
+texture_under = ExtResource("1_vamc5")
+texture_progress = ExtResource("2_8pqik")
+tint_progress = Color(0.14901961, 0.7254902, 0.92156863, 0.88235295)
+script = ExtResource("3_ogehh")
+charge_fill_animations = NodePath("barColors")
+time_add_charge = NodePath("addCharge")
+
+[node name="barColors" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_e1ekg")
+}
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -127.57884
+offset_top = -16.0
+offset_right = -6.578842
+offset_bottom = 16.0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "CHARGE"
+label_settings = SubResource("LabelSettings_0871f")
+horizontal_alignment = 1
+script = ExtResource("5_d5l4r")
+
+[node name="textColors" type="AnimationPlayer" parent="Label2"]
+libraries = {
+&"": SubResource("AnimationLibrary_10n3l")
+}
+
+[node name="addCharge" type="Timer" parent="."]
+process_callback = 0
+wait_time = 1.5
+autostart = true

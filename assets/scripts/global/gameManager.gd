@@ -18,6 +18,11 @@ var ultChargeable: bool = true
 
 # Signals
 signal lifeUpdate(life_update)
+signal enemyHit
+signal enemyExploded
+signal ultFiring
+signal playerExploding
+signal playerExploded
 signal ultDone
 signal oneUpGet
 signal lasGet
@@ -31,6 +36,7 @@ func _ready():
 	life_down.wait_time = 0.2
 
 func player_death():
+	GameManager.playerExploded.emit()
 	life_down.start()
 	await life_down.timeout
 	lives -= 1
