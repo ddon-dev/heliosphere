@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://c201n8dncjw1l"]
+
+[ext_resource type="Script" uid="uid://drq060upjrros" path="res://assets/scenes/entities/enemies/health_bar.gd" id="1_yx1dx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1jf1o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nx6e1"]
+bg_color = Color(0.7, 0.11409999, 0.048999995, 1)
+skew = Vector2(0.3, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.375, 0, 1)
+border_blend = true
+corner_radius_top_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jf1o"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+skew = Vector2(0.3, 0)
+corner_radius_top_left = 20
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0, 0, 0, 0.27450982)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5cl2"]
+bg_color = Color(1, 1, 1, 1)
+skew = Vector2(0.3, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.41870955, 0.43225852, 0.41750938, 1)
+border_blend = true
+corner_radius_top_left = 20
+
+[node name="healthBar" type="ProgressBar" node_paths=PackedStringArray("health_drag", "damageBar")]
+z_index = 3
+offset_right = 96.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_1jf1o")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nx6e1")
+step = 1.0
+value = 60.0
+show_percentage = false
+script = ExtResource("1_yx1dx")
+health_drag = NodePath("Timer")
+damageBar = NodePath("damageBar")
+
+[node name="damageBar" type="ProgressBar" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1jf1o")
+theme_override_styles/fill = SubResource("StyleBoxFlat_j5cl2")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

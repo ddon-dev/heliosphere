@@ -1,0 +1,150 @@
+[gd_scene load_steps=9 format=3 uid="uid://sm7cffe8fgqo"]
+
+[ext_resource type="Texture2D" uid="uid://bht2n3f1hlj1y" path="res://assets/sprites/enemies/chaser/chaser_sheet.png" id="1_706g8"]
+[ext_resource type="Script" uid="uid://jw5xkw0tpvcv" path="res://assets/scenes/entities/enemies/enemy_chaser.gd" id="2_2lx8t"]
+
+[sub_resource type="Animation" id="Animation_2lx8t"]
+resource_name = "default"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_xepk2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hurtbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7npit"]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hurtbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0gs4h"]
+_data = {
+&"RESET": SubResource("Animation_xepk2"),
+&"dead": SubResource("Animation_7npit"),
+&"default": SubResource("Animation_2lx8t")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_706g8"]
+radius = 19.0
+height = 44.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2lx8t"]
+radius = 8.0
+height = 24.0
+
+[node name="enemy_chaser" type="Node2D"]
+script = ExtResource("2_2lx8t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 6
+texture = ExtResource("1_706g8")
+hframes = 2
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_0gs4h")
+}
+autoplay = "default"
+
+[node name="hurtbox" type="Area2D" parent="Sprite2D"]
+collision_layer = 64
+collision_mask = 12
+collision_priority = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hurtbox"]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_706g8")
+
+[node name="hitbox" type="Area2D" parent="Sprite2D"]
+position = Vector2(0, -2)
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitbox"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_2lx8t")
+debug_color = Color(0.9999998, 0.011895275, 0.051790707, 0.41960785)
+
+[connection signal="area_entered" from="Sprite2D/hurtbox" to="." method="_on_hurtbox_area_entered"]

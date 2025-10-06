@@ -1,0 +1,185 @@
+[gd_scene load_steps=13 format=3 uid="uid://cv51cjqwonc44"]
+
+[ext_resource type="Texture2D" uid="uid://b15nps3wte4po" path="res://assets/sprites/enemies/shooter/shooter_sheet.png" id="1_0bgn4"]
+[ext_resource type="Script" uid="uid://d1poc4hswwxsm" path="res://assets/scripts/enemies/enemy_shooter.gd" id="1_gcxo4"]
+[ext_resource type="Texture2D" uid="uid://rlv123kwgpvn" path="res://assets/sprites/vfx/miniboss_firing.png" id="3_vbepq"]
+
+[sub_resource type="Curve2D" id="Curve2D_wrcm0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 143)
+}
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_wrcm0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4r6du"]
+resource_name = "default"
+length = 0.22
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tg75i"]
+_data = {
+&"RESET": SubResource("Animation_wrcm0"),
+&"default": SubResource("Animation_4r6du")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tg75i"]
+radius = 62.000008
+height = 146.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_igc52"]
+radius = 55.026802
+height = 125.980225
+
+[sub_resource type="Animation" id="Animation_vbepq"]
+resource_name = "charging"
+length = 0.15
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_k1b8v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_spqsx"]
+_data = {
+&"RESET": SubResource("Animation_k1b8v"),
+&"charging": SubResource("Animation_vbepq")
+}
+
+[node name="enemy_shooter" type="Node2D"]
+z_index = 1
+script = ExtResource("1_gcxo4")
+
+[node name="shootStart" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(298, -64)
+curve = SubResource("Curve2D_wrcm0")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+rotates = false
+loop = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D"]
+texture_filter = 5
+texture = ExtResource("1_0bgn4")
+hframes = 2
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D/PathFollow2D"]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_tg75i")
+}
+autoplay = "default"
+
+[node name="chargeShot" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D"]
+position = Vector2(0, 56)
+
+[node name="fire" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D"]
+
+[node name="hurtbox" type="Area2D" parent="Path2D/PathFollow2D"]
+priority = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/hurtbox"]
+rotation = -1.5707941
+shape = SubResource("CapsuleShape2D_tg75i")
+
+[node name="hitbox" type="Area2D" parent="Path2D/PathFollow2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/hitbox"]
+position = Vector2(0, -1)
+rotation = -1.5530784
+shape = SubResource("CapsuleShape2D_igc52")
+debug_color = Color(0.99313027, 0, 0.24880138, 0.41960785)
+
+[node name="Marker2D" type="Marker2D" parent="Path2D/PathFollow2D"]
+position = Vector2(0, 56)
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/Marker2D"]
+visible = false
+texture_filter = 5
+position = Vector2(0, -9.536743e-07)
+scale = Vector2(0.19998538, 0.19998538)
+texture = ExtResource("3_vbepq")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D/PathFollow2D/Marker2D/Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_spqsx")
+}
+autoplay = "RESET"

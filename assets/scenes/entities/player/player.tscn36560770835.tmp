@@ -1,0 +1,425 @@
+[gd_scene load_steps=29 format=3 uid="uid://ckog1nfv7gj1"]
+
+[ext_resource type="Script" uid="uid://b2iira8konrj1" path="res://assets/scripts/player/player.gd" id="1_6aecq"]
+[ext_resource type="Texture2D" uid="uid://cbve5s54ytet0" path="res://assets/sprites/player/player_sheet.png" id="2_jrwbg"]
+[ext_resource type="Script" uid="uid://cwh7cjj2dcboy" path="res://assets/scripts/player/projectileSpawn.gd" id="3_grjco"]
+[ext_resource type="AudioStream" uid="uid://cb220gnmkobtj" path="res://assets/sound/sfx/player/fire.ogg" id="3_jrwbg"]
+[ext_resource type="Script" uid="uid://dn40k0rrlhjxy" path="res://assets/scripts/player/projectiles/ult_spawn.gd" id="4_qc3ln"]
+[ext_resource type="AudioStream" uid="uid://cg6vtgfjkmro4" path="res://assets/sound/sfx/player/ultCharging.ogg" id="4_wckgd"]
+[ext_resource type="AudioStream" uid="uid://bopa2d8pim130" path="res://assets/sound/sfx/player/ultFiring.ogg" id="5_otpad"]
+[ext_resource type="AudioStream" uid="uid://caq4l1nwvb4li" path="res://assets/sound/sfx/player/playerDeath.ogg" id="6_d1uob"]
+[ext_resource type="Script" uid="uid://dgmg8vxwjaifu" path="res://assets/scripts/player/firing_vfx.gd" id="7_d1uob"]
+[ext_resource type="Texture2D" uid="uid://dmss5wocwye73" path="res://assets/sprites/vfx/player_firing_normal.png" id="7_otpad"]
+[ext_resource type="Texture2D" uid="uid://ducjlpuvk8vkh" path="res://assets/sprites/vfx/player_charging_ult.png" id="10_158k2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4r6du"]
+radius = 34.0147
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1uob"]
+atlas = ExtResource("2_jrwbg")
+region = Rect2(0, 0, 128, 432)
+filter_clip = true
+
+[sub_resource type="Animation" id="Animation_2by3q"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../hurtbox/CollisionShape2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4r6du"]
+resource_name = "boost"
+length = 0.15
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../hurtbox/CollisionShape2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wbtfn"]
+resource_name = "default"
+length = 0.15
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../hurtbox/CollisionShape2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yeg6q"]
+resource_name = "slow"
+length = 0.15
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../hurtbox/CollisionShape2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.65, 0.65)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2by3q"]
+_data = {
+&"RESET": SubResource("Animation_2by3q"),
+&"boost": SubResource("Animation_4r6du"),
+&"default": SubResource("Animation_wbtfn"),
+&"slow": SubResource("Animation_yeg6q")
+}
+
+[sub_resource type="Animation" id="Animation_6uieu"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0yci6"]
+_data = {
+&"RESET": SubResource("Animation_6uieu")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yeg6q"]
+radius = 8.06226
+
+[sub_resource type="Animation" id="Animation_d1uob"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_otpad"]
+resource_name = "firing"
+length = 0.12
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_grjco"]
+resource_name = "off"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_grjco"]
+_data = {
+&"RESET": SubResource("Animation_d1uob"),
+&"firing": SubResource("Animation_otpad"),
+&"off": SubResource("Animation_grjco")
+}
+
+[sub_resource type="Animation" id="Animation_qc3ln"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_158k2"]
+resource_name = "charging"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cqym6"]
+_data = {
+&"RESET": SubResource("Animation_qc3ln"),
+&"charging": SubResource("Animation_158k2")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation", "animation_vfx", "sfx_shoot", "sfx_ultCharge", "sfx_ultFire", "sfx_death")]
+script = ExtResource("1_6aecq")
+animation = NodePath("MainAnimations")
+animation_vfx = NodePath("VFXAnimations")
+sfx_shoot = NodePath("sfx/shoot")
+sfx_ultCharge = NodePath("sfx/ultCharge")
+sfx_ultFire = NodePath("sfx/ultFire")
+sfx_death = NodePath("sfx/death")
+
+[node name="pickupArea" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4r6du")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 5
+position = Vector2(0, 2)
+texture = SubResource("AtlasTexture_d1uob")
+hframes = 2
+vframes = 6
+region_rect = Rect2(0, 0, 128, 432)
+
+[node name="MainAnimations" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_2by3q")
+}
+autoplay = "default"
+
+[node name="VFXAnimations" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_0yci6")
+}
+
+[node name="hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 160
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_yeg6q")
+debug_color = Color(0.826297, 0.166531, 0.0875394, 0.42)
+
+[node name="projectiles" type="Node2D" parent="." node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("3_grjco")
+spawn_point = NodePath("spawn_point")
+
+[node name="ultSpawn" type="Node2D" parent="projectiles" node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("4_qc3ln")
+spawn_point = NodePath("../spawn_point")
+
+[node name="ultCD" type="Timer" parent="projectiles/ultSpawn"]
+one_shot = true
+
+[node name="spawn_point" type="Marker2D" parent="projectiles"]
+position = Vector2(0, -37)
+
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("3_jrwbg")
+bus = &"SFX"
+
+[node name="ultCharge" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("4_wckgd")
+volume_db = 1.0
+bus = &"SFX"
+
+[node name="ultFire" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("5_otpad")
+volume_db = 1.0
+bus = &"SFX"
+
+[node name="death" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("6_d1uob")
+bus = &"SFX"
+
+[node name="vfx" type="Node2D" parent="." node_paths=PackedStringArray("vfx_fire", "animation", "ultCharging", "chargeAnim", "loop_duration")]
+script = ExtResource("7_d1uob")
+vfx_fire = NodePath("firing")
+animation = NodePath("firing/firing_animations")
+ultCharging = NodePath("ultCharging")
+chargeAnim = NodePath("ultCharging/AnimationPlayer")
+loop_duration = NodePath("ultCharging/loopDuration")
+
+[node name="firing" type="Sprite2D" parent="vfx"]
+visible = false
+z_index = -1
+texture_filter = 5
+texture = ExtResource("7_otpad")
+offset = Vector2(0, -7)
+hframes = 2
+vframes = 2
+
+[node name="firing_animations" type="AnimationPlayer" parent="vfx/firing"]
+libraries = {
+&"": SubResource("AnimationLibrary_grjco")
+}
+next/firing = &"off"
+
+[node name="ultCharging" type="Sprite2D" parent="vfx"]
+visible = false
+z_index = -1
+texture_filter = 5
+texture = ExtResource("10_158k2")
+offset = Vector2(0, -5)
+hframes = 2
+
+[node name="loopDuration" type="Timer" parent="vfx/ultCharging"]
+wait_time = 2.14
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="vfx/ultCharging"]
+libraries = {
+&"": SubResource("AnimationLibrary_cqym6")
+}
+
+[connection signal="fire" from="." to="vfx" method="_on_player_fire"]
+[connection signal="ultFire" from="." to="vfx" method="_on_player_ult_fire"]

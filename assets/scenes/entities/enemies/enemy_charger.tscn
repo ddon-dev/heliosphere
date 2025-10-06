@@ -1,0 +1,327 @@
+[gd_scene load_steps=28 format=3 uid="uid://nuo8r1sgp4we"]
+
+[ext_resource type="Texture2D" uid="uid://kki142lxyxfj" path="res://assets/sprites/enemies/charger/charger/charger_sheet.png" id="1_c0t31"]
+[ext_resource type="Script" uid="uid://ctwdr847dchq2" path="res://assets/scripts/enemies/enemy_charger.gd" id="1_iqc37"]
+[ext_resource type="Script" uid="uid://ck100b4j442uo" path="res://assets/scripts/enemies/hurtbox.gd" id="3_487io"]
+[ext_resource type="Texture2D" uid="uid://ii0f7jamc1km" path="res://assets/sprites/vfx/debris_charger.png" id="3_miev5"]
+[ext_resource type="Script" uid="uid://b6edpkqidu6u4" path="res://assets/scripts/enemies/hitbox.gd" id="4_7ax0g"]
+[ext_resource type="AudioStream" uid="uid://crfvwbvssu41p" path="res://assets/sound/sfx/enemies/enemyDeath.ogg" id="5_br8r5"]
+
+[sub_resource type="Animation" id="Animation_2by3q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/hurtbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_miev5"]
+resource_name = "dead"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/hurtbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_yeg6q"]
+resource_name = "default"
+length = 0.08
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4r6du"]
+_data = {
+&"RESET": SubResource("Animation_2by3q"),
+&"dead": SubResource("Animation_miev5"),
+&"default": SubResource("Animation_yeg6q")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_miev5"]
+radius = 22.0
+height = 62.0
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_7ax0g"]
+parameter_name = "tint"
+default_value_enabled = true
+default_value = Color(2, 2, 2, 1)
+
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_3p65j"]
+parameter_name = "enabled"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_nwars"]
+default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_pq555"]
+input_name = "color"
+
+[sub_resource type="VisualShader" id="VisualShader_0v7l0"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform bool enabled = false;
+uniform vec4 tint : source_color = vec4(2.000000, 2.000000, 2.000000, 1.000000);
+
+
+
+void vertex() {
+// BooleanParameter:3
+	bool n_out3p0 = enabled;
+
+
+// ColorParameter:2
+	vec4 n_out2p0 = tint;
+
+
+// Input:5
+	vec4 n_out5p0 = COLOR;
+
+
+	vec3 n_out4p0;
+// If:4
+	float n_in4p1 = 1.00000;
+	float n_in4p2 = 0.00001;
+	if(abs((n_out3p0 ? 1.0 : 0.0) - n_in4p1) < n_in4p2)
+	{
+		n_out4p0 = vec3(n_out2p0.xyz);
+	}
+	else if((n_out3p0 ? 1.0 : 0.0) < n_in4p1)
+	{
+		n_out4p0 = vec3(n_out5p0.xyz);
+	}
+	else
+	{
+		n_out4p0 = vec3(n_out5p0.xyz);
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out4p0;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/vertex/0/position = Vector2(860, 360)
+nodes/vertex/2/node = SubResource("VisualShaderNodeColorParameter_7ax0g")
+nodes/vertex/2/position = Vector2(180, 420)
+nodes/vertex/3/node = SubResource("VisualShaderNodeBooleanParameter_3p65j")
+nodes/vertex/3/position = Vector2(140, 140)
+nodes/vertex/4/node = SubResource("VisualShaderNodeIf_nwars")
+nodes/vertex/4/position = Vector2(620, 260)
+nodes/vertex/5/node = SubResource("VisualShaderNodeInput_pq555")
+nodes/vertex/5/position = Vector2(380, 620)
+nodes/vertex/connections = PackedInt32Array(3, 0, 4, 0, 5, 0, 4, 5, 4, 0, 0, 2, 5, 0, 4, 4, 2, 0, 4, 3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwars"]
+shader = SubResource("VisualShader_0v7l0")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(2, 2, 2, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n3jvr"]
+radius = 18.0
+height = 54.0
+
+[sub_resource type="Curve" id="Curve_miev5"]
+_limits = [-360.0, 303.08698, 0.0, 1024.0]
+_data = [Vector2(0, -7.3667603), 0.0, 0.0, 0, 0, Vector2(112.39025, 24.888153), 0.8305899, 0.8305899, 0, 0, Vector2(1024, 303.08698), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ewopy"]
+width = 100
+curve = SubResource("Curve_miev5")
+
+[sub_resource type="Curve" id="Curve_v66se"]
+_limits = [0.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 99.51355), 0.0, -48.157135, 0, 1, Vector2(1, 51.356415), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_487io"]
+curve = SubResource("Curve_v66se")
+
+[sub_resource type="Gradient" id="Gradient_miev5"]
+offsets = PackedFloat32Array(0, 0.8255208, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.9739583, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_br8r5"]
+gradient = SubResource("Gradient_miev5")
+
+[sub_resource type="Curve" id="Curve_5oklx"]
+_limits = [0.0, 14.11664, 0.0, 1.0]
+_data = [Vector2(0, 8.022318), 0.0, -10.058563, 0, 1, Vector2(0.797561, 0), -4.1319084, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7ax0g"]
+curve = SubResource("Curve_5oklx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n3jvr"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 11.34
+angle_min = -525.2
+angle_max = -398.1
+angle_curve = SubResource("CurveTexture_ewopy")
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 11.759999
+initial_velocity_max = 35.29
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = 1.9999839
+angular_velocity_curve = SubResource("CurveTexture_487io")
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 0.99997765
+radial_velocity_curve = SubResource("CurveTexture_7ax0g")
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_br8r5")
+
+[node name="enemy_charger" type="CharacterBody2D" node_paths=PackedStringArray("animationMain", "hurtbox", "particles", "sfx_death", "charge_start", "spawnMove") groups=["Enemies"]]
+z_index = 1
+script = ExtResource("1_iqc37")
+animationMain = NodePath("Sprite2D/AnimationPlayer")
+hurtbox = NodePath("Sprite2D/hurtbox")
+particles = NodePath("GPUParticles2D")
+sfx_death = NodePath("sfx_death")
+charge_start = NodePath("chargeStart")
+spawnMove = NodePath("spawnMove")
+
+[node name="spawnMove" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="chargeStart" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 5
+texture = ExtResource("1_c0t31")
+offset = Vector2(0, -17)
+hframes = 2
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_4r6du")
+}
+autoplay = "default"
+
+[node name="hurtbox" type="Area2D" parent="Sprite2D"]
+collision_layer = 64
+collision_mask = 8
+priority = 1
+script = ExtResource("3_487io")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hurtbox"]
+position = Vector2(0, -7)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_miev5")
+
+[node name="hitbox" type="Area2D" parent="Sprite2D"]
+material = SubResource("ShaderMaterial_nwars")
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("4_7ax0g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitbox"]
+position = Vector2(0, -7)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_n3jvr")
+debug_color = Color(0.89908534, 0, 0.19520503, 0.41960785)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -2
+texture_filter = 1
+emitting = false
+amount = 5
+amount_ratio = 0.6909
+texture = ExtResource("3_miev5")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_n3jvr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(2.960003, 1)
+rect = Rect2(-11.486476, -36, 22.972954, 54)
+
+[node name="sfx_death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_br8r5")
+bus = &"SFX"
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

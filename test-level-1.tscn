@@ -1,0 +1,486 @@
+[gd_scene load_steps=41 format=3 uid="uid://bnwip1vywlqdb"]
+
+[ext_resource type="PackedScene" uid="uid://ckog1nfv7gj1" path="res://assets/scenes/entities/player/player.tscn" id="1_wbtfn"]
+[ext_resource type="PackedScene" uid="uid://nuo8r1sgp4we" path="res://assets/scenes/entities/enemies/enemy_charger.tscn" id="2_yeg6q"]
+[ext_resource type="AudioStream" uid="uid://bnlo75x57221q" path="res://assets/sound/music/geocities.ogg" id="3_2by3q"]
+[ext_resource type="PackedScene" uid="uid://cv51cjqwonc44" path="res://assets/scenes/entities/enemies/enemy_shooter.tscn" id="3_4r6du"]
+[ext_resource type="Texture2D" uid="uid://c4nmmoa7qc5jn" path="res://assets/sprites/ui/chargebar.png" id="5_er1bt"]
+[ext_resource type="Script" uid="uid://6f5fo5f7f82u" path="res://assets/scripts/ui/ui.gd" id="5_tar4d"]
+[ext_resource type="Texture2D" uid="uid://cy6iupn2oep41" path="res://assets/sprites/ui/pwr_spread.png" id="5_tg75i"]
+[ext_resource type="Texture2D" uid="uid://dhqn81lhktxkc" path="res://assets/sprites/ui/pwr_laser.png" id="6_igc52"]
+[ext_resource type="Texture2D" uid="uid://07oww8c4muqt" path="res://assets/sprites/ui/ui_lives.png" id="7_t6t78"]
+[ext_resource type="FontFile" uid="uid://biyltwvbkgds7" path="res://assets/fonts/BlackAcute.ttf" id="8_tar4d"]
+[ext_resource type="Script" uid="uid://f7rbvvu721nr" path="res://assets/scripts/ui/lives_display.gd" id="10_stdlf"]
+[ext_resource type="Script" uid="uid://sb3ocsj1mukh" path="res://ult_charge_bar.gd" id="11_luy0b"]
+[ext_resource type="Texture2D" uid="uid://ddfqkr5w0xq5u" path="res://assets/sprites/ui/chargebar_fill.png" id="11_tx8ci"]
+[ext_resource type="PackedScene" uid="uid://bv1ppn50m8du0" path="res://assets/scenes/items/1_up.tscn" id="11_whxql"]
+[ext_resource type="FontFile" uid="uid://ckcf1ufa4ixa5" path="res://assets/fonts/ChunkyDunk.ttf" id="12_aqnel"]
+[ext_resource type="PackedScene" uid="uid://cq7wuaqlu02al" path="res://assets/scenes/items/spr_upgrade.tscn" id="12_tiybf"]
+[ext_resource type="Script" uid="uid://c1nunsgmicevp" path="res://assets/scenes/ui/charge_text.gd" id="12_tx8ci"]
+[ext_resource type="PackedScene" uid="uid://dgcqysipmy8l0" path="res://assets/scenes/items/las_upgrade.tscn" id="13_xaymg"]
+[ext_resource type="PackedScene" uid="uid://cngao3yus1p60" path="res://assets/scenes/entities/enemies/enemy_sh_homing.tscn" id="14_o4p3j"]
+[ext_resource type="Theme" uid="uid://b58yfok0gvnar" path="res://menus_theme.tres" id="15_hhpv8"]
+[ext_resource type="PackedScene" uid="uid://sm7cffe8fgqo" path="res://assets/scenes/entities/enemies/enemy_chaser.tscn" id="15_m23yt"]
+[ext_resource type="PackedScene" uid="uid://bxlvriqx8wohs" path="res://assets/scenes/entities/enemies/projectiles/enemy_homing_projectile.tscn" id="16_0ytjv"]
+[ext_resource type="Script" uid="uid://cjrnayadudr7r" path="res://pause.gd" id="16_q37na"]
+[ext_resource type="AudioStream" uid="uid://fmnxui0y6tsi" path="res://assets/sound/sfx/pause.ogg" id="17_mpw6h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tar4d"]
+font = ExtResource("8_tar4d")
+font_size = 40
+shadow_size = 6
+shadow_color = Color(0.21059999, 0.6301799, 0.81, 1)
+shadow_offset = Vector2(2, 3)
+
+[sub_resource type="Animation" id="Animation_x6575"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.14901961, 0.7176471, 0.9098039, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0871f"]
+resource_name = "charge_cd"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9999999, 1.9999999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.2886, 0.65715, 0.78, 0.88235295), Color(0.44820002, 0.51705, 0.54, 0.88235295), Color(0.2886, 0.65715, 0.78, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_e1ekg"]
+resource_name = "charge_full"
+length = 3.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000007, 0.6, 0.8000001, 1, 1.2, 1.4000001, 1.6000001, 1.8000001, 1.9999999, 2.1999998, 2.4, 2.6, 2.8000002, 3, 3.2000003, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(4.235506e-06, 0.77704203, 0.9973677, 0.88235295), Color(0, 0.4500003, 1, 0.88235295), Color(0, 0.116666794, 1, 0.88235295), Color(0.2166667, 0, 1, 0.88235295), Color(0.5500002, 0, 1, 0.88235295), Color(0.8833332, 0, 1, 0.88235295), Color(1, 0, 0.7833333, 0.88235295), Color(1, 0, 0.4499998, 0.88235295), Color(1, 0, 0.116666794, 0.88235295), Color(1, 0.2166667, 0, 0.88235295), Color(1, 0.55, 0, 0.88235295), Color(1, 0.8833333, 0, 0.88235295), Color(0.7833333, 1, 0, 0.88235295), Color(0.45000005, 1, 0, 0.88235295), Color(0.116666794, 1, 0, 0.88235295), Color(0, 1, 0.2166667, 0.88235295), Color(0, 1, 0.5500002, 0.88235295), Color(0, 1, 0.88333344, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_s1n25"]
+resource_name = "charging"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.14901961, 0.7254902, 0.92156863, 0.88235295), Color(0.39, 0.84749997, 1, 0.88235295), Color(0.14901961, 0.7254902, 0.92156863, 0.88235295)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e1ekg"]
+_data = {
+&"RESET": SubResource("Animation_x6575"),
+&"charge_cd": SubResource("Animation_0871f"),
+&"charge_full": SubResource("Animation_e1ekg"),
+&"charging": SubResource("Animation_s1n25")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_0871f"]
+font = ExtResource("12_aqnel")
+font_size = 32
+shadow_size = 5
+shadow_color = Color(0.14720003, 0.7268, 0.92, 0.88235295)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_faq8n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.14720003, 0.7268, 0.92, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_a707y"]
+resource_name = "charge_cd"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.2886, 0.65715, 0.78, 0.88235295), Color(0.44820002, 0.51705, 0.54, 0.88235295), Color(0.2886, 0.65715, 0.78, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_10n3l"]
+resource_name = "charge_full"
+length = 3.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000004, 0.6, 0.8000001, 1, 1.2, 1.4000001, 1.6000001, 1.8000001, 2, 2.2, 2.4, 2.6000001, 2.8000002, 3, 3.2000003, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(4.235506e-06, 0.77704203, 0.9973677, 0.88235295), Color(0, 0.4500003, 1, 0.88235295), Color(0, 0.116666794, 1, 0.88235295), Color(0.2166667, 0, 1, 0.88235295), Color(0.5500002, 0, 1, 0.88235295), Color(0.8833332, 0, 1, 0.88235295), Color(1, 0, 0.7833333, 0.88235295), Color(1, 0, 0.4499998, 0.88235295), Color(1, 0, 0.116666794, 0.88235295), Color(1, 0.2166667, 0, 0.88235295), Color(1, 0.55, 0, 0.88235295), Color(1, 0.8833333, 0, 0.88235295), Color(0.7833333, 1, 0, 0.88235295), Color(0.45000005, 1, 0, 0.88235295), Color(0.116666794, 1, 0, 0.88235295), Color(0, 1, 0.2166667, 0.88235295), Color(0, 1, 0.5500002, 0.88235295), Color(0, 1, 0.88333344, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_pshpe"]
+resource_name = "charging"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.14901961, 0.7254902, 0.92156863, 0.88235295), Color(0.46, 0.805, 0.92, 0.88235295), Color(0.14901961, 0.7254902, 0.92156863, 0.88235295)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_10n3l"]
+_data = {
+&"RESET": SubResource("Animation_faq8n"),
+&"charge_cd": SubResource("Animation_a707y"),
+&"charge_full": SubResource("Animation_10n3l"),
+&"charging": SubResource("Animation_pshpe")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mpw6h"]
+bg_color = Color(0.08078333, 0.08078336, 0.08078327, 0.39607844)
+
+[sub_resource type="Animation" id="Animation_q37na"]
+resource_name = "color_pulse"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.3254902, 0.7647059, 1, 1), Color(0, 0.6106056, 0.8504227, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mpw6h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.3254902, 0.7647059, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mpw6h"]
+_data = {
+&"RESET": SubResource("Animation_mpw6h"),
+&"color_pulse": SubResource("Animation_q37na")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="enemy_charger" parent="." instance=ExtResource("2_yeg6q")]
+position = Vector2(588, -18)
+
+[node name="enemy_shooter" parent="." instance=ExtResource("3_4r6du")]
+position = Vector2(297, -65)
+
+[node name="Music" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("3_2by3q")
+volume_db = -2.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("spreadSprite", "pierceSprite")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 200)
+script = ExtResource("5_tar4d")
+spreadSprite = NodePath("SpreadPwr")
+pierceSprite = NodePath("PiercePwr")
+metadata/_edit_use_anchors_ = true
+
+[node name="SpreadPwr" type="Sprite2D" parent="CanvasLayer/UI"]
+texture_filter = 5
+position = Vector2(195.47995, 1034.48)
+texture = ExtResource("5_tg75i")
+
+[node name="PiercePwr" type="Sprite2D" parent="CanvasLayer/UI"]
+texture_filter = 5
+position = Vector2(195.47995, 1034.48)
+texture = ExtResource("6_igc52")
+
+[node name="Lives" type="Sprite2D" parent="CanvasLayer/UI"]
+position = Vector2(69.47996, 1034.48)
+scale = Vector2(0.63999873, 0.63999873)
+texture = ExtResource("7_t6t78")
+
+[node name="livesNumber" type="Label" parent="CanvasLayer/UI/Lives"]
+unique_name_in_owner = true
+offset_left = 55.35727
+offset_top = -16.071423
+offset_right = 130.35727
+offset_bottom = 29.928577
+text = "X"
+label_settings = SubResource("LabelSettings_tar4d")
+script = ExtResource("10_stdlf")
+
+[node name="ChargeBar" type="MarginContainer" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.95, 0.95)
+pivot_offset = Vector2(988, 566)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/UI/ChargeBar" node_paths=PackedStringArray("charge_fill_animations", "time_add_charge")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+value = 50.0
+texture_under = ExtResource("5_er1bt")
+texture_progress = ExtResource("11_tx8ci")
+tint_progress = Color(0.14901961, 0.7176471, 0.9098039, 1)
+script = ExtResource("11_luy0b")
+charge_fill_animations = NodePath("barColors")
+time_add_charge = NodePath("addCharge")
+
+[node name="barColors" type="AnimationPlayer" parent="CanvasLayer/UI/ChargeBar/TextureProgressBar"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_e1ekg")
+}
+
+[node name="Label2" type="Label" parent="CanvasLayer/UI/ChargeBar/TextureProgressBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -127.57884
+offset_top = -16.0
+offset_right = -6.578842
+offset_bottom = 16.0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "CHARGE"
+label_settings = SubResource("LabelSettings_0871f")
+horizontal_alignment = 1
+script = ExtResource("12_tx8ci")
+
+[node name="textColors" type="AnimationPlayer" parent="CanvasLayer/UI/ChargeBar/TextureProgressBar/Label2"]
+libraries = {
+&"": SubResource("AnimationLibrary_10n3l")
+}
+
+[node name="addCharge" type="Timer" parent="CanvasLayer/UI/ChargeBar/TextureProgressBar"]
+process_callback = 0
+wait_time = 1.5
+autostart = true
+
+[node name="ig-menus" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("15_hhpv8")
+
+[node name="pause" type="Panel" parent="CanvasLayer/ig-menus"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mpw6h")
+script = ExtResource("16_q37na")
+
+[node name="Label" type="Label" parent="CanvasLayer/ig-menus/pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.0
+offset_top = -43.5
+offset_right = 226.0
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.5)
+text = "PAUSED"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ig-menus/pause/Label"]
+libraries = {
+&"": SubResource("AnimationLibrary_mpw6h")
+}
+autoplay = "color_pulse"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ig-menus/pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="unpause" type="Button" parent="CanvasLayer/ig-menus/pause/VBoxContainer"]
+layout_mode = 2
+
+[node name="options" type="Button" parent="CanvasLayer/ig-menus/pause/VBoxContainer"]
+layout_mode = 2
+
+[node name="main_menu" type="Button" parent="CanvasLayer/ig-menus/pause/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/ig-menus/pause/VBoxContainer/main_menu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/ig-menus/pause/VBoxContainer/main_menu/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 87.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ig-menus/pause/VBoxContainer/main_menu/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="exit" type="Button" parent="CanvasLayer/ig-menus/pause/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/ig-menus/pause/VBoxContainer/exit"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/ig-menus/pause/VBoxContainer/exit/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 87.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ig-menus/pause/VBoxContainer/exit/Panel/Label"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/ig-menus/pause"]
+stream = ExtResource("17_mpw6h")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="gameover" type="Control" parent="CanvasLayer/ig-menus"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="victory" type="Control" parent="CanvasLayer/ig-menus"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="sprUpgrade" parent="." instance=ExtResource("12_tiybf")]
+position = Vector2(1651, 54)
+
+[node name="1up" parent="." instance=ExtResource("11_whxql")]
+position = Vector2(1541, 54)
+
+[node name="lasUpgrade" parent="." instance=ExtResource("13_xaymg")]
+position = Vector2(1738, 54)
+
+[node name="enemy_chaser" parent="." instance=ExtResource("15_m23yt")]
+position = Vector2(1215, 150)
+
+[node name="Player" parent="." instance=ExtResource("1_wbtfn")]
+position = Vector2(960, 947)
+
+[node name="enemy_sh_homing" parent="." instance=ExtResource("14_o4p3j")]
+position = Vector2(448, -54)
+
+[node name="enemy_homing_projectile" parent="." instance=ExtResource("16_0ytjv")]
+position = Vector2(189, 246)
+
+[node name="enemy_chaser2" parent="." instance=ExtResource("15_m23yt")]
+position = Vector2(1139, 225)
+
+[node name="Respawn Point" type="Marker2D" parent="." groups=["RespawnPoint"]]
+unique_name_in_owner = true
+position = Vector2(960, 950)
+gizmo_extents = 130.0

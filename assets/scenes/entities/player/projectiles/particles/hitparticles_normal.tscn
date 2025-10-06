@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://csl1tiivah0ht"]
+
+[ext_resource type="Script" uid="uid://b6dogjku1qoni" path="res://assets/scripts/player/projectiles/hitPartDespawn.gd" id="1_eqnoq"]
+
+[sub_resource type="Curve" id="Curve_54i66"]
+_limits = [0.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 14.984954, 0, 1, Vector2(1, 14.984955), 14.984954, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4r73q"]
+curve = SubResource("Curve_54i66")
+
+[sub_resource type="Gradient" id="Gradient_t1k52"]
+offsets = PackedFloat32Array(0.108333334, 0.25555557)
+colors = PackedColorArray(0.9490196, 0.972549, 1, 1, 0.41000003, 0.6656667, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mn5ql"]
+gradient = SubResource("Gradient_t1k52")
+
+[sub_resource type="Gradient" id="Gradient_40385"]
+offsets = PackedFloat32Array(0.64166665, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j7m4t"]
+gradient = SubResource("Gradient_40385")
+
+[sub_resource type="Curve" id="Curve_4r73q"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.42627883), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_x4fh5"]
+curve = SubResource("Curve_4r73q")
+
+[sub_resource type="Curve" id="Curve_mq7b4"]
+_data = [Vector2(0.6554404, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.54363084), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3lw6f"]
+curve = SubResource("Curve_mq7b4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gdcbd"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 285.40002
+angle_curve = SubResource("CurveTexture_4r73q")
+inherit_velocity_ratio = 1.0
+direction = Vector3(6, 0, 0)
+spread = 10.0
+initial_velocity_min = 134.44
+initial_velocity_max = 146.23
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_3lw6f")
+color_ramp = SubResource("GradientTexture1D_j7m4t")
+color_initial_ramp = SubResource("GradientTexture1D_mn5ql")
+emission_curve = SubResource("CurveTexture_x4fh5")
+turbulence_noise_strength = 2.69
+turbulence_influence_min = 0.10700001
+turbulence_influence_max = 0.11400001
+turbulence_initial_displacement_min = 1.490116e-06
+turbulence_initial_displacement_max = 1.490116e-06
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+z_index = 3
+rotation = -1.5707964
+emitting = false
+amount = 15
+amount_ratio = 0.7899
+lifetime = 0.8
+one_shot = true
+speed_scale = 1.8
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_gdcbd")
+script = ExtResource("1_eqnoq")
+
+[node name="time_til_delete" type="Timer" parent="."]
+autostart = true
+
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="timeout" from="time_til_delete" to="." method="_on_time_til_delete_timeout"]

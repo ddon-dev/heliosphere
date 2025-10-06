@@ -1,0 +1,270 @@
+[gd_scene load_steps=24 format=3 uid="uid://bp4nj5stbifbj"]
+
+[ext_resource type="Script" uid="uid://6f5fo5f7f82u" path="res://assets/scripts/ui/ui.gd" id="1_ehx4c"]
+[ext_resource type="Texture2D" uid="uid://cy6iupn2oep41" path="res://assets/sprites/ui/pwr_spread.png" id="2_vodjt"]
+[ext_resource type="Texture2D" uid="uid://dhqn81lhktxkc" path="res://assets/sprites/ui/pwr_laser.png" id="3_8ih1r"]
+[ext_resource type="Texture2D" uid="uid://07oww8c4muqt" path="res://assets/sprites/ui/ui_lives.png" id="4_gn74b"]
+[ext_resource type="FontFile" uid="uid://biyltwvbkgds7" path="res://assets/fonts/BlackAcute.ttf" id="5_wfa5w"]
+[ext_resource type="Script" uid="uid://f7rbvvu721nr" path="res://assets/scripts/ui/lives_display.gd" id="6_fediw"]
+[ext_resource type="Texture2D" uid="uid://c4nmmoa7qc5jn" path="res://assets/sprites/ui/chargebar.png" id="7_l3m6o"]
+[ext_resource type="Texture2D" uid="uid://ddfqkr5w0xq5u" path="res://assets/sprites/ui/chargebar_fill.png" id="8_k8757"]
+[ext_resource type="Script" uid="uid://sb3ocsj1mukh" path="res://ult_charge_bar.gd" id="9_wsdfl"]
+[ext_resource type="FontFile" uid="uid://ckcf1ufa4ixa5" path="res://assets/fonts/ChunkyDunk.ttf" id="10_bd8cq"]
+[ext_resource type="Script" uid="uid://c1nunsgmicevp" path="res://assets/scenes/ui/charge_text.gd" id="11_86a3p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tar4d"]
+font = ExtResource("5_wfa5w")
+font_size = 40
+shadow_size = 6
+shadow_color = Color(0.21059999, 0.6301799, 0.81, 1)
+shadow_offset = Vector2(2, 3)
+
+[sub_resource type="Animation" id="Animation_x6575"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.14901961, 0.7176471, 0.9098039, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0871f"]
+resource_name = "charge_cd"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9999999, 1.9999999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.2886, 0.65715, 0.78, 0.88235295), Color(0.44820002, 0.51705, 0.54, 0.88235295), Color(0.2886, 0.65715, 0.78, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_e1ekg"]
+resource_name = "charge_full"
+length = 3.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000007, 0.6, 0.8000001, 1, 1.2, 1.4000001, 1.6000001, 1.8000001, 1.9999999, 2.1999998, 2.4, 2.6, 2.8000002, 3, 3.2000003, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(4.235506e-06, 0.77704203, 0.9973677, 0.88235295), Color(0, 0.4500003, 1, 0.88235295), Color(0, 0.116666794, 1, 0.88235295), Color(0.2166667, 0, 1, 0.88235295), Color(0.5500002, 0, 1, 0.88235295), Color(0.8833332, 0, 1, 0.88235295), Color(1, 0, 0.7833333, 0.88235295), Color(1, 0, 0.4499998, 0.88235295), Color(1, 0, 0.116666794, 0.88235295), Color(1, 0.2166667, 0, 0.88235295), Color(1, 0.55, 0, 0.88235295), Color(1, 0.8833333, 0, 0.88235295), Color(0.7833333, 1, 0, 0.88235295), Color(0.45000005, 1, 0, 0.88235295), Color(0.116666794, 1, 0, 0.88235295), Color(0, 1, 0.2166667, 0.88235295), Color(0, 1, 0.5500002, 0.88235295), Color(0, 1, 0.88333344, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_s1n25"]
+resource_name = "charging"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.14901961, 0.7254902, 0.92156863, 0.88235295), Color(0.39, 0.84749997, 1, 0.88235295), Color(0.14901961, 0.7254902, 0.92156863, 0.88235295)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e1ekg"]
+_data = {
+&"RESET": SubResource("Animation_x6575"),
+&"charge_cd": SubResource("Animation_0871f"),
+&"charge_full": SubResource("Animation_e1ekg"),
+&"charging": SubResource("Animation_s1n25")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_0871f"]
+font = ExtResource("10_bd8cq")
+font_size = 32
+shadow_size = 5
+shadow_color = Color(0.14720003, 0.7268, 0.92, 0.88235295)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_faq8n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.14720003, 0.7268, 0.92, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_a707y"]
+resource_name = "charge_cd"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.2886, 0.65715, 0.78, 0.88235295), Color(0.44820002, 0.51705, 0.54, 0.88235295), Color(0.2886, 0.65715, 0.78, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_10n3l"]
+resource_name = "charge_full"
+length = 3.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000004, 0.6, 0.8000001, 1, 1.2, 1.4000001, 1.6000001, 1.8000001, 2, 2.2, 2.4, 2.6000001, 2.8000002, 3, 3.2000003, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(4.235506e-06, 0.77704203, 0.9973677, 0.88235295), Color(0, 0.4500003, 1, 0.88235295), Color(0, 0.116666794, 1, 0.88235295), Color(0.2166667, 0, 1, 0.88235295), Color(0.5500002, 0, 1, 0.88235295), Color(0.8833332, 0, 1, 0.88235295), Color(1, 0, 0.7833333, 0.88235295), Color(1, 0, 0.4499998, 0.88235295), Color(1, 0, 0.116666794, 0.88235295), Color(1, 0.2166667, 0, 0.88235295), Color(1, 0.55, 0, 0.88235295), Color(1, 0.8833333, 0, 0.88235295), Color(0.7833333, 1, 0, 0.88235295), Color(0.45000005, 1, 0, 0.88235295), Color(0.116666794, 1, 0, 0.88235295), Color(0, 1, 0.2166667, 0.88235295), Color(0, 1, 0.5500002, 0.88235295), Color(0, 1, 0.88333344, 0.88235295)]
+}
+
+[sub_resource type="Animation" id="Animation_pshpe"]
+resource_name = "charging"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.14901961, 0.7254902, 0.92156863, 0.88235295), Color(0.46, 0.805, 0.92, 0.88235295), Color(0.14901961, 0.7254902, 0.92156863, 0.88235295)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_10n3l"]
+_data = {
+&"RESET": SubResource("Animation_faq8n"),
+&"charge_cd": SubResource("Animation_a707y"),
+&"charge_full": SubResource("Animation_10n3l"),
+&"charging": SubResource("Animation_pshpe")
+}
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("spreadSprite", "pierceSprite")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 200)
+script = ExtResource("1_ehx4c")
+spreadSprite = NodePath("SpreadPwr")
+pierceSprite = NodePath("PiercePwr")
+metadata/_edit_use_anchors_ = true
+
+[node name="SpreadPwr" type="Sprite2D" parent="UI"]
+texture_filter = 5
+position = Vector2(195.47995, 1034.48)
+texture = ExtResource("2_vodjt")
+
+[node name="PiercePwr" type="Sprite2D" parent="UI"]
+texture_filter = 5
+position = Vector2(195.47995, 1034.48)
+texture = ExtResource("3_8ih1r")
+
+[node name="Lives" type="Sprite2D" parent="UI"]
+position = Vector2(69.47996, 1034.48)
+scale = Vector2(0.63999873, 0.63999873)
+texture = ExtResource("4_gn74b")
+
+[node name="livesNumber" type="Label" parent="UI/Lives"]
+unique_name_in_owner = true
+offset_left = 55.35727
+offset_top = -16.071423
+offset_right = 130.35727
+offset_bottom = 29.928577
+text = "X"
+label_settings = SubResource("LabelSettings_tar4d")
+script = ExtResource("6_fediw")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.95, 0.95)
+pivot_offset = Vector2(988, 566)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/MarginContainer" node_paths=PackedStringArray("charge_fill_animations", "time_add_charge")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+value = 50.0
+texture_under = ExtResource("7_l3m6o")
+texture_progress = ExtResource("8_k8757")
+tint_progress = Color(0.14901961, 0.7176471, 0.9098039, 1)
+script = ExtResource("9_wsdfl")
+charge_fill_animations = NodePath("barColors")
+time_add_charge = NodePath("addCharge")
+
+[node name="barColors" type="AnimationPlayer" parent="UI/MarginContainer/TextureProgressBar"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_e1ekg")
+}
+
+[node name="Label2" type="Label" parent="UI/MarginContainer/TextureProgressBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -127.57884
+offset_top = -16.0
+offset_right = -6.578842
+offset_bottom = 16.0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "CHARGE"
+label_settings = SubResource("LabelSettings_0871f")
+horizontal_alignment = 1
+script = ExtResource("11_86a3p")
+
+[node name="textColors" type="AnimationPlayer" parent="UI/MarginContainer/TextureProgressBar/Label2"]
+libraries = {
+&"": SubResource("AnimationLibrary_10n3l")
+}
+
+[node name="addCharge" type="Timer" parent="UI/MarginContainer/TextureProgressBar"]
+process_callback = 0
+wait_time = 1.5
+autostart = true

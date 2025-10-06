@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqpueb1norky"]
+
+[ext_resource type="Script" uid="uid://cybox0ledhcbo" path="res://assets/scripts/vfx/explosion.gd" id="1_d20m8"]
+[ext_resource type="AudioStream" uid="uid://cvopix6xh8qks" path="res://assets/sound/sfx/enemies/enemyExplode.ogg" id="2_xye68"]
+
+[sub_resource type="Gradient" id="Gradient_xb541"]
+offsets = PackedFloat32Array(0.057692308, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.7465617, 0, 0.010232886, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d20m8"]
+gradient = SubResource("Gradient_xb541")
+
+[sub_resource type="Curve" id="Curve_xye68"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_goqoq"]
+curve = SubResource("Curve_xye68")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1yh8r"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 33.09
+initial_velocity_max = 202.20999
+gravity = Vector3(0, 0, 0)
+scale_min = 13.99
+scale_max = 13.99
+scale_curve = SubResource("CurveTexture_goqoq")
+color = Color(0.9396001, 0.7712692, 0, 1)
+color_ramp = SubResource("GradientTexture1D_d20m8")
+hue_variation_min = -0.09000002
+hue_variation_max = -2.2351742e-08
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xye68"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 33.09
+initial_velocity_max = 202.20999
+gravity = Vector3(0, 0, 0)
+scale_min = 13.99
+scale_max = 13.99
+scale_curve = SubResource("CurveTexture_goqoq")
+color = Color(0.2159017, 0.21590173, 0.2159017, 1)
+
+[node name="explosion_medium" type="Node2D" node_paths=PackedStringArray("sfx_explode", "fire_particles", "smoke_particles")]
+script = ExtResource("1_d20m8")
+sfx_explode = NodePath("sfx_explode")
+fire_particles = NodePath("fire")
+smoke_particles = NodePath("smoke")
+
+[node name="fire" type="GPUParticles2D" parent="."]
+amount = 20
+lifetime = 0.4
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_1yh8r")
+
+[node name="smoke" type="GPUParticles2D" parent="."]
+z_index = -1
+amount = 20
+lifetime = 0.4
+explosiveness = 0.38
+process_material = SubResource("ParticleProcessMaterial_xye68")
+
+[node name="sfx_explode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_xye68")
+bus = &"SFX"

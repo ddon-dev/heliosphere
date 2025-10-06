@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://bv1ppn50m8du0"]
+
+[ext_resource type="Script" uid="uid://c6i783bmn33xk" path="res://assets/scenes/items/1_up.gd" id="1_67uxb"]
+[ext_resource type="Texture2D" uid="uid://fui063la7l7g" path="res://assets/sprites/collectibles/1Up_sheet.png" id="2_67uxb"]
+[ext_resource type="AudioStream" uid="uid://b0jpltak31fus" path="res://assets/sound/sfx/player/pick_1up.ogg" id="3_cxw1c"]
+[ext_resource type="Script" uid="uid://dvu71irwdw727" path="res://assets/scenes/items/1_up_sfx.gd" id="3_nbogw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_67uxb"]
+radius = 24.0
+
+[sub_resource type="Animation" id="Animation_cxw1c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_67uxb"]
+resource_name = "default"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nbogw"]
+_data = {
+&"RESET": SubResource("Animation_cxw1c"),
+&"default": SubResource("Animation_67uxb")
+}
+
+[node name="1up" type="Node2D"]
+script = ExtResource("1_67uxb")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_cxw1c")
+volume_db = -3.0
+bus = &"SFX"
+script = ExtResource("3_nbogw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_67uxb")
+hframes = 2
+vframes = 2
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+visible = false
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("CircleShape2D_67uxb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_nbogw")
+}
+autoplay = "default"
+
+[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
