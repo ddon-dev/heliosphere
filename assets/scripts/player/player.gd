@@ -144,8 +144,8 @@ func shoot():
 		
 func fire_ult():
 	if GameManager.ultReady:
+		GameManager.playerHurtable = false
 		ultPreFire = true
-		charging_particles.position = global_position
 		charging_particles.emitting = true
 		animation_vfx.play("ult_charging")
 		GameManager.ultReady = false
@@ -156,6 +156,7 @@ func fire_ult():
 		await sfx_ultCharge.finished
 		animation_vfx.play("RESET")
 		sfx_ultFire.play()
+		GameManager.ultFiring.emit()
 		GameManager.ultCharge = 0
 		ult_attack.fire()
 		charging_particles.emitting = false
@@ -170,6 +171,7 @@ func ult_charge_cd():
 #region Death and Respawn logic
 # Death animations and behaviour
 func death(_death):
+	if GameManager.playerHurtable:
 		death_explosions()
 		deathExplosionsTimer.start()
 		timeDying.start()
@@ -190,6 +192,7 @@ func death(_death):
 		1.3
 		).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 		await timeDying.timeout
+		GameManager.playerExploded.emit()
 		var big_boom = EXPLOSION_BIG.instantiate()
 		get_parent().add_child(big_boom)
 		big_boom.global_position = global_position

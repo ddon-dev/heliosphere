@@ -5,6 +5,7 @@ class_name enemyShHoming
 # Resources
 @export var hurtbox: Area2D
 @export var animationMain: AnimationPlayer
+@export var animationVFX: AnimationPlayer
 @export var shoot_anim: AnimationPlayer
 @export var projectile_spawn: Marker2D
 @export var projectile_type: PackedScene
@@ -70,11 +71,13 @@ func fire():
 
 func hurt(_hurt):
 	if hp <= 0 && isAlive:
+		animationVFX.play("RESET")
 		dead(dead)
 	else:
+		animationVFX.play("hurt")
 		hp -= 20
-	
-	healthbar.health = hp
+	if is_instance_valid(healthbar):
+		healthbar.health = hp
 	
 func dead(_dead):
 	sfx_death.play()

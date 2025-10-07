@@ -45,9 +45,10 @@ _data = {
 &"firing": SubResource("Animation_og0ib")
 }
 
-[node name="ultBeam" type="Node2D" node_paths=PackedStringArray("lifetime")]
+[node name="ultBeam" type="Node2D" node_paths=PackedStringArray("lifetime", "time_between_hits")]
 script = ExtResource("1_og0ib")
 lifetime = NodePath("Sprite2D/lifetime")
+time_between_hits = NodePath("timeBetweenHits")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1.0961504, 1.0961504, 1.0961504, 0.972549)
@@ -83,6 +84,9 @@ autostart = true
 stream = ExtResource("3_knexp")
 volume_db = 2.0
 bus = &"SFX"
+
+[node name="timeBetweenHits" type="Timer" parent="."]
+wait_time = 0.2
 
 [connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="Sprite2D/lifetime" to="." method="_on_lifetime_timeout"]

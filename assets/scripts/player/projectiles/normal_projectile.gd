@@ -6,7 +6,7 @@ const PARTICLES = preload("uid://csl1tiivah0ht")
 @export_range(50, 1000, 5) var speed: float = 830
 @onready var area_2d: Area2D = $Area2D
 @export var direction: Vector2 = Vector2.UP
-@export var damage_dealt: int = 1
+@export var damage_dealt: int = 20
 var hasHit: bool = false
 
 # Called when the node enters the scene tree for the first time.

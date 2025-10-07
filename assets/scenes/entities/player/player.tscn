@@ -24,6 +24,51 @@ atlas = ExtResource("2_jrwbg")
 region = Rect2(0, 0, 128, 432)
 filter_clip = true
 
+[sub_resource type="Gradient" id="Gradient_fnfdq"]
+colors = PackedColorArray(1, 1, 1, 1, 0.5031086, 0.5634122, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6uieu"]
+gradient = SubResource("Gradient_fnfdq")
+
+[sub_resource type="Gradient" id="Gradient_cqym6"]
+colors = PackedColorArray(1, 1, 1, 1, 0.228798, 0.6957791, 0.99999994, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fnfdq"]
+gradient = SubResource("Gradient_cqym6")
+
+[sub_resource type="Curve" id="Curve_6uieu"]
+_data = [Vector2(0.0042735115, 0.42696637), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0yci6"]
+curve = SubResource("Curve_6uieu")
+
+[sub_resource type="Curve" id="Curve_cqym6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.557173, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fnfdq"]
+curve = SubResource("Curve_cqym6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cqym6"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 23.16
+inherit_velocity_ratio = 0.1
+direction = Vector3(0, -30, 0)
+spread = 40.0
+initial_velocity_min = 66.18
+initial_velocity_max = 99.27
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -83.090004
+radial_accel_max = -83.090004
+scale_min = 8.349999
+scale_max = 8.349999
+scale_curve = SubResource("CurveTexture_fnfdq")
+color_ramp = SubResource("GradientTexture1D_fnfdq")
+color_initial_ramp = SubResource("GradientTexture1D_6uieu")
+emission_curve = SubResource("CurveTexture_0yci6")
+
 [sub_resource type="Animation" id="Animation_2by3q"]
 resource_name = "RESET"
 length = 0.001
@@ -386,51 +431,6 @@ _data = {
 &"ult_charging": SubResource("Animation_ouw8k")
 }
 
-[sub_resource type="Gradient" id="Gradient_fnfdq"]
-colors = PackedColorArray(1, 1, 1, 1, 0.5031086, 0.5634122, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6uieu"]
-gradient = SubResource("Gradient_fnfdq")
-
-[sub_resource type="Gradient" id="Gradient_cqym6"]
-colors = PackedColorArray(1, 1, 1, 1, 0.228798, 0.6957791, 0.99999994, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_fnfdq"]
-gradient = SubResource("Gradient_cqym6")
-
-[sub_resource type="Curve" id="Curve_6uieu"]
-_data = [Vector2(0.0042735115, 0.42696637), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_0yci6"]
-curve = SubResource("Curve_6uieu")
-
-[sub_resource type="Curve" id="Curve_cqym6"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.557173, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_fnfdq"]
-curve = SubResource("Curve_cqym6")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cqym6"]
-particle_flag_disable_z = true
-emission_shape = 2
-emission_sphere_radius = 23.16
-inherit_velocity_ratio = 0.1
-direction = Vector3(0, -30, 0)
-spread = 40.0
-initial_velocity_min = 66.18
-initial_velocity_max = 99.27
-gravity = Vector3(0, 0, 0)
-radial_accel_min = -83.090004
-radial_accel_max = -83.090004
-scale_min = 8.349999
-scale_max = 8.349999
-scale_curve = SubResource("CurveTexture_fnfdq")
-color_ramp = SubResource("GradientTexture1D_fnfdq")
-color_initial_ramp = SubResource("GradientTexture1D_6uieu")
-emission_curve = SubResource("CurveTexture_0yci6")
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_yeg6q"]
 radius = 8.06226
 
@@ -587,13 +587,13 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation", "animation_respawn", "animation_vfx", "charging_particles", "ult_cd", "sfx_shoot", "sfx_ultCharge", "sfx_ultFire", "sfx_death", "timeDying", "deathExplosionsTimer", "time_til_respawn", "respawn_invul", "pwrUpDuration") groups=["Player"]]
-collision_layer = 512
+collision_layer = 513
 collision_mask = 256
 script = ExtResource("1_6aecq")
 animation = NodePath("Animations/MainAnimations")
 animation_respawn = NodePath("Animations/RespawnAnim")
 animation_vfx = NodePath("Animations/VFXAnimations")
-charging_particles = NodePath("Animations/VFXAnimations/ultChargingParts")
+charging_particles = NodePath("Sprite2D/ultChargingParts")
 ult_cd = NodePath("timers/ultCD")
 sfx_shoot = NodePath("sfx/shoot")
 sfx_ultCharge = NodePath("sfx/ultCharge")
@@ -632,7 +632,7 @@ wait_time = 0.3
 wait_time = 5.0
 
 [node name="itemPickup" type="Area2D" parent="."]
-collision_mask = 0
+collision_mask = 16
 
 [node name="pickupArea" type="CollisionShape2D" parent="itemPickup"]
 shape = SubResource("CircleShape2D_4r6du")
@@ -644,6 +644,14 @@ texture = SubResource("AtlasTexture_d1uob")
 hframes = 2
 vframes = 6
 region_rect = Rect2(0, 0, 128, 432)
+
+[node name="ultChargingParts" type="GPUParticles2D" parent="Sprite2D"]
+z_index = 1
+position = Vector2(0, -2)
+emitting = false
+amount = 10
+speed_scale = 2.0
+process_material = SubResource("ParticleProcessMaterial_cqym6")
 
 [node name="Animations" type="Node2D" parent="."]
 position = Vector2(0, 2)
@@ -667,13 +675,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_8c0gc")
 }
 autoplay = "RESET"
-
-[node name="ultChargingParts" type="GPUParticles2D" parent="Animations/VFXAnimations"]
-z_index = 1
-emitting = false
-amount = 10
-speed_scale = 2.0
-process_material = SubResource("ParticleProcessMaterial_cqym6")
 
 [node name="hurtbox" type="Area2D" parent="."]
 collision_layer = 2

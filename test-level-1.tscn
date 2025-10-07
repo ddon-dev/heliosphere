@@ -142,7 +142,6 @@ tint_progress = Color(0.14901961, 0.7176471, 0.9098039, 1)
 
 [node name="ig-menus" type="Control" parent="CanvasLayer"]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -153,6 +152,7 @@ theme = ExtResource("15_hhpv8")
 
 [node name="pause" type="Panel" parent="CanvasLayer/ig-menus" node_paths=PackedStringArray("sfx_paused", "sfx_pressed")]
 process_mode = 3
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -251,10 +251,24 @@ anchor_mode = 0
 script = ExtResource("1_hhpv8")
 camera = NodePath("..")
 
-[node name="enemy_charger" parent="." instance=ExtResource("2_yeg6q")]
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="enemy_chaser" parent="enemies" instance=ExtResource("15_m23yt")]
+position = Vector2(1215, 150)
+
+[node name="enemy_sh_homing" parent="enemies" instance=ExtResource("14_o4p3j")]
+position = Vector2(448, -54)
+
+[node name="enemy_homing_projectile" parent="enemies" instance=ExtResource("16_0ytjv")]
+position = Vector2(189, 246)
+
+[node name="enemy_chaser2" parent="enemies" instance=ExtResource("15_m23yt")]
+position = Vector2(1139, 225)
+
+[node name="enemy_charger" parent="enemies" instance=ExtResource("2_yeg6q")]
 position = Vector2(588, -18)
 
-[node name="enemy_shooter" parent="." instance=ExtResource("3_4r6du")]
+[node name="enemy_shooter" parent="enemies" instance=ExtResource("3_4r6du")]
 position = Vector2(297, -65)
 
 [node name="Music" type="Node" parent="."]
@@ -266,26 +280,16 @@ autoplay = true
 bus = &"Music"
 parameters/looping = true
 
-[node name="sprUpgrade" parent="." instance=ExtResource("12_tiybf")]
+[node name="items" type="Node2D" parent="."]
+
+[node name="sprUpgrade" parent="items" instance=ExtResource("12_tiybf")]
 position = Vector2(1651, 54)
 
-[node name="1up" parent="." instance=ExtResource("11_whxql")]
+[node name="1up" parent="items" instance=ExtResource("11_whxql")]
 position = Vector2(1541, 54)
 
-[node name="lasUpgrade" parent="." instance=ExtResource("13_xaymg")]
+[node name="lasUpgrade" parent="items" instance=ExtResource("13_xaymg")]
 position = Vector2(1738, 54)
-
-[node name="enemy_chaser" parent="." instance=ExtResource("15_m23yt")]
-position = Vector2(1215, 150)
 
 [node name="Player" parent="." instance=ExtResource("1_wbtfn")]
 position = Vector2(960, 947)
-
-[node name="enemy_sh_homing" parent="." instance=ExtResource("14_o4p3j")]
-position = Vector2(448, -54)
-
-[node name="enemy_homing_projectile" parent="." instance=ExtResource("16_0ytjv")]
-position = Vector2(189, 246)
-
-[node name="enemy_chaser2" parent="." instance=ExtResource("15_m23yt")]
-position = Vector2(1139, 225)
