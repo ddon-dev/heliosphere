@@ -5,6 +5,7 @@ var shake_time_left: float = 2.0
 @export var intensity: float = 5.0
 var current_intensity: float
 var intensity_tween: Tween
+@export var max_intensity: float = 20
 
 #func _ready() -> void:
 	#GameManager.enemyExploded.connect()
@@ -14,7 +15,8 @@ var intensity_tween: Tween
 
 func shake(duration: float, shake_intensity: float = intensity):
 	shake_time_left = duration
-	current_intensity = shake_intensity
+	current_intensity += shake_intensity
+	current_intensity = min(current_intensity, max_intensity)
 	if intensity_tween && intensity_tween.is_valid():
 		intensity_tween.kill()
 	intensity_tween = create_tween()
