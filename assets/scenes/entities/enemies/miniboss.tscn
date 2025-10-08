@@ -1,6 +1,6 @@
 [gd_scene load_steps=40 format=3 uid="uid://dd1jpc1w3ffg"]
 
-[ext_resource type="Script" uid="uid://d6qgc5vkehrj" path="res://assets/scenes/entities/enemies/miniboss.gd" id="1_elsoa"]
+[ext_resource type="Script" uid="uid://d6qgc5vkehrj" path="res://assets/scripts/enemies/miniboss.gd" id="1_elsoa"]
 [ext_resource type="Texture2D" uid="uid://hyu1h2x80yv3" path="res://assets/sprites/enemies/miniboss/miniboss_sheet.png" id="1_qjs01"]
 [ext_resource type="Texture2D" uid="uid://rlv123kwgpvn" path="res://assets/sprites/vfx/miniboss_firing.png" id="2_0julf"]
 [ext_resource type="PackedScene" uid="uid://dgexdir50d4k7" path="res://assets/scenes/entities/enemies/projectiles/boss_homing_projectile.tscn" id="2_2j3rx"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://ck100b4j442uo" path="res://assets/scripts/enemies/hurtbox.gd" id="4_511kg"]
 [ext_resource type="AudioStream" uid="uid://crfvwbvssu41p" path="res://assets/sound/sfx/enemies/enemyDeath.ogg" id="4_vy6tf"]
 [ext_resource type="Texture2D" uid="uid://dqghbgq2x8pk" path="res://assets/sprites/vfx/debris_miniboss.png" id="11_8d3wa"]
-[ext_resource type="Script" uid="uid://bmpw6afgh7qg2" path="res://assets/scenes/entities/enemies/boss_health_bar.gd" id="12_c8hoi"]
+[ext_resource type="Script" uid="uid://bmpw6afgh7qg2" path="res://assets/scripts/enemies/boss_health_bar.gd" id="12_c8hoi"]
 [ext_resource type="FontFile" uid="uid://cf1h0wqf1xivc" path="res://assets/fonts/UpheavalPro.otf" id="13_c8hoi"]
 
 [sub_resource type="Animation" id="Animation_prgep"]

@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://btwy3b714emgb" path="res://assets/scripts/ui/gameover.gd" id="9_b06ak"]
 [ext_resource type="AudioStream" uid="uid://byf3xayuksdcq" path="res://assets/sound/music/gameOver.ogg" id="10_ravl6"]
 [ext_resource type="Script" uid="uid://6f5fo5f7f82u" path="res://assets/scripts/ui/ui.gd" id="11_1cu6b"]
-[ext_resource type="Script" uid="uid://bob1burcxvaav" path="res://assets/scenes/ui/victory.gd" id="11_7asii"]
+[ext_resource type="Script" uid="uid://bob1burcxvaav" path="res://assets/scripts/ui/victory.gd" id="11_7asii"]
 [ext_resource type="Texture2D" uid="uid://cy6iupn2oep41" path="res://assets/sprites/ui/pwr_spread.png" id="12_ayqsg"]
 [ext_resource type="AudioStream" uid="uid://bdbuqwikhtgfi" path="res://assets/sound/music/victory_placeholder.ogg" id="12_fowig"]
 [ext_resource type="Texture2D" uid="uid://dhqn81lhktxkc" path="res://assets/sprites/ui/pwr_laser.png" id="13_qo5b7"]

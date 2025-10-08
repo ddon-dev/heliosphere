@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ddfqkr5w0xq5u" path="res://assets/sprites/ui/chargebar_fill.png" id="2_8pqik"]
 [ext_resource type="Script" uid="uid://sb3ocsj1mukh" path="res://assets/levels/scripts/ult_charge_bar.gd" id="3_ogehh"]
 [ext_resource type="FontFile" uid="uid://ckcf1ufa4ixa5" path="res://assets/fonts/ChunkyDunk.ttf" id="4_37ypk"]
-[ext_resource type="Script" uid="uid://c1nunsgmicevp" path="res://assets/scenes/ui/charge_text.gd" id="5_d5l4r"]
+[ext_resource type="Script" uid="uid://c1nunsgmicevp" path="res://assets/scripts/ui/charge_text.gd" id="5_d5l4r"]
 
 [sub_resource type="Animation" id="Animation_x6575"]
 length = 0.001

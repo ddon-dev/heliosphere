@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2iira8konrj1" path="res://assets/scripts/player/player.gd" id="1_6aecq"]
 [ext_resource type="Texture2D" uid="uid://cbve5s54ytet0" path="res://assets/sprites/player/player_sheet.png" id="2_jrwbg"]
-[ext_resource type="Script" uid="uid://dt1m2mrbkmncv" path="res://assets/scenes/entities/player/hurtbox.gd" id="3_cqym6"]
+[ext_resource type="Script" uid="uid://dt1m2mrbkmncv" path="res://assets/scripts/player/hurtbox.gd" id="3_cqym6"]
 [ext_resource type="Script" uid="uid://cwh7cjj2dcboy" path="res://assets/scripts/player/projectileSpawn.gd" id="3_grjco"]
 [ext_resource type="AudioStream" uid="uid://cb220gnmkobtj" path="res://assets/sound/sfx/player/fire.ogg" id="3_jrwbg"]
 [ext_resource type="Script" uid="uid://dn40k0rrlhjxy" path="res://assets/scripts/player/projectiles/ult_spawn.gd" id="4_qc3ln"]
