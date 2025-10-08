@@ -37,6 +37,7 @@ signal boss
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameManager.canPause = true
 	boss.connect(boss_start)
 	tutorial.tutorial_finished.connect(start_stage_1)
 	stage1_duration.timeout.connect(start_stage_2)

@@ -16,6 +16,9 @@ var ultReady: bool = false
 var ultChargeable: bool = true
 @export_range(0,100,1) var ultCharge: int = 0
 
+# Menus
+var canPause: bool = true
+
 ## Win - Lose
 var victory: bool = false
 var game_over: bool = false

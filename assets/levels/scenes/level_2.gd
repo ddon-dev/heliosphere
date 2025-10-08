@@ -42,9 +42,13 @@ var finished_level: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameManager.canPause = true
+	# Create player
 	var _player = PLAYER.instantiate()
 	_player.position = respawn_point.position
 	add_child(_player)
+	
+	# Connections
 	level_start.timeout.connect(start_stage_1)
 	stage1_duration.timeout.connect(start_stage_2)
 	stage2_duration.timeout.connect(start_stage_3)

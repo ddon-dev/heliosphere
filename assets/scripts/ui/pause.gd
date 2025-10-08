@@ -24,23 +24,24 @@ func _ready() -> void:
 	
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
-		paused = !paused
-		sfx_paused.play()
-		visible = !visible
-		get_tree().paused = !get_tree().paused
-	
-	if paused:
-		AudioServer.set_bus_effect_enabled(1,0,true)
-	else:
-		AudioServer.set_bus_effect_enabled(1,0,false)
-		returnMenuChoice.visible = false
-		returnMenuChoice.set_process(false)
-		retryLevelChoice.visible = false
-		retryLevelChoice.set_process(false)
-		exitGameChoice.visible = false
-		exitGameChoice.set_process(false)
-		currentMenu.visible = true
+	if GameManager.canPause:
+		if event.is_action_pressed("pause"):
+			paused = !paused
+			sfx_paused.play()
+			visible = !visible
+			get_tree().paused = !get_tree().paused
+		
+		if paused:
+			AudioServer.set_bus_effect_enabled(1,0,true)
+		else:
+			AudioServer.set_bus_effect_enabled(1,0,false)
+			returnMenuChoice.visible = false
+			returnMenuChoice.set_process(false)
+			retryLevelChoice.visible = false
+			retryLevelChoice.set_process(false)
+			exitGameChoice.visible = false
+			exitGameChoice.set_process(false)
+			currentMenu.visible = true
 
 func continue_game():
 	AudioServer.set_bus_effect_enabled(1,0,false)

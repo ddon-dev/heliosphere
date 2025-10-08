@@ -8,7 +8,8 @@ extends Control
 @export var exitGameChoice: Panel
 @export var sfx_pressed: AudioStreamPlayer
 @export var music: AudioStreamPlayer
-@onready var level_music: AudioStreamPlayer = get_tree().get_first_node_in_group("music")
+@onready var level_music: AudioStreamPlayer = $"../../../music/level_music"
+@onready var boss_music: AudioStreamPlayer = $"../../../music/boss_music"
 
 func _ready() -> void:
 	retry_stage.pressed.connect(restart_level)
@@ -36,7 +37,9 @@ func exit_game():
 	exitGameChoice.visible = true
 	
 func start():
+	GameManager.canPause = false
 	level_music.stop()
+	boss_music.stop()
 	visible = true
 	get_tree().paused = true
 	music.play()

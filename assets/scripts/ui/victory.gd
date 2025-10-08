@@ -7,6 +7,7 @@ func _ready() -> void:
 	
 func start():
 	visible = true
+	GameManager.canPause = false
 	GameManager.victory = true
 	music.play()
 	await music.finished

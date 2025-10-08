@@ -176,7 +176,9 @@ stage1_chaserSpawn = NodePath("timers/stageDuration/Node/chaserEnable")
 stage2_duration = NodePath("timers/stageDuration/stageTwo")
 stage3_duration = NodePath("timers/stageDuration/stageThree")
 
-[node name="level_music" type="AudioStreamPlayer" parent="."]
+[node name="Node" type="Node" parent="."]
+
+[node name="level_music" type="AudioStreamPlayer" parent="Node"]
 unique_name_in_owner = true
 process_mode = 3
 stream = ExtResource("2_udwk7")
@@ -184,6 +186,12 @@ volume_db = -2.0
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="boss_music" type="AudioStreamPlayer" parent="Node"]
+unique_name_in_owner = true
+stream = ExtResource("4_doer1")
+volume_db = -6.0
+bus = &"Music"
 
 [node name="enemySpawns" type="Node" parent="."]
 
@@ -285,12 +293,6 @@ gizmo_extents = 130.0
 [node name="alarm" type="AudioStreamPlayer" parent="sfxs"]
 stream = ExtResource("2_tt1eg")
 bus = &"SFX"
-
-[node name="boss_music" type="AudioStreamPlayer" parent="sfxs"]
-unique_name_in_owner = true
-stream = ExtResource("4_doer1")
-volume_db = -6.0
-bus = &"Music"
 
 [node name="vfx" type="Node" parent="."]
 
