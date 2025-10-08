@@ -289,7 +289,7 @@ bus = &"SFX"
 [node name="boss_music" type="AudioStreamPlayer" parent="sfxs"]
 unique_name_in_owner = true
 stream = ExtResource("4_doer1")
-volume_db = -2.0
+volume_db = -6.0
 bus = &"Music"
 
 [node name="vfx" type="Node" parent="."]

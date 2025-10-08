@@ -18,7 +18,6 @@ func go_to_next_level():
 	if level_idx + 1 < level_paths.size():
 		var next_level_path = level_paths.get(level_idx + 1)
 		go_to_level(next_level_path)
-	
 	else:
 		go_to_menu()
 
