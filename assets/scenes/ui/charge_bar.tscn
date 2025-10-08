@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c4nmmoa7qc5jn" path="res://assets/sprites/ui/chargebar.png" id="1_vamc5"]
 [ext_resource type="Texture2D" uid="uid://ddfqkr5w0xq5u" path="res://assets/sprites/ui/chargebar_fill.png" id="2_8pqik"]
-[ext_resource type="Script" uid="uid://sb3ocsj1mukh" path="res://ult_charge_bar.gd" id="3_ogehh"]
+[ext_resource type="Script" uid="uid://sb3ocsj1mukh" path="res://assets/levels/scripts/ult_charge_bar.gd" id="3_ogehh"]
 [ext_resource type="FontFile" uid="uid://ckcf1ufa4ixa5" path="res://assets/fonts/ChunkyDunk.ttf" id="4_37ypk"]
 [ext_resource type="Script" uid="uid://c1nunsgmicevp" path="res://assets/scenes/ui/charge_text.gd" id="5_d5l4r"]
 
@@ -164,10 +164,9 @@ _data = {
 [node name="TextureProgressBar" type="TextureProgressBar" node_paths=PackedStringArray("charge_fill_animations", "time_add_charge")]
 size_flags_horizontal = 8
 size_flags_vertical = 8
-value = 50.0
 texture_under = ExtResource("1_vamc5")
 texture_progress = ExtResource("2_8pqik")
-tint_progress = Color(0.14901961, 0.7254902, 0.92156863, 0.88235295)
+tint_progress = Color(0.14901961, 0.7176471, 0.9098039, 1)
 script = ExtResource("3_ogehh")
 charge_fill_animations = NodePath("barColors")
 time_add_charge = NodePath("addCharge")

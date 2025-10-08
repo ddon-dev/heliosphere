@@ -25,4 +25,4 @@ func _process(_delta: float) -> void:
 
 func timeAddCharge():
 	if GameManager.ultChargeable and GameManager.ultCharge < 100:
-			GameManager.ultCharge += 2
+			GameManager.ultCharge += 1

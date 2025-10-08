@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://vxbjq3kc5xqq"]
+
+[ext_resource type="FontFile" uid="uid://ckcf1ufa4ixa5" path="res://assets/fonts/ChunkyDunk.ttf" id="1_xl5gq"]
+[ext_resource type="FontFile" uid="uid://bvv5cyrdja8qo" path="res://assets/fonts/Quadrangle.otf" id="2_ta70r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_emleq"]
+
+[resource]
+Button/colors/font_hover_color = Color(0.3254902, 0.7647059, 1, 1)
+Button/colors/font_hover_pressed_color = Color(0.3254902, 0.7647059, 1, 1)
+Button/font_sizes/font_size = 70
+Button/fonts/font = ExtResource("1_xl5gq")
+Button/styles/focus = SubResource("StyleBoxEmpty_emleq")
+Label/colors/font_shadow_color = Color(0.32422715, 0.7666111, 0.99999946, 1)
+Label/constants/shadow_offset_x = -7
+Label/constants/shadow_offset_y = 5
+Label/font_sizes/font_size = 72
+Label/fonts/font = ExtResource("2_ta70r")

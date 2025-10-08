@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dgcqysipmy8l0"]
 
-[ext_resource type="Script" uid="uid://dbfb6vnu50lyg" path="res://assets/scenes/items/las_upgrade.gd" id="1_cqpyn"]
+[ext_resource type="Script" uid="uid://dbfb6vnu50lyg" path="res://assets/scripts/items/las_upgrade.gd" id="1_cqpyn"]
 [ext_resource type="AudioStream" uid="uid://cljuluore6kvr" path="res://assets/sound/sfx/player/pick_PwrUp.ogg" id="2_27bfs"]
-[ext_resource type="Script" uid="uid://hsgejm52dvfw" path="res://assets/scenes/items/spr_upgrade_sfx.gd" id="3_qcihi"]
+[ext_resource type="Script" uid="uid://hsgejm52dvfw" path="res://assets/scripts/items/spr_upgrade_sfx.gd" id="3_qcihi"]
 [ext_resource type="Texture2D" uid="uid://okiipteg3i3c" path="res://assets/sprites/collectibles/lasUpgrade_sheet.png" id="4_cqpyn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o4p3j"]

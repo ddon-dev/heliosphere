@@ -7,6 +7,8 @@ extends PanelContainer
 @export var sfx_pressed: AudioStreamPlayer
 
 func _ready() -> void:
+	get_tree().paused = false
+	AudioServer.set_bus_effect_enabled(1,0,false)
 	load_game.pressed.connect(continue_game)
 	new_game.pressed.connect(start_game)
 	options.pressed.connect(options_open)
@@ -18,7 +20,7 @@ func continue_game():
 
 func start_game():
 	sfx_pressed.play()
-	get_tree().change_scene_to_file("res://test-level-1.tscn")
+	LevelManager.go_to_init_level()
 	pass
 
 func options_open():

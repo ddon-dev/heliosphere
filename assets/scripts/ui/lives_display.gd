@@ -2,4 +2,7 @@ extends Label
 
 	
 func set_lives_number(lives: int):
-	text = "X %s" % lives
+	if lives >= 0:
+		text = "X %s" % lives
+	else:
+		text = "X DEAD"

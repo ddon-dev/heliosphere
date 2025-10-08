@@ -1,0 +1,277 @@
+[gd_scene load_steps=22 format=3 uid="uid://o05mrw3iqvoj"]
+
+[ext_resource type="Script" uid="uid://ixv54lvx2i0" path="res://assets/levels/scenes/level_2.gd" id="1_tt1eg"]
+[ext_resource type="AudioStream" uid="uid://c0wfn6ah5mcxd" path="res://assets/sound/sfx/warning.ogg" id="2_tt1eg"]
+[ext_resource type="AudioStream" uid="uid://8ss1h7cntkwa" path="res://assets/sound/music/angelfire.ogg" id="2_udwk7"]
+[ext_resource type="Texture2D" uid="uid://buoa3fi7ph0vd" path="res://assets/sprites/ui/ui_WARNING.png" id="3_udwk7"]
+[ext_resource type="PackedScene" uid="uid://b0posed4t4w5f" path="res://assets/scenes/ui/ui_and_menus.tscn" id="4_chel8"]
+[ext_resource type="AudioStream" uid="uid://d4jnk5tl0nj0" path="res://assets/sound/music/xVsZero.ogg" id="4_doer1"]
+[ext_resource type="Script" uid="uid://ytorwbopj43" path="res://assets/scripts/vfx/shaker.gd" id="6_b7m4j"]
+[ext_resource type="Texture2D" uid="uid://dldcu4c3hrj1n" path="res://assets/sprites/bgs/stars5.png" id="6_tt1eg"]
+[ext_resource type="Texture2D" uid="uid://dypgqthqf18gv" path="res://assets/sprites/bgs/stars3.png" id="7_udwk7"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p4dqe"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_u152o"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ma7cw"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1vcco"]
+
+[sub_resource type="Animation" id="Animation_wbbgv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5j6m5"]
+resource_name = "default"
+length = 0.7
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.20000002, 0.26666668, 0.33333334, 0.40000004, 0.4666667, 0.53333336, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4hl74"]
+_data = {
+&"RESET": SubResource("Animation_wbbgv"),
+&"default": SubResource("Animation_5j6m5")
+}
+
+[sub_resource type="Gradient" id="Gradient_8auou"]
+colors = PackedColorArray(0, 0, 0, 1, 0.24368703, 4.003275e-05, 0.2436851, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_715ku"]
+gradient = SubResource("Gradient_8auou")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Animation" id="Animation_udwk7"]
+resource_name = "boss_darken"
+length = 4.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.43904907, 0.43904915, 0.43904895, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../stars_front:autoscroll")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 800), Vector2(0, 1300)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../stars_back:autoscroll")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 260), Vector2(0, 640)]
+}
+
+[sub_resource type="Animation" id="Animation_chel8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../stars_front:autoscroll")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 800)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../stars_back:autoscroll")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 260)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_chel8"]
+_data = {
+&"RESET": SubResource("Animation_chel8"),
+&"boss_darken": SubResource("Animation_udwk7")
+}
+
+[node name="Level2" type="Node2D" node_paths=PackedStringArray("warning_anim", "bg_anim", "alarm", "warning")]
+script = ExtResource("1_tt1eg")
+warning_anim = NodePath("vfx/boss_warning/Sprite2D/warn_anim")
+bg_anim = NodePath("background/TextureRect/bg_anim")
+alarm = NodePath("sfxs/alarm")
+warning = NodePath("vfx/boss_warning/Sprite2D")
+
+[node name="level_music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("2_udwk7")
+volume_db = -2.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="level_borders" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="level_borders"]
+collision_layer = 256
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(960, 1080)
+shape = SubResource("WorldBoundaryShape2D_p4dqe")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(1920, 549)
+rotation = -1.5707941
+shape = SubResource("WorldBoundaryShape2D_u152o")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(960, 0)
+rotation = 3.1415882
+shape = SubResource("WorldBoundaryShape2D_ma7cw")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(0, 521)
+rotation = 1.5707941
+shape = SubResource("WorldBoundaryShape2D_1vcco")
+
+[node name="Respawn Point" type="Marker2D" parent="." groups=["RespawnPoint"]]
+unique_name_in_owner = true
+position = Vector2(960, 956)
+gizmo_extents = 130.0
+
+[node name="sfxs" type="Node" parent="."]
+
+[node name="alarm" type="AudioStreamPlayer" parent="sfxs"]
+stream = ExtResource("2_tt1eg")
+bus = &"SFX"
+
+[node name="boss_music" type="AudioStreamPlayer" parent="sfxs"]
+unique_name_in_owner = true
+stream = ExtResource("4_doer1")
+volume_db = -2.0
+bus = &"Music"
+
+[node name="vfx" type="Node" parent="."]
+
+[node name="boss_warning" type="Node" parent="vfx"]
+
+[node name="Sprite2D" type="Sprite2D" parent="vfx/boss_warning"]
+visible = false
+position = Vector2(961, 540)
+texture = ExtResource("3_udwk7")
+hframes = 5
+vframes = 4
+
+[node name="warn_anim" type="AnimationPlayer" parent="vfx/boss_warning/Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_4hl74")
+}
+
+[node name="ui_and_menus" parent="." instance=ExtResource("4_chel8")]
+
+[node name="background" type="Node" parent="."]
+
+[node name="stars_front" type="Parallax2D" parent="background"]
+z_index = -3
+repeat_size = Vector2(1600, 2700)
+autoscroll = Vector2(0, 800)
+repeat_times = 3
+
+[node name="TextureRect" type="TextureRect" parent="background/stars_front"]
+z_index = -3
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_tt1eg")
+metadata/_edit_use_anchors_ = true
+
+[node name="stars_back" type="Parallax2D" parent="background"]
+z_index = -3
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1600, 2700)
+autoscroll = Vector2(0, 260)
+repeat_times = 3
+
+[node name="TextureRect" type="TextureRect" parent="background/stars_back"]
+z_index = -3
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("7_udwk7")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="background"]
+z_index = -7
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_715ku")
+metadata/_edit_use_anchors_ = true
+
+[node name="bg_anim" type="AnimationPlayer" parent="background/TextureRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_chel8")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="shaker" type="Node2D" parent="Camera2D" node_paths=PackedStringArray("camera")]
+script = ExtResource("6_b7m4j")
+camera = NodePath("..")

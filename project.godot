@@ -11,19 +11,22 @@ config_version=5
 [application]
 
 config/name="Heliosphere"
-run/main_scene="uid://bnwip1vywlqdb"
+run/main_scene="uid://dxfeqhfhgqweb"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="uid://cf54jwbfqcibc"
+run/layer_10=""
 
 [autoload]
 
 GameManager="*res://assets/scripts/global/gameManager.gd"
+LevelManager="*res://assets/scripts/global/levelManager.tscn"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 window/custom_image=""
 window/default_bus_layout="res://default_bus_layout.tres"
 
@@ -32,6 +35,7 @@ window/default_bus_layout="res://default_bus_layout.tres"
 Enemies=""
 Player=""
 RespawnPoint=""
+Levels=""
 
 [input]
 

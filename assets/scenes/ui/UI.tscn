@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://f7rbvvu721nr" path="res://assets/scripts/ui/lives_display.gd" id="6_fediw"]
 [ext_resource type="Texture2D" uid="uid://c4nmmoa7qc5jn" path="res://assets/sprites/ui/chargebar.png" id="7_l3m6o"]
 [ext_resource type="Texture2D" uid="uid://ddfqkr5w0xq5u" path="res://assets/sprites/ui/chargebar_fill.png" id="8_k8757"]
-[ext_resource type="Script" uid="uid://sb3ocsj1mukh" path="res://ult_charge_bar.gd" id="9_wsdfl"]
+[ext_resource type="Script" uid="uid://sb3ocsj1mukh" path="res://assets/levels/scripts/ult_charge_bar.gd" id="9_wsdfl"]
 [ext_resource type="FontFile" uid="uid://ckcf1ufa4ixa5" path="res://assets/fonts/ChunkyDunk.ttf" id="10_bd8cq"]
 [ext_resource type="Script" uid="uid://c1nunsgmicevp" path="res://assets/scenes/ui/charge_text.gd" id="11_86a3p"]
 

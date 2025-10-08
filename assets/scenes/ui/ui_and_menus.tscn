@@ -1,0 +1,704 @@
+[gd_scene load_steps=33 format=3 uid="uid://b0posed4t4w5f"]
+
+[ext_resource type="Theme" uid="uid://b58yfok0gvnar" path="res://assets/themes/menus_theme.tres" id="1_y33o8"]
+[ext_resource type="AudioStream" uid="uid://cucu4k4tf8ws5" path="res://assets/sound/sfx/menuselect.ogg" id="2_0qvux"]
+[ext_resource type="AudioStream" uid="uid://fmnxui0y6tsi" path="res://assets/sound/sfx/pause.ogg" id="3_7asii"]
+[ext_resource type="Script" uid="uid://cjrnayadudr7r" path="res://assets/scripts/ui/pause.gd" id="4_fowig"]
+[ext_resource type="Script" uid="uid://11nsae48wfx7" path="res://assets/scripts/ui/p_return_menu.gd" id="5_63d3b"]
+[ext_resource type="FontFile" uid="uid://ckcf1ufa4ixa5" path="res://assets/fonts/ChunkyDunk.ttf" id="6_kxghv"]
+[ext_resource type="Script" uid="uid://b5wlrnlkm0gs" path="res://assets/scripts/ui/retry_level_button.gd" id="7_8fu6n"]
+[ext_resource type="Script" uid="uid://bkyqg6h6mlhoc" path="res://assets/scripts/ui/p_exit_menu.gd" id="8_xl5sn"]
+[ext_resource type="Script" uid="uid://btwy3b714emgb" path="res://assets/scripts/ui/gameover.gd" id="9_b06ak"]
+[ext_resource type="AudioStream" uid="uid://byf3xayuksdcq" path="res://assets/sound/music/gameOver.ogg" id="10_ravl6"]
+[ext_resource type="Script" uid="uid://6f5fo5f7f82u" path="res://assets/scripts/ui/ui.gd" id="11_1cu6b"]
+[ext_resource type="Texture2D" uid="uid://cy6iupn2oep41" path="res://assets/sprites/ui/pwr_spread.png" id="12_ayqsg"]
+[ext_resource type="Texture2D" uid="uid://dhqn81lhktxkc" path="res://assets/sprites/ui/pwr_laser.png" id="13_qo5b7"]
+[ext_resource type="Texture2D" uid="uid://07oww8c4muqt" path="res://assets/sprites/ui/ui_lives.png" id="14_d3xfo"]
+[ext_resource type="FontFile" uid="uid://biyltwvbkgds7" path="res://assets/fonts/BlackAcute.ttf" id="15_4n2yr"]
+[ext_resource type="Script" uid="uid://f7rbvvu721nr" path="res://assets/scripts/ui/lives_display.gd" id="16_qug2o"]
+[ext_resource type="PackedScene" uid="uid://dc0nl1yw616j1" path="res://assets/scenes/ui/charge_bar.tscn" id="17_7k4j0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vl7hk"]
+bg_color = Color(0.08078333, 0.08078336, 0.08078327, 0.39607844)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dbmw5"]
+font_size = 72
+shadow_color = Color(0.3254902, 0.7647059, 1, 1)
+shadow_offset = Vector2(-7, 5)
+
+[sub_resource type="Animation" id="Animation_c7w7h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.3254902, 0.7647059, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w6q4n"]
+resource_name = "color_pulse"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.3254902, 0.7647059, 1, 1), Color(1.732707e-06, 0.5719077, 0.7987298, 1), Color(0.3254902, 0.7647059, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7334d"]
+_data = {
+&"RESET": SubResource("Animation_c7w7h"),
+&"color_pulse": SubResource("Animation_w6q4n")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4e3ho"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_07ahp"]
+font = ExtResource("6_kxghv")
+font_size = 90
+
+[sub_resource type="LabelSettings" id="LabelSettings_pc1i5"]
+font = ExtResource("6_kxghv")
+font_size = 90
+
+[sub_resource type="LabelSettings" id="LabelSettings_fvrvr"]
+font = ExtResource("6_kxghv")
+font_size = 90
+
+[sub_resource type="LabelSettings" id="LabelSettings_m7j03"]
+font_size = 90
+shadow_color = Color(0.77254903, 0, 0.07450981, 1)
+shadow_offset = Vector2(-7, 5)
+
+[sub_resource type="Animation" id="Animation_mpw6h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.77254903, 0, 0.07450981, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q37na"]
+resource_name = "color_pulse"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.99999994, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.77254903, 0, 0.07450981, 1), Color(0.95351976, 0, 0.07180496, 1), Color(0.77254903, 0, 0.07450981, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_eu5c6"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mpw6h"]
+_data = {
+&"RESET": SubResource("Animation_mpw6h"),
+&"color_pulse": SubResource("Animation_q37na"),
+&"new_animation": SubResource("Animation_eu5c6")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_vwv63"]
+font = ExtResource("15_4n2yr")
+font_size = 40
+shadow_size = 6
+shadow_color = Color(0.21059999, 0.6301799, 0.81, 1)
+shadow_offset = Vector2(2, 3)
+
+[node name="ui_and_menus" type="CanvasLayer"]
+layer = 4
+
+[node name="ig-menus" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_y33o8")
+metadata/_edit_use_anchors_ = true
+
+[node name="buttonPressed" type="AudioStreamPlayer" parent="ig-menus"]
+stream = ExtResource("2_0qvux")
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="paused" type="AudioStreamPlayer" parent="ig-menus"]
+stream = ExtResource("3_7asii")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="pause" type="Panel" parent="ig-menus" node_paths=PackedStringArray("currentMenu", "returnMenuChoice", "retryLevelChoice", "exitGameChoice", "sfx_paused", "sfx_pressed")]
+process_mode = 3
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vl7hk")
+script = ExtResource("4_fowig")
+currentMenu = NodePath("BoxContainer/VBoxContainer")
+returnMenuChoice = NodePath("returnToMenu")
+retryLevelChoice = NodePath("retryLevel")
+exitGameChoice = NodePath("exitGame")
+sfx_paused = NodePath("../paused")
+sfx_pressed = NodePath("../buttonPressed")
+
+[node name="Label" type="Label" parent="ig-menus/pause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3328125
+anchor_top = 0.3148148
+anchor_right = 0.6859375
+anchor_bottom = 0.4960648
+offset_right = -226.0
+offset_bottom = -108.75
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 2.25)
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_dbmw5")
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ig-menus/pause/Label"]
+libraries = {
+&"": SubResource("AnimationLibrary_7334d")
+}
+autoplay = "color_pulse"
+
+[node name="BoxContainer" type="BoxContainer" parent="ig-menus/pause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37708333
+anchor_top = 0.5138889
+anchor_right = 0.6234375
+anchor_bottom = 0.8851852
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ig-menus/pause/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="resume" type="Button" parent="ig-menus/pause/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Continue"
+flat = true
+
+[node name="options" type="Button" parent="ig-menus/pause/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Options"
+flat = true
+
+[node name="retry_stage" type="Button" parent="ig-menus/pause/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Retry Stage"
+flat = true
+
+[node name="menu" type="Button" parent="ig-menus/pause/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Return to Menu"
+flat = true
+
+[node name="exit" type="Button" parent="ig-menus/pause/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Exit Game"
+flat = true
+
+[node name="returnToMenu" type="Panel" parent="ig-menus/pause" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
+process_mode = 3
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4e3ho")
+script = ExtResource("5_63d3b")
+prevOptions = NodePath("../BoxContainer/VBoxContainer")
+yes = NodePath("HBoxContainer/Button")
+no = NodePath("HBoxContainer/Button2")
+sfx_pressed = NodePath("../../buttonPressed")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ig-menus/pause/returnToMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34010416
+anchor_top = 0.5037037
+anchor_right = 0.675
+anchor_bottom = 0.5861111
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return to menu?"
+label_settings = SubResource("LabelSettings_07ahp")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/returnToMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37708333
+anchor_top = 0.6111111
+anchor_right = 0.6380208
+anchor_bottom = 0.6824074
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 300
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="ig-menus/pause/returnToMenu/HBoxContainer"]
+layout_mode = 2
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="ig-menus/pause/returnToMenu/HBoxContainer"]
+layout_mode = 2
+text = "No"
+flat = true
+
+[node name="retryLevel" type="Panel" parent="ig-menus/pause" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
+process_mode = 3
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4e3ho")
+script = ExtResource("7_8fu6n")
+prevOptions = NodePath("../BoxContainer/VBoxContainer")
+yes = NodePath("HBoxContainer/Button")
+no = NodePath("HBoxContainer/Button2")
+sfx_pressed = NodePath("../../buttonPressed")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ig-menus/pause/retryLevel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.365625
+anchor_top = 0.5037037
+anchor_right = 0.6536458
+anchor_bottom = 0.5861111
+grow_horizontal = 2
+grow_vertical = 2
+text = "Are you sure?"
+label_settings = SubResource("LabelSettings_pc1i5")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/retryLevel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37708333
+anchor_top = 0.6111111
+anchor_right = 0.6380208
+anchor_bottom = 0.6824074
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 300
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="ig-menus/pause/retryLevel/HBoxContainer"]
+layout_mode = 2
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="ig-menus/pause/retryLevel/HBoxContainer"]
+layout_mode = 2
+text = "No"
+flat = true
+
+[node name="exitGame" type="Panel" parent="ig-menus/pause" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
+process_mode = 3
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4e3ho")
+script = ExtResource("8_xl5sn")
+prevOptions = NodePath("../BoxContainer/VBoxContainer")
+yes = NodePath("HBoxContainer/Button")
+no = NodePath("HBoxContainer/Button2")
+sfx_pressed = NodePath("../../buttonPressed")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ig-menus/pause/exitGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -218.0
+offset_top = 4.0
+offset_right = 219.0
+offset_bottom = 93.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit game?"
+label_settings = SubResource("LabelSettings_fvrvr")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/exitGame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37708333
+anchor_top = 0.6111111
+anchor_right = 0.6380208
+anchor_bottom = 0.6824074
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 300
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="ig-menus/pause/exitGame/HBoxContainer"]
+layout_mode = 2
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="ig-menus/pause/exitGame/HBoxContainer"]
+layout_mode = 2
+text = "No"
+flat = true
+
+[node name="gameover" type="Control" parent="ig-menus" node_paths=PackedStringArray("retry_stage", "return_menu", "exit", "currentMenu", "returnMenuChoice", "exitGameChoice", "sfx_pressed", "music")]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_b06ak")
+retry_stage = NodePath("Panel/BoxContainer/lose_options/retry_stage")
+return_menu = NodePath("Panel/BoxContainer/lose_options/menu")
+exit = NodePath("Panel/BoxContainer/lose_options/exit")
+currentMenu = NodePath("Panel/BoxContainer/lose_options")
+returnMenuChoice = NodePath("Panel/go_menu")
+exitGameChoice = NodePath("Panel/game_exit")
+sfx_pressed = NodePath("../buttonPressed")
+music = NodePath("gameOverJingle")
+
+[node name="gameOverJingle" type="AudioStreamPlayer" parent="ig-menus/gameover"]
+stream = ExtResource("10_ravl6")
+volume_db = -6.0
+bus = &"Music"
+
+[node name="Panel" type="Panel" parent="ig-menus/gameover"]
+process_mode = 3
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vl7hk")
+
+[node name="game_over" type="Label" parent="ig-menus/gameover/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.18072917
+anchor_top = 0.28703704
+anchor_right = 0.81822914
+anchor_bottom = 0.5141204
+offset_right = -408.0
+offset_bottom = -136.25006
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 2.25)
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_m7j03")
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ig-menus/gameover/Panel/game_over"]
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_mpw6h")
+}
+autoplay = "color_pulse"
+
+[node name="BoxContainer" type="BoxContainer" parent="ig-menus/gameover/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37578124
+anchor_top = 0.5361111
+anchor_right = 0.62421876
+anchor_bottom = 0.9074074
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="lose_options" type="VBoxContainer" parent="ig-menus/gameover/Panel/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="retry_stage" type="Button" parent="ig-menus/gameover/Panel/BoxContainer/lose_options"]
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Retry Stage"
+flat = true
+
+[node name="menu" type="Button" parent="ig-menus/gameover/Panel/BoxContainer/lose_options"]
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Return to Menu"
+flat = true
+
+[node name="exit" type="Button" parent="ig-menus/gameover/Panel/BoxContainer/lose_options"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Exit Game"
+flat = true
+
+[node name="go_menu" type="Panel" parent="ig-menus/gameover/Panel" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4e3ho")
+script = ExtResource("5_63d3b")
+prevOptions = NodePath("../BoxContainer/lose_options")
+yes = NodePath("HBoxContainer/Button")
+no = NodePath("HBoxContainer/Button2")
+sfx_pressed = NodePath("../../../buttonPressed")
+
+[node name="Label" type="Label" parent="ig-menus/gameover/Panel/go_menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34010416
+anchor_top = 0.5037037
+anchor_right = 0.675
+anchor_bottom = 0.5861111
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return to menu?"
+label_settings = SubResource("LabelSettings_07ahp")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/gameover/Panel/go_menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37708333
+anchor_top = 0.6111111
+anchor_right = 0.6380208
+anchor_bottom = 0.6824074
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 300
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="ig-menus/gameover/Panel/go_menu/HBoxContainer"]
+layout_mode = 2
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="ig-menus/gameover/Panel/go_menu/HBoxContainer"]
+layout_mode = 2
+text = "No"
+flat = true
+
+[node name="game_exit" type="Panel" parent="ig-menus/gameover/Panel" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4e3ho")
+script = ExtResource("8_xl5sn")
+prevOptions = NodePath("../BoxContainer/lose_options")
+yes = NodePath("HBoxContainer/Button")
+no = NodePath("HBoxContainer/Button2")
+sfx_pressed = NodePath("../../../buttonPressed")
+
+[node name="Label" type="Label" parent="ig-menus/gameover/Panel/game_exit"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38645834
+anchor_top = 0.5037037
+anchor_right = 0.6140625
+anchor_bottom = 0.5861111
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit game?"
+label_settings = SubResource("LabelSettings_fvrvr")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/gameover/Panel/game_exit"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37708333
+anchor_top = 0.6111111
+anchor_right = 0.6380208
+anchor_bottom = 0.6824074
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 300
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="ig-menus/gameover/Panel/game_exit/HBoxContainer"]
+layout_mode = 2
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="ig-menus/gameover/Panel/game_exit/HBoxContainer"]
+layout_mode = 2
+text = "No"
+flat = true
+
+[node name="victory" type="Control" parent="ig-menus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("spreadSprite", "pierceSprite")]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 200)
+mouse_filter = 2
+script = ExtResource("11_1cu6b")
+spreadSprite = NodePath("SpreadPwr")
+pierceSprite = NodePath("PiercePwr")
+metadata/_edit_use_anchors_ = true
+
+[node name="SpreadPwr" type="Sprite2D" parent="UI"]
+texture_filter = 5
+position = Vector2(195.47995, 1034.48)
+texture = ExtResource("12_ayqsg")
+
+[node name="PiercePwr" type="Sprite2D" parent="UI"]
+texture_filter = 5
+position = Vector2(195.47995, 1034.48)
+texture = ExtResource("13_qo5b7")
+
+[node name="Lives" type="Sprite2D" parent="UI"]
+position = Vector2(69.47996, 1034.48)
+scale = Vector2(0.63999873, 0.63999873)
+texture = ExtResource("14_d3xfo")
+
+[node name="livesNumber" type="Label" parent="UI/Lives"]
+unique_name_in_owner = true
+offset_left = 55.35727
+offset_top = -16.071423
+offset_right = 130.35727
+offset_bottom = 29.928577
+text = "X"
+label_settings = SubResource("LabelSettings_vwv63")
+script = ExtResource("16_qug2o")
+
+[node name="ChargeBar" type="MarginContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.95, 0.95)
+pivot_offset = Vector2(988, 566)
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureProgressBar" parent="UI/ChargeBar" instance=ExtResource("17_7k4j0")]
+layout_mode = 2
+mouse_filter = 2

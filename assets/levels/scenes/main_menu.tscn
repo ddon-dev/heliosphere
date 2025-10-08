@@ -1,0 +1,178 @@
+[gd_scene load_steps=13 format=3 uid="uid://dxfeqhfhgqweb"]
+
+[ext_resource type="Theme" uid="uid://b58yfok0gvnar" path="res://assets/themes/menus_theme.tres" id="1_ef6ql"]
+[ext_resource type="Script" uid="uid://dmdm4m2k4qwg2" path="res://assets/levels/scripts/main_menu.gd" id="2_7ftig"]
+[ext_resource type="AudioStream" uid="uid://dlhwvyimj8sei" path="res://assets/sound/music/earedrobot.ogg" id="3_bx52v"]
+[ext_resource type="AudioStream" uid="uid://cucu4k4tf8ws5" path="res://assets/sound/sfx/menuselect.ogg" id="4_omu1q"]
+[ext_resource type="Texture2D" uid="uid://byus7tua2u3y3" path="res://assets/sprites/bgs/menu_stars.png" id="5_0cvrm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_glbon"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jix8l"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_06t4h"]
+font_size = 160
+shadow_color = Color(0.3254902, 0.7647059, 1, 1)
+shadow_offset = Vector2(-15, 10)
+
+[sub_resource type="Animation" id="Animation_glbon"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.3254902, 0.7647059, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jix8l"]
+resource_name = "rbow"
+length = 7.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8, 3.2, 3.6, 4.2, 4.8, 5.2, 5.6, 6, 6.4, 6.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.7772606, 0.99735785, 1), Color(0, 0.45043758, 1, 1), Color(0, 0.11774104, 1, 1), Color(0.2166667, 0, 1, 0.88235295), Color(0.5497381, 0, 1, 1), Color(0.8834195, 0, 1, 1), Color(1, 0, 0.7833561, 1), Color(1, 0, 0.45043758, 1), Color(1, 0, 0.11774104, 1), Color(1, 0.21802102, 0, 1), Color(1, 0.8834195, 0, 1), Color(0.7833561, 1, 0, 1), Color(0.45043758, 1, 0, 1), Color(0.11774104, 1, 0, 1), Color(0, 1, 0.21802102, 1), Color(0, 1, 0.5497381, 1), Color(0, 1, 0.8834195, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nlkkf"]
+_data = {
+&"RESET": SubResource("Animation_glbon"),
+&"rbow": SubResource("Animation_jix8l")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fu7sn"]
+
+[node name="Main Menu" type="PanelContainer" node_paths=PackedStringArray("sfx_pressed")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_ef6ql")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_glbon")
+script = ExtResource("2_7ftig")
+sfx_pressed = NodePath("menu_select_sfx")
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bx52v")
+autoplay = true
+bus = &"Music"
+
+[node name="title" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jix8l")
+
+[node name="title" type="Label" parent="title"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0578125
+anchor_top = 0.24166666
+anchor_right = 0.94166666
+anchor_bottom = 0.50972223
+offset_bottom = -96.5
+scale = Vector2(1, 1.5)
+size_flags_horizontal = 4
+text = "HELIOSPHERE"
+label_settings = SubResource("LabelSettings_06t4h")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="title/title"]
+libraries = {
+&"": SubResource("AnimationLibrary_nlkkf")
+}
+autoplay = "rbow"
+
+[node name="options" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fu7sn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.41197917
+anchor_top = 0.57314813
+anchor_right = 0.58802086
+anchor_bottom = 0.86944443
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="load_game" type="Button" parent="options/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../newGame")
+text = "Continue"
+flat = true
+
+[node name="newGame" type="Button" parent="options/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../options")
+text = "New Game"
+flat = true
+
+[node name="options" type="Button" parent="options/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../exit")
+text = "Options"
+flat = true
+
+[node name="exit" type="Button" parent="options/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../load_game")
+text = "Exit"
+flat = true
+
+[node name="menu_select_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_omu1q")
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="background" type="Node" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="background"]
+z_index = -1
+repeat_size = Vector2(1920, 851)
+autoscroll = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="background/Parallax2D"]
+offset_right = 3200.0
+offset_bottom = 900.0
+size_flags_vertical = 8
+mouse_filter = 2
+texture = ExtResource("5_0cvrm")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="background"]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.03947231, 0.02182017, 0.0542486, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0

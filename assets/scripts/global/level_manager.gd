@@ -20,3 +20,12 @@ func go_to_level(level_path):
 	current_level_path = level_path
 	get_tree().change_scene_to_file(current_level_path)
 	level_changed.emit(current_level_path)
+	
+func go_to_menu():
+	go_to_level(level_paths[0])
+	get_tree().change_scene_to_file(current_level_path)
+	GameManager.reset_state()
+
+func restart_level():
+	get_tree().reload_current_scene()
+	GameManager.reset_state()

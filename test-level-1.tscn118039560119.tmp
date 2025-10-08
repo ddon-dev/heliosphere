@@ -1,0 +1,637 @@
+[gd_scene load_steps=47 format=3 uid="uid://bnwip1vywlqdb"]
+
+[ext_resource type="Script" uid="uid://ytorwbopj43" path="res://shaker.gd" id="1_hhpv8"]
+[ext_resource type="Theme" uid="uid://vxbjq3kc5xqq" path="res://menus_theme2.tres" id="1_w6q4n"]
+[ext_resource type="PackedScene" uid="uid://ckog1nfv7gj1" path="res://assets/scenes/entities/player/player.tscn" id="1_wbtfn"]
+[ext_resource type="PackedScene" uid="uid://nuo8r1sgp4we" path="res://assets/scenes/entities/enemies/enemy_charger.tscn" id="2_yeg6q"]
+[ext_resource type="AudioStream" uid="uid://bnlo75x57221q" path="res://assets/sound/music/geocities.ogg" id="3_2by3q"]
+[ext_resource type="PackedScene" uid="uid://cv51cjqwonc44" path="res://assets/scenes/entities/enemies/enemy_shooter.tscn" id="3_4r6du"]
+[ext_resource type="Script" uid="uid://6f5fo5f7f82u" path="res://assets/scripts/ui/ui.gd" id="5_tar4d"]
+[ext_resource type="Texture2D" uid="uid://cy6iupn2oep41" path="res://assets/sprites/ui/pwr_spread.png" id="5_tg75i"]
+[ext_resource type="Script" uid="uid://11nsae48wfx7" path="res://p_return_menu.gd" id="5_w6q4n"]
+[ext_resource type="Texture2D" uid="uid://dhqn81lhktxkc" path="res://assets/sprites/ui/pwr_laser.png" id="6_igc52"]
+[ext_resource type="Script" uid="uid://b5wlrnlkm0gs" path="res://retry_level_button.gd" id="7_c7w7h"]
+[ext_resource type="Texture2D" uid="uid://07oww8c4muqt" path="res://assets/sprites/ui/ui_lives.png" id="7_t6t78"]
+[ext_resource type="FontFile" uid="uid://biyltwvbkgds7" path="res://assets/fonts/BlackAcute.ttf" id="8_tar4d"]
+[ext_resource type="PackedScene" uid="uid://dc0nl1yw616j1" path="res://assets/scenes/ui/charge_bar.tscn" id="10_0871f"]
+[ext_resource type="Script" uid="uid://f7rbvvu721nr" path="res://assets/scripts/ui/lives_display.gd" id="10_stdlf"]
+[ext_resource type="PackedScene" uid="uid://bv1ppn50m8du0" path="res://assets/scenes/items/1_up.tscn" id="11_whxql"]
+[ext_resource type="FontFile" uid="uid://ckcf1ufa4ixa5" path="res://assets/fonts/ChunkyDunk.ttf" id="12_aqnel"]
+[ext_resource type="AudioStream" uid="uid://byf3xayuksdcq" path="res://assets/sound/music/gameOver.ogg" id="12_q37na"]
+[ext_resource type="PackedScene" uid="uid://cq7wuaqlu02al" path="res://assets/scenes/items/spr_upgrade.tscn" id="12_tiybf"]
+[ext_resource type="PackedScene" uid="uid://dgcqysipmy8l0" path="res://assets/scenes/items/las_upgrade.tscn" id="13_xaymg"]
+[ext_resource type="PackedScene" uid="uid://cngao3yus1p60" path="res://assets/scenes/entities/enemies/enemy_sh_homing.tscn" id="14_o4p3j"]
+[ext_resource type="PackedScene" uid="uid://sm7cffe8fgqo" path="res://assets/scenes/entities/enemies/enemy_chaser.tscn" id="15_m23yt"]
+[ext_resource type="PackedScene" uid="uid://bxlvriqx8wohs" path="res://assets/scenes/entities/enemies/projectiles/enemy_homing_projectile.tscn" id="16_0ytjv"]
+[ext_resource type="Script" uid="uid://cjrnayadudr7r" path="res://pause.gd" id="16_q37na"]
+[ext_resource type="AudioStream" uid="uid://fmnxui0y6tsi" path="res://assets/sound/sfx/pause.ogg" id="17_mpw6h"]
+[ext_resource type="AudioStream" uid="uid://cucu4k4tf8ws5" path="res://assets/sound/sfx/menuselect.ogg" id="17_w6q4n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mpw6h"]
+bg_color = Color(0.08078333, 0.08078336, 0.08078327, 0.39607844)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mpw6h"]
+font_size = 72
+shadow_color = Color(0.3254902, 0.7647059, 1, 1)
+shadow_offset = Vector2(-7, 5)
+
+[sub_resource type="Animation" id="Animation_c7w7h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.3254902, 0.7647059, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w6q4n"]
+resource_name = "color_pulse"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.3254902, 0.7647059, 1, 1), Color(1.732707e-06, 0.5719077, 0.7987298, 1), Color(0.3254902, 0.7647059, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7334d"]
+_data = {
+&"RESET": SubResource("Animation_c7w7h"),
+&"color_pulse": SubResource("Animation_w6q4n")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w6q4n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_w6q4n"]
+font = ExtResource("12_aqnel")
+font_size = 90
+
+[sub_resource type="LabelSettings" id="LabelSettings_c7w7h"]
+font = ExtResource("12_aqnel")
+font_size = 90
+
+[sub_resource type="LabelSettings" id="LabelSettings_7334d"]
+font = ExtResource("12_aqnel")
+font_size = 90
+
+[sub_resource type="LabelSettings" id="LabelSettings_hhpv8"]
+font_size = 90
+shadow_color = Color(0.77254903, 0, 0.07450981, 1)
+shadow_offset = Vector2(-7, 5)
+
+[sub_resource type="Animation" id="Animation_mpw6h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.77254903, 0, 0.07450981, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q37na"]
+resource_name = "color_pulse"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:label_settings:shadow_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.99999994, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.77254903, 0, 0.07450981, 1), Color(0.95351976, 0, 0.07180496, 1), Color(0.77254903, 0, 0.07450981, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_eu5c6"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mpw6h"]
+_data = {
+&"RESET": SubResource("Animation_mpw6h"),
+&"color_pulse": SubResource("Animation_q37na"),
+&"new_animation": SubResource("Animation_eu5c6")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_tar4d"]
+font = ExtResource("8_tar4d")
+font_size = 40
+shadow_size = 6
+shadow_color = Color(0.21059999, 0.6301799, 0.81, 1)
+shadow_offset = Vector2(2, 3)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0871f"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hhpv8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_q37na"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mpw6h"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c7w7h"]
+noise_type = 3
+
+[node name="TestLevel" type="Node2D" groups=["Levels"]]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="ig-menus" type="Control" parent="CanvasLayer"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_w6q4n")
+
+[node name="pause" type="Panel" parent="CanvasLayer/ig-menus" node_paths=PackedStringArray("currentMenu", "returnMenuChoice", "sfx_paused", "sfx_pressed")]
+process_mode = 3
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mpw6h")
+script = ExtResource("16_q37na")
+currentMenu = NodePath("BoxContainer/VBoxContainer")
+returnMenuChoice = NodePath("returnToMenu")
+sfx_paused = NodePath("paused")
+sfx_pressed = NodePath("buttonPressed")
+
+[node name="Label" type="Label" parent="CanvasLayer/ig-menus/pause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.32395834
+anchor_top = 0.22777778
+anchor_right = 0.6770833
+anchor_bottom = 0.40902779
+offset_right = -226.0
+offset_bottom = -108.75
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 2.25)
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_mpw6h")
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ig-menus/pause/Label"]
+libraries = {
+&"": SubResource("AnimationLibrary_7334d")
+}
+autoplay = "color_pulse"
+
+[node name="paused" type="AudioStreamPlayer" parent="CanvasLayer/ig-menus/pause"]
+stream = ExtResource("17_mpw6h")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="buttonPressed" type="AudioStreamPlayer" parent="CanvasLayer/ig-menus/pause"]
+stream = ExtResource("17_w6q4n")
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/ig-menus/pause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37578124
+anchor_top = 0.4611111
+anchor_right = 0.62421876
+anchor_bottom = 0.8324074
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ig-menus/pause/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="resume" type="Button" parent="CanvasLayer/ig-menus/pause/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Continue"
+flat = true
+
+[node name="options" type="Button" parent="CanvasLayer/ig-menus/pause/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Options"
+flat = true
+
+[node name="retry_stage" type="Button" parent="CanvasLayer/ig-menus/pause/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Retry Stage"
+flat = true
+
+[node name="menu" type="Button" parent="CanvasLayer/ig-menus/pause/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Return to Menu"
+flat = true
+
+[node name="exit" type="Button" parent="CanvasLayer/ig-menus/pause/BoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Exit Game"
+flat = true
+
+[node name="returnToMenu" type="Panel" parent="CanvasLayer/ig-menus/pause" node_paths=PackedStringArray("prevOptions", "yes", "no")]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_w6q4n")
+script = ExtResource("5_w6q4n")
+prevOptions = NodePath("../BoxContainer/VBoxContainer")
+yes = NodePath("HBoxContainer/Button")
+no = NodePath("HBoxContainer/Button2")
+
+[node name="Label" type="Label" parent="CanvasLayer/ig-menus/pause/returnToMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33255208
+anchor_top = 0.4587963
+anchor_right = 0.6674479
+anchor_bottom = 0.5412037
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return to menu?"
+label_settings = SubResource("LabelSettings_w6q4n")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ig-menus/pause/returnToMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36953124
+anchor_top = 0.6074074
+anchor_right = 0.6304687
+anchor_bottom = 0.6787037
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 300
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer/ig-menus/pause/returnToMenu/HBoxContainer"]
+layout_mode = 2
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="CanvasLayer/ig-menus/pause/returnToMenu/HBoxContainer"]
+layout_mode = 2
+text = "No"
+flat = true
+
+[node name="retryLevel" type="Panel" parent="CanvasLayer/ig-menus/pause" node_paths=PackedStringArray("prevOptions", "yes", "no")]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_w6q4n")
+script = ExtResource("7_c7w7h")
+prevOptions = NodePath("../BoxContainer/VBoxContainer")
+yes = NodePath("../returnToMenu/HBoxContainer/Button")
+no = NodePath("../returnToMenu/HBoxContainer/Button2")
+
+[node name="Label" type="Label" parent="CanvasLayer/ig-menus/pause/retryLevel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33255208
+anchor_top = 0.4587963
+anchor_right = 0.6674479
+anchor_bottom = 0.5412037
+grow_horizontal = 2
+grow_vertical = 2
+text = "Are you sure?"
+label_settings = SubResource("LabelSettings_c7w7h")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ig-menus/pause/retryLevel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36953124
+anchor_top = 0.6074074
+anchor_right = 0.6304687
+anchor_bottom = 0.6787037
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 300
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer/ig-menus/pause/retryLevel/HBoxContainer"]
+layout_mode = 2
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="CanvasLayer/ig-menus/pause/retryLevel/HBoxContainer"]
+layout_mode = 2
+text = "No"
+flat = true
+
+[node name="exitGame" type="Panel" parent="CanvasLayer/ig-menus/pause"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_w6q4n")
+
+[node name="Label" type="Label" parent="CanvasLayer/ig-menus/pause/exitGame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.19739583
+anchor_top = 0.45925927
+anchor_right = 0.84010416
+anchor_bottom = 0.5416667
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit game?"
+label_settings = SubResource("LabelSettings_7334d")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ig-menus/pause/exitGame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36953124
+anchor_top = 0.6074074
+anchor_right = 0.6304687
+anchor_bottom = 0.6787037
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 300
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer/ig-menus/pause/exitGame/HBoxContainer"]
+layout_mode = 2
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="CanvasLayer/ig-menus/pause/exitGame/HBoxContainer"]
+layout_mode = 2
+text = "No"
+flat = true
+
+[node name="gameover" type="Control" parent="CanvasLayer/ig-menus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/ig-menus/gameover"]
+process_mode = 3
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mpw6h")
+
+[node name="Label" type="Label" parent="CanvasLayer/ig-menus/gameover/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -613.0
+offset_top = -230.0
+offset_right = 203.0
+offset_bottom = -121.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 2.25)
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_hhpv8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ig-menus/gameover/Panel/Label"]
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_mpw6h")
+}
+autoplay = "color_pulse"
+
+[node name="gameOverJingle" type="AudioStreamPlayer" parent="CanvasLayer/ig-menus/gameover/Panel"]
+stream = ExtResource("12_q37na")
+volume_db = -6.0
+bus = &"Music"
+
+[node name="buttonPressed" type="AudioStreamPlayer" parent="CanvasLayer/ig-menus/gameover/Panel"]
+stream = ExtResource("17_w6q4n")
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="victory" type="Control" parent="CanvasLayer/ig-menus"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("spreadSprite", "pierceSprite")]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 200)
+mouse_filter = 2
+script = ExtResource("5_tar4d")
+spreadSprite = NodePath("SpreadPwr")
+pierceSprite = NodePath("PiercePwr")
+metadata/_edit_use_anchors_ = true
+
+[node name="SpreadPwr" type="Sprite2D" parent="CanvasLayer/UI"]
+texture_filter = 5
+position = Vector2(195.47995, 1034.48)
+texture = ExtResource("5_tg75i")
+
+[node name="PiercePwr" type="Sprite2D" parent="CanvasLayer/UI"]
+texture_filter = 5
+position = Vector2(195.47995, 1034.48)
+texture = ExtResource("6_igc52")
+
+[node name="Lives" type="Sprite2D" parent="CanvasLayer/UI"]
+position = Vector2(69.47996, 1034.48)
+scale = Vector2(0.63999873, 0.63999873)
+texture = ExtResource("7_t6t78")
+
+[node name="livesNumber" type="Label" parent="CanvasLayer/UI/Lives"]
+unique_name_in_owner = true
+offset_left = 55.35727
+offset_top = -16.071423
+offset_right = 130.35727
+offset_bottom = 29.928577
+text = "X"
+label_settings = SubResource("LabelSettings_tar4d")
+script = ExtResource("10_stdlf")
+
+[node name="ChargeBar" type="MarginContainer" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.95, 0.95)
+pivot_offset = Vector2(988, 566)
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureProgressBar" parent="CanvasLayer/UI/ChargeBar" instance=ExtResource("10_0871f")]
+layout_mode = 2
+mouse_filter = 2
+tint_progress = Color(0.14901961, 0.7176471, 0.9098039, 1)
+
+[node name="level_borders" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="level_borders"]
+collision_layer = 256
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(960, 1080)
+shape = SubResource("WorldBoundaryShape2D_0871f")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(1920, 549)
+rotation = -1.5707941
+shape = SubResource("WorldBoundaryShape2D_hhpv8")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(960, 0)
+rotation = 3.1415882
+shape = SubResource("WorldBoundaryShape2D_q37na")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(0, 521)
+rotation = 1.5707941
+shape = SubResource("WorldBoundaryShape2D_mpw6h")
+
+[node name="Respawn Point" type="Marker2D" parent="." groups=["RespawnPoint"]]
+unique_name_in_owner = true
+position = Vector2(960, 950)
+gizmo_extents = 130.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="shaker" type="Node2D" parent="Camera2D" node_paths=PackedStringArray("camera")]
+script = ExtResource("1_hhpv8")
+camera = NodePath("..")
+noise = SubResource("FastNoiseLite_c7w7h")
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="enemy_chaser" parent="enemies" instance=ExtResource("15_m23yt")]
+position = Vector2(1215, 150)
+
+[node name="enemy_sh_homing" parent="enemies" instance=ExtResource("14_o4p3j")]
+position = Vector2(448, -54)
+
+[node name="enemy_homing_projectile" parent="enemies" instance=ExtResource("16_0ytjv")]
+position = Vector2(189, 246)
+
+[node name="enemy_chaser2" parent="enemies" instance=ExtResource("15_m23yt")]
+position = Vector2(1139, 225)
+
+[node name="enemy_charger" parent="enemies" instance=ExtResource("2_yeg6q")]
+position = Vector2(588, -18)
+
+[node name="enemy_shooter" parent="enemies" instance=ExtResource("3_4r6du")]
+position = Vector2(297, -65)
+
+[node name="Music" type="Node" parent="."]
+process_mode = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("3_2by3q")
+volume_db = -2.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="items" type="Node2D" parent="."]
+
+[node name="sprUpgrade" parent="items" instance=ExtResource("12_tiybf")]
+position = Vector2(1651, 54)
+
+[node name="1up" parent="items" instance=ExtResource("11_whxql")]
+position = Vector2(1541, 54)
+
+[node name="lasUpgrade" parent="items" instance=ExtResource("13_xaymg")]
+position = Vector2(1738, 54)
+
+[node name="Player" parent="." instance=ExtResource("1_wbtfn")]
+position = Vector2(960, 947)

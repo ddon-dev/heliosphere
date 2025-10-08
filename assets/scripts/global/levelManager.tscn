@@ -4,4 +4,4 @@
 
 [node name="LevelManager" type="Node"]
 script = ExtResource("1_0l4pa")
-level_paths = Array[String](["uid://dxfeqhfhgqweb", "uid://bnwip1vywlqdb", "", ""])
+level_paths = Array[String](["uid://dxfeqhfhgqweb", "uid://vga3y0ihxnq5", "uid://o05mrw3iqvoj", ""])

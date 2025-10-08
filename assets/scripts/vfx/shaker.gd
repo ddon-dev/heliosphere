@@ -6,12 +6,14 @@ var shake_time_left: float = 2.0
 var current_intensity: float
 var intensity_tween: Tween
 var ultShake_tween: Tween
+var playerDeath_tween: Tween
 @export var max_intensity: float = 20
 @export var enemyHitShake: float = 1
 @export var enemyExplosionShake: float = 5
 @export var playerSmallBoomShake: float = 3
 @export var playerExplodedShake: float = 6
 @export var ultFiring: float = 12
+
 func _ready() -> void:
 	GameManager.enemyExploded.connect(func():
 		self.shake(1,enemyExplosionShake)

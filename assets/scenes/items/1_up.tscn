@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bv1ppn50m8du0"]
 
-[ext_resource type="Script" uid="uid://c6i783bmn33xk" path="res://assets/scenes/items/1_up.gd" id="1_67uxb"]
+[ext_resource type="Script" uid="uid://c6i783bmn33xk" path="res://assets/scripts/items/1_up.gd" id="1_67uxb"]
 [ext_resource type="Texture2D" uid="uid://fui063la7l7g" path="res://assets/sprites/collectibles/1Up_sheet.png" id="2_67uxb"]
 [ext_resource type="AudioStream" uid="uid://b0jpltak31fus" path="res://assets/sound/sfx/player/pick_1up.ogg" id="3_cxw1c"]
-[ext_resource type="Script" uid="uid://dvu71irwdw727" path="res://assets/scenes/items/1_up_sfx.gd" id="3_nbogw"]
+[ext_resource type="Script" uid="uid://dvu71irwdw727" path="res://assets/scripts/items/1_up_sfx.gd" id="3_nbogw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_67uxb"]
 radius = 24.0

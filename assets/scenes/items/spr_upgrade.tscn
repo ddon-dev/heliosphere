@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://cq7wuaqlu02al"]
 
-[ext_resource type="Script" uid="uid://bvvdb6w5w4p1c" path="res://assets/scenes/items/spr_upgrade.gd" id="1_ts3mh"]
+[ext_resource type="Script" uid="uid://bvvdb6w5w4p1c" path="res://assets/scripts/items/spr_upgrade.gd" id="1_ts3mh"]
 [ext_resource type="AudioStream" uid="uid://cljuluore6kvr" path="res://assets/sound/sfx/player/pick_PwrUp.ogg" id="1_xnafi"]
 [ext_resource type="Texture2D" uid="uid://5omto8qck4w4" path="res://assets/sprites/collectibles/sprUpgrade_sheet.png" id="3_rf76u"]
-[ext_resource type="Script" uid="uid://hsgejm52dvfw" path="res://assets/scenes/items/spr_upgrade_sfx.gd" id="3_ts3mh"]
+[ext_resource type="Script" uid="uid://hsgejm52dvfw" path="res://assets/scripts/items/spr_upgrade_sfx.gd" id="3_ts3mh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o4p3j"]
 radius = 21.0

@@ -1,0 +1,105 @@
+[gd_scene load_steps=17 format=3 uid="uid://bnwip1vywlqdb"]
+
+[ext_resource type="PackedScene" uid="uid://b0posed4t4w5f" path="res://assets/scenes/ui/ui_and_menus.tscn" id="12_wbsiq"]
+[ext_resource type="Script" uid="uid://ytorwbopj43" path="res://assets/scripts/vfx/shaker.gd" id="17_bvkq7"]
+[ext_resource type="PackedScene" uid="uid://sm7cffe8fgqo" path="res://assets/scenes/entities/enemies/enemy_chaser.tscn" id="18_o14ku"]
+[ext_resource type="PackedScene" uid="uid://cngao3yus1p60" path="res://assets/scenes/entities/enemies/enemy_sh_homing.tscn" id="19_5ntoj"]
+[ext_resource type="PackedScene" uid="uid://bxlvriqx8wohs" path="res://assets/scenes/entities/enemies/projectiles/enemy_homing_projectile.tscn" id="20_ih7xk"]
+[ext_resource type="PackedScene" uid="uid://nuo8r1sgp4we" path="res://assets/scenes/entities/enemies/enemy_charger.tscn" id="21_khcfi"]
+[ext_resource type="PackedScene" uid="uid://cv51cjqwonc44" path="res://assets/scenes/entities/enemies/enemy_shooter.tscn" id="22_1ws7g"]
+[ext_resource type="AudioStream" uid="uid://bnlo75x57221q" path="res://assets/sound/music/geocities.ogg" id="23_jn3bh"]
+[ext_resource type="PackedScene" uid="uid://cq7wuaqlu02al" path="res://assets/scenes/items/spr_upgrade.tscn" id="24_6mpa0"]
+[ext_resource type="PackedScene" uid="uid://bv1ppn50m8du0" path="res://assets/scenes/items/1_up.tscn" id="25_d3bxe"]
+[ext_resource type="PackedScene" uid="uid://dgcqysipmy8l0" path="res://assets/scenes/items/las_upgrade.tscn" id="26_yddce"]
+[ext_resource type="PackedScene" uid="uid://ckog1nfv7gj1" path="res://assets/scenes/entities/player/player.tscn" id="27_lia44"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0871f"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hhpv8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_q37na"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mpw6h"]
+
+[node name="TestLevel" type="Node2D" groups=["Levels"]]
+
+[node name="level_music" type="AudioStreamPlayer" parent="." groups=["music"]]
+unique_name_in_owner = true
+stream = ExtResource("23_jn3bh")
+volume_db = -2.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="ui_and_menus" parent="." instance=ExtResource("12_wbsiq")]
+
+[node name="level_borders" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="level_borders"]
+collision_layer = 256
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(960, 1080)
+shape = SubResource("WorldBoundaryShape2D_0871f")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(1920, 549)
+rotation = -1.5707941
+shape = SubResource("WorldBoundaryShape2D_hhpv8")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(960, 0)
+rotation = 3.1415882
+shape = SubResource("WorldBoundaryShape2D_q37na")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+position = Vector2(0, 521)
+rotation = 1.5707941
+shape = SubResource("WorldBoundaryShape2D_mpw6h")
+
+[node name="Respawn Point" type="Marker2D" parent="." groups=["RespawnPoint"]]
+unique_name_in_owner = true
+position = Vector2(960, 950)
+gizmo_extents = 130.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="shaker" type="Node2D" parent="Camera2D" node_paths=PackedStringArray("camera")]
+script = ExtResource("17_bvkq7")
+camera = NodePath("..")
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="enemy_chaser" parent="enemies" instance=ExtResource("18_o14ku")]
+position = Vector2(1215, 150)
+
+[node name="enemy_sh_homing" parent="enemies" instance=ExtResource("19_5ntoj")]
+position = Vector2(448, -54)
+
+[node name="enemy_homing_projectile" parent="enemies" instance=ExtResource("20_ih7xk")]
+position = Vector2(189, 246)
+
+[node name="enemy_chaser2" parent="enemies" instance=ExtResource("18_o14ku")]
+position = Vector2(1139, 225)
+
+[node name="enemy_charger" parent="enemies" instance=ExtResource("21_khcfi")]
+position = Vector2(588, -18)
+
+[node name="enemy_shooter" parent="enemies" instance=ExtResource("22_1ws7g")]
+position = Vector2(297, -65)
+
+[node name="items" type="Node2D" parent="."]
+
+[node name="sprUpgrade" parent="items" instance=ExtResource("24_6mpa0")]
+position = Vector2(1651, 54)
+
+[node name="1up" parent="items" instance=ExtResource("25_d3bxe")]
+position = Vector2(1541, 54)
+
+[node name="lasUpgrade" parent="items" instance=ExtResource("26_yddce")]
+position = Vector2(1738, 54)
+
+[node name="Player" parent="." instance=ExtResource("27_lia44")]
+position = Vector2(960, 947)
