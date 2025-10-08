@@ -33,6 +33,8 @@ signal lasGet
 signal sprGet
 signal gameOver
 signal win
+signal bossHalfHealth
+signal boss_dead
 
 var life_down:= Timer.new()
 

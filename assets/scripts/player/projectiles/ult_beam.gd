@@ -15,19 +15,19 @@ func _on_lifetime_timeout() -> void:
 	GameManager.ult_finished()
 	queue_free()
 
-func _physics_process(_delta: float) -> void:
+func _on_time_between_hits_timeout() -> void:
 	if area_2d.has_overlapping_areas():
 		var enemies = area_2d.get_overlapping_areas()
 		for area in enemies:
-			await time_between_hits.timeout
 			if is_instance_valid(area):
 				if area.has_method("hurt"):
 					area.hurt("hurt")
 					hit_sfx.play()
 					hit_sfx.reparent(get_tree().get_root())
-				
-#func _on_area_2d_area_entered(area: Area2D) -> void:
-	#if area.has_method("hurt"):
-			#area.hurt("hurt")
-			#hit_sfx.play()
-			#hit_sfx.reparent(get_tree().get_root())
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if is_instance_valid(area):
+		if area.has_method("hurt"):
+			area.hurt("hurt")
+			hit_sfx.play()
+			hit_sfx.reparent(get_tree().get_root())

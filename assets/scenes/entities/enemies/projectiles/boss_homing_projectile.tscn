@@ -1,0 +1,193 @@
+[gd_scene load_steps=19 format=3 uid="uid://dgexdir50d4k7"]
+
+[ext_resource type="Script" uid="uid://h3uda8hu71we" path="res://assets/scripts/enemies/projectiles/enemy_homing_projectile.gd" id="1_dfaq7"]
+[ext_resource type="Texture2D" uid="uid://d488rynhghkp" path="res://assets/sprites/enemies/miniboss/miniboss_projectile_sheet.png" id="2_dfaq7"]
+[ext_resource type="Script" uid="uid://bkfbejhkfh4ah" path="res://assets/scripts/enemies/projectiles/timeout_particles.gd" id="3_5jixf"]
+
+[sub_resource type="Animation" id="Animation_nak3b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kggb0"]
+resource_name = "default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.40000004, 0.50000006, 0.6, 0.70000005, 0.8000001, 0.9000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.2831855, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vprnx"]
+_data = {
+&"RESET": SubResource("Animation_nak3b"),
+&"default": SubResource("Animation_kggb0")
+}
+
+[sub_resource type="Curve" id="Curve_125jx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t5ls1"]
+curve = SubResource("Curve_125jx")
+
+[sub_resource type="Curve" id="Curve_kggb0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.97409326, 0.66750246), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.48495483), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_rirfm"]
+curve = SubResource("Curve_kggb0")
+
+[sub_resource type="Curve" id="Curve_nak3b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jw3qg"]
+curve = SubResource("Curve_nak3b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dfaq7"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 16.05
+inherit_velocity_ratio = -0.5
+spread = 10.0
+initial_velocity_min = 3.6799998
+initial_velocity_max = 55.57
+gravity = Vector3(0, 0, 0)
+scale_min = 12.759999
+scale_max = 12.759999
+scale_curve = SubResource("CurveTexture_jw3qg")
+color = Color(0.78431374, 0.14117648, 0.08235294, 1)
+alpha_curve = SubResource("CurveTexture_t5ls1")
+emission_curve = SubResource("CurveTexture_rirfm")
+
+[sub_resource type="Gradient" id="Gradient_nak3b"]
+offsets = PackedFloat32Array(0.48557693, 1)
+colors = PackedColorArray(0.78431374, 0.14117648, 0.08235294, 1, 0.21568628, 0.14117648, 0.08235294, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vprnx"]
+gradient = SubResource("Gradient_nak3b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aakt5"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 29.41
+initial_velocity_max = 44.12
+gravity = Vector3(0, 0, 0)
+scale_min = 12.759999
+scale_max = 12.759999
+scale_curve = SubResource("CurveTexture_jw3qg")
+color_ramp = SubResource("GradientTexture1D_vprnx")
+emission_curve = SubResource("CurveTexture_rirfm")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aakt5"]
+radius = 21.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vprnx"]
+radius = 31.016125
+
+[node name="boss_homing_projectile" type="CharacterBody2D" node_paths=PackedStringArray("timeout_particles", "hitbox", "delete_zone")]
+script = ExtResource("1_dfaq7")
+timeout_particles = NodePath("Sprite2D/timeoutParticles")
+hitbox = NodePath("Sprite2D/hitbox")
+delete_zone = NodePath("Sprite2D/delete_zone")
+
+[node name="lifetime" type="Timer" parent="."]
+wait_time = 5.5
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_dfaq7")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_vprnx")
+}
+autoplay = "default"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+show_behind_parent = true
+position = Vector2(8.742268e-08, 0)
+rotation = -1.5707964
+scale = Vector2(1.6445522, 1.6255695)
+amount = 15
+lifetime = 0.3
+explosiveness = 0.1
+process_material = SubResource("ParticleProcessMaterial_dfaq7")
+
+[node name="timeoutParticles" type="GPUParticles2D" parent="Sprite2D"]
+show_behind_parent = true
+position = Vector2(8.742268e-08, 0)
+rotation = -1.5707964
+scale = Vector2(1.6445522, 1.6255695)
+emitting = false
+amount = 10
+lifetime = 0.4
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_aakt5")
+script = ExtResource("3_5jixf")
+
+[node name="hitbox" type="Area2D" parent="Sprite2D"]
+collision_layer = 128
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitbox"]
+shape = SubResource("CircleShape2D_aakt5")
+debug_color = Color(0.9984152, 0, 0.15404469, 0.41960785)
+
+[node name="delete_zone" type="Area2D" parent="Sprite2D"]
+collision_layer = 128
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/delete_zone"]
+shape = SubResource("CircleShape2D_vprnx")
+
+[connection signal="timeout" from="lifetime" to="." method="_on_lifetime_timeout"]
+[connection signal="finished" from="Sprite2D/timeoutParticles" to="Sprite2D/timeoutParticles" method="_on_finished"]
+[connection signal="area_entered" from="Sprite2D/delete_zone" to="." method="_on_delete_zone_area_entered"]

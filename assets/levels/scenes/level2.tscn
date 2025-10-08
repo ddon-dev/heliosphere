@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://o05mrw3iqvoj"]
+[gd_scene load_steps=27 format=3 uid="uid://o05mrw3iqvoj"]
 
 [ext_resource type="Script" uid="uid://ixv54lvx2i0" path="res://assets/levels/scenes/level_2.gd" id="1_tt1eg"]
 [ext_resource type="AudioStream" uid="uid://c0wfn6ah5mcxd" path="res://assets/sound/sfx/warning.ogg" id="2_tt1eg"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://ytorwbopj43" path="res://assets/scripts/vfx/shaker.gd" id="6_b7m4j"]
 [ext_resource type="Texture2D" uid="uid://dldcu4c3hrj1n" path="res://assets/sprites/bgs/stars5.png" id="6_tt1eg"]
 [ext_resource type="Script" uid="uid://c7k0kqaff7118" path="res://assets/levels/scenes/spawn_sh_homing.gd" id="6_u152o"]
+[ext_resource type="Script" uid="uid://86eg5fefrjwf" path="res://assets/levels/scenes/miniboss_spawn.gd" id="7_ma7cw"]
 [ext_resource type="Texture2D" uid="uid://dypgqthqf18gv" path="res://assets/sprites/bgs/stars3.png" id="7_udwk7"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p4dqe"]
@@ -67,6 +68,45 @@ colors = PackedColorArray(0, 0, 0, 1, 0.24368703, 4.003275e-05, 0.2436851, 1)
 gradient = SubResource("Gradient_8auou")
 fill_to = Vector2(0, 1)
 
+[sub_resource type="Animation" id="Animation_chel8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../stars_front:autoscroll")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 800)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../stars_back:autoscroll")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 260)]
+}
+
 [sub_resource type="Animation" id="Animation_udwk7"]
 resource_name = "boss_darken"
 length = 4.8
@@ -107,52 +147,13 @@ tracks/2/keys = {
 "values": [Vector2(0, 260), Vector2(0, 640)]
 }
 
-[sub_resource type="Animation" id="Animation_chel8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../stars_front:autoscroll")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 800)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../stars_back:autoscroll")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 260)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_chel8"]
 _data = {
 &"RESET": SubResource("Animation_chel8"),
 &"boss_darken": SubResource("Animation_udwk7")
 }
 
-[node name="Level2" type="Node2D" node_paths=PackedStringArray("warning_anim", "bg_anim", "alarm", "warning", "time_til_fadeout", "time_til_victory", "enemy_charger", "enemy_shooter", "enemy_chaser", "enemy_sh_homing", "chargerFreq", "shooterFreq", "chaserFreq", "shHomingFreq", "level_start", "stage1_duration", "stage1_chaserSpawn", "stage2_duration", "stage3_duration", "boss_fight_duration")]
+[node name="Level2" type="Node2D" node_paths=PackedStringArray("warning_anim", "bg_anim", "alarm", "warning", "time_til_fadeout", "time_til_victory", "enemy_charger", "enemy_shooter", "enemy_chaser", "enemy_sh_homing", "miniboss", "chargerFreq", "shooterFreq", "chaserFreq", "shHomingFreq", "level_start", "stage1_duration", "stage1_chaserSpawn", "stage2_duration", "stage3_duration")]
 script = ExtResource("1_tt1eg")
 warning_anim = NodePath("vfx/boss_warning/Sprite2D/warn_anim")
 bg_anim = NodePath("background/TextureRect/bg_anim")
@@ -164,6 +165,7 @@ enemy_charger = NodePath("enemySpawns/spawnCharger")
 enemy_shooter = NodePath("enemySpawns/spawnShooter")
 enemy_chaser = NodePath("enemySpawns/spawnChaser")
 enemy_sh_homing = NodePath("enemySpawns/spawnShHoming")
+miniboss = NodePath("enemySpawns/minibossSpawn")
 chargerFreq = NodePath("timers/spawnFreq/spawnChargerFreq")
 shooterFreq = NodePath("timers/spawnFreq/spawnShooterFreq")
 chaserFreq = NodePath("timers/spawnFreq/spawnChaserFreq")
@@ -173,7 +175,6 @@ stage1_duration = NodePath("timers/stageDuration/Node/stageOne")
 stage1_chaserSpawn = NodePath("timers/stageDuration/Node/chaserEnable")
 stage2_duration = NodePath("timers/stageDuration/stageTwo")
 stage3_duration = NodePath("timers/stageDuration/stageThree")
-boss_fight_duration = NodePath("timers/stageDuration/bossDuration")
 
 [node name="level_music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -198,6 +199,9 @@ script = ExtResource("5_ma7cw")
 [node name="spawnShHoming" type="Node" parent="enemySpawns"]
 script = ExtResource("6_u152o")
 
+[node name="minibossSpawn" type="Node" parent="enemySpawns"]
+script = ExtResource("7_ma7cw")
+
 [node name="timers" type="Node" parent="."]
 
 [node name="spawnFreq" type="Node" parent="timers"]
@@ -212,13 +216,14 @@ wait_time = 10.0
 wait_time = 8.0
 
 [node name="spawnHomingFreq" type="Timer" parent="timers/spawnFreq"]
+wait_time = 12.0
 
 [node name="stageDuration" type="Node" parent="timers"]
 
 [node name="Node" type="Node" parent="timers/stageDuration"]
 
 [node name="stageOne" type="Timer" parent="timers/stageDuration/Node"]
-wait_time = 30.0
+wait_time = 25.0
 one_shot = true
 
 [node name="chaserEnable" type="Timer" parent="timers/stageDuration/Node"]
@@ -226,7 +231,7 @@ wait_time = 8.0
 one_shot = true
 
 [node name="stageTwo" type="Timer" parent="timers/stageDuration"]
-wait_time = 40.0
+wait_time = 30.0
 one_shot = true
 
 [node name="stageThree" type="Timer" parent="timers/stageDuration"]
@@ -237,10 +242,6 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 autostart = true
-
-[node name="bossDuration" type="Timer" parent="timers/stageDuration"]
-wait_time = 30.0
-one_shot = true
 
 [node name="tilNextLevel" type="Timer" parent="timers"]
 wait_time = 10.0
