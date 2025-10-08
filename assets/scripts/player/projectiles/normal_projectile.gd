@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	
 func hit():
 	GameManager.enemyHit.emit()
-	GameManager.ultCharge += 3
+	GameManager.ultCharge += 1
 	var particles = PARTICLES.instantiate()
 	get_parent().add_child(particles)
 	particles.global_position = global_position
@@ -38,4 +38,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			hasHit = true
 			hit_sfx.hit()
 			hit_sfx.reparent(get_tree().get_root())
-			hit()
+			if is_instance_valid(area):
+				hit()

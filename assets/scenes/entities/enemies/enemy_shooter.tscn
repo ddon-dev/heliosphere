@@ -302,7 +302,6 @@ wait_time = 2.0
 one_shot = true
 
 [node name="spawnMove" type="Timer" parent="timers"]
-wait_time = 1.5
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -327,12 +326,14 @@ libraries = {
 
 [node name="chargeShot" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("3_spqsx")
+volume_db = 6.0
 attenuation = 0.3
 panning_strength = 0.8
 bus = &"SFX"
 
 [node name="fire" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("4_fqfin")
+volume_db = 3.0
 bus = &"SFX"
 
 [node name="death" type="AudioStreamPlayer2D" parent="sfx"]

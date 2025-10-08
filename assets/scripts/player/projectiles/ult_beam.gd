@@ -11,6 +11,7 @@ func _ready() -> void:
 
 func _on_lifetime_timeout() -> void:
 	GameManager.canShoot = true
+	GameManager.playerHurtable = true
 	GameManager.ult_finished()
 	queue_free()
 

@@ -1,13 +1,17 @@
-[gd_scene load_steps=22 format=3 uid="uid://o05mrw3iqvoj"]
+[gd_scene load_steps=26 format=3 uid="uid://o05mrw3iqvoj"]
 
 [ext_resource type="Script" uid="uid://ixv54lvx2i0" path="res://assets/levels/scenes/level_2.gd" id="1_tt1eg"]
 [ext_resource type="AudioStream" uid="uid://c0wfn6ah5mcxd" path="res://assets/sound/sfx/warning.ogg" id="2_tt1eg"]
 [ext_resource type="AudioStream" uid="uid://8ss1h7cntkwa" path="res://assets/sound/music/angelfire.ogg" id="2_udwk7"]
+[ext_resource type="Script" uid="uid://b72yotbejwsw" path="res://assets/levels/scenes/spawn_charger.gd" id="3_p4dqe"]
 [ext_resource type="Texture2D" uid="uid://buoa3fi7ph0vd" path="res://assets/sprites/ui/ui_WARNING.png" id="3_udwk7"]
 [ext_resource type="PackedScene" uid="uid://b0posed4t4w5f" path="res://assets/scenes/ui/ui_and_menus.tscn" id="4_chel8"]
 [ext_resource type="AudioStream" uid="uid://d4jnk5tl0nj0" path="res://assets/sound/music/xVsZero.ogg" id="4_doer1"]
+[ext_resource type="Script" uid="uid://1w7gvcqa2heg" path="res://assets/levels/scenes/spawn_shooter.gd" id="4_u152o"]
+[ext_resource type="Script" uid="uid://71f66kewlif" path="res://assets/levels/scenes/spawn_chaser.gd" id="5_ma7cw"]
 [ext_resource type="Script" uid="uid://ytorwbopj43" path="res://assets/scripts/vfx/shaker.gd" id="6_b7m4j"]
 [ext_resource type="Texture2D" uid="uid://dldcu4c3hrj1n" path="res://assets/sprites/bgs/stars5.png" id="6_tt1eg"]
+[ext_resource type="Script" uid="uid://c7k0kqaff7118" path="res://assets/levels/scenes/spawn_sh_homing.gd" id="6_u152o"]
 [ext_resource type="Texture2D" uid="uid://dypgqthqf18gv" path="res://assets/sprites/bgs/stars3.png" id="7_udwk7"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p4dqe"]
@@ -148,12 +152,28 @@ _data = {
 &"boss_darken": SubResource("Animation_udwk7")
 }
 
-[node name="Level2" type="Node2D" node_paths=PackedStringArray("warning_anim", "bg_anim", "alarm", "warning")]
+[node name="Level2" type="Node2D" node_paths=PackedStringArray("warning_anim", "bg_anim", "alarm", "warning", "time_til_fadeout", "time_til_victory", "enemy_charger", "enemy_shooter", "enemy_chaser", "enemy_sh_homing", "chargerFreq", "shooterFreq", "chaserFreq", "shHomingFreq", "level_start", "stage1_duration", "stage1_chaserSpawn", "stage2_duration", "stage3_duration", "boss_fight_duration")]
 script = ExtResource("1_tt1eg")
 warning_anim = NodePath("vfx/boss_warning/Sprite2D/warn_anim")
 bg_anim = NodePath("background/TextureRect/bg_anim")
 alarm = NodePath("sfxs/alarm")
 warning = NodePath("vfx/boss_warning/Sprite2D")
+time_til_fadeout = NodePath("timers/tilNextLevel")
+time_til_victory = NodePath("timers/tilVictoryScreen")
+enemy_charger = NodePath("enemySpawns/spawnCharger")
+enemy_shooter = NodePath("enemySpawns/spawnShooter")
+enemy_chaser = NodePath("enemySpawns/spawnChaser")
+enemy_sh_homing = NodePath("enemySpawns/spawnShHoming")
+chargerFreq = NodePath("timers/spawnFreq/spawnChargerFreq")
+shooterFreq = NodePath("timers/spawnFreq/spawnShooterFreq")
+chaserFreq = NodePath("timers/spawnFreq/spawnChaserFreq")
+shHomingFreq = NodePath("timers/spawnFreq/spawnHomingFreq")
+level_start = NodePath("timers/stageDuration/levelStart")
+stage1_duration = NodePath("timers/stageDuration/Node/stageOne")
+stage1_chaserSpawn = NodePath("timers/stageDuration/Node/chaserEnable")
+stage2_duration = NodePath("timers/stageDuration/stageTwo")
+stage3_duration = NodePath("timers/stageDuration/stageThree")
+boss_fight_duration = NodePath("timers/stageDuration/bossDuration")
 
 [node name="level_music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -163,6 +183,71 @@ volume_db = -2.0
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="enemySpawns" type="Node" parent="."]
+
+[node name="spawnCharger" type="Node" parent="enemySpawns"]
+script = ExtResource("3_p4dqe")
+
+[node name="spawnShooter" type="Node" parent="enemySpawns"]
+script = ExtResource("4_u152o")
+
+[node name="spawnChaser" type="Node" parent="enemySpawns"]
+script = ExtResource("5_ma7cw")
+
+[node name="spawnShHoming" type="Node" parent="enemySpawns"]
+script = ExtResource("6_u152o")
+
+[node name="timers" type="Node" parent="."]
+
+[node name="spawnFreq" type="Node" parent="timers"]
+
+[node name="spawnChargerFreq" type="Timer" parent="timers/spawnFreq"]
+wait_time = 2.0
+
+[node name="spawnShooterFreq" type="Timer" parent="timers/spawnFreq"]
+wait_time = 10.0
+
+[node name="spawnChaserFreq" type="Timer" parent="timers/spawnFreq"]
+wait_time = 8.0
+
+[node name="spawnHomingFreq" type="Timer" parent="timers/spawnFreq"]
+
+[node name="stageDuration" type="Node" parent="timers"]
+
+[node name="Node" type="Node" parent="timers/stageDuration"]
+
+[node name="stageOne" type="Timer" parent="timers/stageDuration/Node"]
+wait_time = 30.0
+one_shot = true
+
+[node name="chaserEnable" type="Timer" parent="timers/stageDuration/Node"]
+wait_time = 8.0
+one_shot = true
+
+[node name="stageTwo" type="Timer" parent="timers/stageDuration"]
+wait_time = 40.0
+one_shot = true
+
+[node name="stageThree" type="Timer" parent="timers/stageDuration"]
+wait_time = 40.0
+one_shot = true
+
+[node name="levelStart" type="Timer" parent="timers/stageDuration"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="bossDuration" type="Timer" parent="timers/stageDuration"]
+wait_time = 30.0
+one_shot = true
+
+[node name="tilNextLevel" type="Timer" parent="timers"]
+wait_time = 10.0
+
+[node name="tilVictoryScreen" type="Timer" parent="timers"]
+wait_time = 3.0
+one_shot = true
 
 [node name="level_borders" type="Node2D" parent="."]
 
@@ -260,6 +345,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(960, 540)
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_715ku")
 metadata/_edit_use_anchors_ = true

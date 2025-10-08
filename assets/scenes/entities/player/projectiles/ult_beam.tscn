@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://doexa11ci6rr8" path="res://assets/sound/sfx/projectileHit.ogg" id="3_knexp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_30s4m"]
-size = Vector2(20, 19.674267)
+size = Vector2(20, 34.833477)
 
 [sub_resource type="Animation" id="Animation_knexp"]
 length = 0.001
@@ -54,7 +54,7 @@ time_between_hits = NodePath("timeBetweenHits")
 modulate = Color(1.0961504, 1.0961504, 1.0961504, 0.972549)
 z_index = 2
 texture_filter = 5
-position = Vector2(0, -478)
+position = Vector2(0, -851)
 texture = ExtResource("1_30s4m")
 hframes = 2
 vframes = 2
@@ -65,7 +65,7 @@ collision_layer = 8
 collision_mask = 192
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
-position = Vector2(0, -0.6526184)
+position = Vector2(0, 4)
 scale = Vector2(11.114058, 48.861042)
 shape = SubResource("RectangleShape2D_30s4m")
 
@@ -81,6 +81,7 @@ one_shot = true
 autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -373)
 stream = ExtResource("3_knexp")
 volume_db = 2.0
 bus = &"SFX"

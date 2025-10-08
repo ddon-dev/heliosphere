@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var time_til_deletion: Timer = $time_til_deletion
 
-@export_range(50, 1000, 5) var speed: float = 830
+@export_range(50, 3000, 5) var speed: float = 3000
 @export var direction: Vector2 = Vector2.DOWN
 @export var particles: GPUParticles2D
 

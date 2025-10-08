@@ -207,9 +207,6 @@ colors = PackedColorArray(0, 0, 0, 1, 0.011764706, 0.34901962, 0.2784314, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7s2p4"]
 gradient = SubResource("Gradient_wbbgv")
-width = 300
-height = 300
-fill_from = Vector2(0, 0.20085472)
 fill_to = Vector2(0, 1)
 
 [sub_resource type="Animation" id="Animation_ecf7m"]
@@ -305,26 +302,22 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i5vui"]
 
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("warning_anim", "bg_anim", "alarm", "warning", "tutorial", "time_til_fadeout", "time_til_victory", "enemy_charger", "enemy_shooter", "enemy_chaser", "chargerFreq", "shooterFreq", "chaserFreq", "chaserSwarm", "stage1_duration", "stage2_duration", "stage3_duration", "boss_fight_duration")]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("warning_anim", "bg_anim", "alarm", "warning", "tutorial", "enemy_charger", "enemy_shooter", "enemy_chaser", "chargerFreq", "shooterFreq", "chaserFreq", "stage1_duration", "stage2_duration", "stage3_duration")]
 script = ExtResource("1_irvpj")
 warning_anim = NodePath("vfx/boss_warning/Sprite2D/AnimationPlayer")
 bg_anim = NodePath("background/TextureRect/AnimationPlayer")
 alarm = NodePath("sfxs/AudioStreamPlayer")
 warning = NodePath("vfx/boss_warning/Sprite2D")
 tutorial = NodePath("tutorial")
-time_til_fadeout = NodePath("timers/tilNextLevel")
-time_til_victory = NodePath("timers/tilVictoryScreen")
 enemy_charger = NodePath("enemySpawns/spawnCharger")
 enemy_shooter = NodePath("enemySpawns/spawnShooter")
 enemy_chaser = NodePath("enemySpawns/spawnChaser")
 chargerFreq = NodePath("timers/spawnFreq/spawnChargerFreq")
 shooterFreq = NodePath("timers/spawnFreq/spawnShooterFreq")
 chaserFreq = NodePath("timers/spawnFreq/spawnChaserFreq")
-chaserSwarm = NodePath("timers/spawnFreq/swarmChaser")
 stage1_duration = NodePath("timers/stageDuration/stageOne")
 stage2_duration = NodePath("timers/stageDuration/stageTwo")
 stage3_duration = NodePath("timers/stageDuration/stageThree")
-boss_fight_duration = NodePath("timers/stageDuration/bossDuration")
 
 [node name="level_music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -346,45 +339,6 @@ script = ExtResource("4_5l5p5")
 [node name="spawnChaser" type="Node" parent="enemySpawns"]
 script = ExtResource("5_p67qd")
 
-[node name="spawnFreq" type="Node" parent="enemySpawns"]
-
-[node name="spawnChargerFreq" type="Timer" parent="enemySpawns/spawnFreq"]
-wait_time = 2.0
-
-[node name="spawnShooterFreq" type="Timer" parent="enemySpawns/spawnFreq"]
-wait_time = 10.0
-
-[node name="spawnChaserFreq" type="Timer" parent="enemySpawns/spawnFreq"]
-wait_time = 5.0
-
-[node name="swarmChaser" type="Timer" parent="enemySpawns/spawnFreq"]
-wait_time = 0.6
-
-[node name="stageDuration" type="Node" parent="enemySpawns"]
-
-[node name="stageOne" type="Timer" parent="enemySpawns/stageDuration"]
-wait_time = 30.0
-one_shot = true
-
-[node name="stageTwo" type="Timer" parent="enemySpawns/stageDuration"]
-wait_time = 40.0
-one_shot = true
-
-[node name="stageThree" type="Timer" parent="enemySpawns/stageDuration"]
-wait_time = 40.0
-one_shot = true
-
-[node name="bossDuration" type="Timer" parent="enemySpawns/stageDuration"]
-wait_time = 35.0
-one_shot = true
-
-[node name="tilNextLevel" type="Timer" parent="enemySpawns"]
-wait_time = 10.0
-
-[node name="tilVictoryScreen" type="Timer" parent="enemySpawns"]
-wait_time = 3.0
-one_shot = true
-
 [node name="timers" type="Node" parent="."]
 
 [node name="startTutorial" type="Timer" parent="timers"]
@@ -397,38 +351,18 @@ autostart = true
 wait_time = 2.0
 
 [node name="spawnShooterFreq" type="Timer" parent="timers/spawnFreq"]
-wait_time = 10.0
 
 [node name="spawnChaserFreq" type="Timer" parent="timers/spawnFreq"]
-wait_time = 5.0
-
-[node name="swarmChaser" type="Timer" parent="timers/spawnFreq"]
-wait_time = 0.6
 
 [node name="stageDuration" type="Node" parent="timers"]
 
 [node name="stageOne" type="Timer" parent="timers/stageDuration"]
-wait_time = 30.0
+wait_time = 40.0
 one_shot = true
 
 [node name="stageTwo" type="Timer" parent="timers/stageDuration"]
-wait_time = 40.0
-one_shot = true
 
 [node name="stageThree" type="Timer" parent="timers/stageDuration"]
-wait_time = 40.0
-one_shot = true
-
-[node name="bossDuration" type="Timer" parent="timers/stageDuration"]
-wait_time = 35.0
-one_shot = true
-
-[node name="tilNextLevel" type="Timer" parent="timers"]
-wait_time = 10.0
-
-[node name="tilVictoryScreen" type="Timer" parent="timers"]
-wait_time = 3.0
-one_shot = true
 
 [node name="sfxs" type="Node" parent="."]
 
@@ -438,7 +372,6 @@ bus = &"SFX"
 
 [node name="boss_music" type="AudioStreamPlayer" parent="sfxs"]
 unique_name_in_owner = true
-process_mode = 3
 stream = ExtResource("4_4hl74")
 volume_db = -2.0
 bus = &"Music"
@@ -483,10 +416,9 @@ anchor_left = 0.3078125
 anchor_top = 0.6824074
 anchor_right = 0.4046875
 anchor_bottom = 0.72037035
-offset_top = -211.0
-offset_bottom = -211.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="move_with" type="Label" parent="tutorial/main/movement"]
 layout_mode = 2
@@ -506,10 +438,9 @@ anchor_left = 0.60625
 anchor_top = 0.6824074
 anchor_right = 0.71875
 anchor_bottom = 0.72037035
-offset_top = -211.0
-offset_bottom = -211.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="fire" type="Label" parent="tutorial/main/attack"]
 layout_mode = 2
@@ -528,9 +459,9 @@ anchor_left = 0.30729166
 anchor_top = 0.67777777
 anchor_right = 0.46145833
 anchor_bottom = 0.79814816
-offset_top = -211.0
 offset_right = -128.0
-offset_bottom = -256.0
+offset_bottom = -45.0
+metadata/_edit_use_anchors_ = true
 
 [node name="speed_up" type="Label" parent="tutorial/main/speed"]
 layout_mode = 2
@@ -551,9 +482,9 @@ anchor_left = 0.59583336
 anchor_top = 0.67777777
 anchor_right = 0.784375
 anchor_bottom = 0.79814816
-offset_top = -211.0
 offset_right = -161.0
-offset_bottom = -256.0
+offset_bottom = -45.0
+metadata/_edit_use_anchors_ = true
 
 [node name="slow_down" type="Label" parent="tutorial/main/slow"]
 layout_mode = 2
@@ -570,9 +501,9 @@ texture = ExtResource("10_3pclb")
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 742.0
-offset_top = 395.0
+offset_top = 521.0
 offset_right = 1171.0
-offset_bottom = 480.0
+offset_bottom = 606.0
 
 [node name="charge_full" type="Label" parent="tutorial/main/ult_attack"]
 layout_mode = 2
@@ -626,8 +557,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.5, 1.5)
-pivot_offset = Vector2(960, 540)
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_7s2p4")
 metadata/_edit_use_anchors_ = true

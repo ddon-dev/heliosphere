@@ -21,7 +21,7 @@ const EXPLOSION = preload("uid://dxtc0ogemg87v")
 
 # Enemy properties
 var can_shoot: bool = false
-@export var spawn_speed: float = 100
+@export var spawn_speed: float = 200
 @export_range(1,300,1) var hp: int = 100
 
 # Death config
@@ -57,7 +57,6 @@ func _process(delta: float) -> void:
 
 func shoot_charge():
 	if isAlive:
-		print ("Charging...")
 		can_shoot = true
 		shoot_anim.play("charging")
 		sfx_charge_shot.play()
@@ -72,7 +71,6 @@ func fire():
 		var projectile = projectile_type.instantiate()
 		projectile.position = projectile_spawn.global_position
 		get_tree().root.call_deferred("add_child", projectile)
-		print ("Fire!")
 
 func hurt(_hurt):
 	if hp <= 0 && isAlive:
@@ -111,7 +109,7 @@ func dead(_dead):
 	explosion.reparent(get_tree().get_root())
 	if item_drop <= 15:
 		var item_type: int = randi_range(0,50)
-		if item_type >= 50:
+		if item_type >= 25:
 			var las_item = LAS_ITEM.instantiate()
 			get_parent().add_child(las_item)
 			las_item.global_position = global_position
@@ -121,7 +119,7 @@ func dead(_dead):
 			get_parent().add_child(spr_item)
 			spr_item.global_position = global_position
 			spr_item.reparent(get_tree().get_root())
-	if oneUp_drop <= 5:
+	if oneUp_drop <= 2:
 		var _1up = _1UP_.instantiate()
 		get_parent().add_child(_1up)
 		_1up.global_position = global_position

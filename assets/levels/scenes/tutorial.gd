@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @export var start_fadein: Timer
 @onready var tutorial: AnimationPlayer = $main/tutorial
-var tutorial_finished: bool = false
+signal tutorial_finished
 
 
 func _ready() -> void:
@@ -18,4 +18,4 @@ func start_tutorial():
 	tutorial.play("ult")
 	await tutorial.animation_finished
 	GameManager.ultChargeable = true
-	tutorial_finished = true
+	tutorial_finished.emit()

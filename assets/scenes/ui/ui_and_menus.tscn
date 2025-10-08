@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b0posed4t4w5f"]
+[gd_scene load_steps=36 format=3 uid="uid://b0posed4t4w5f"]
 
 [ext_resource type="Theme" uid="uid://b58yfok0gvnar" path="res://assets/themes/menus_theme.tres" id="1_y33o8"]
 [ext_resource type="AudioStream" uid="uid://cucu4k4tf8ws5" path="res://assets/sound/sfx/menuselect.ogg" id="2_0qvux"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" uid="uid://btwy3b714emgb" path="res://assets/scripts/ui/gameover.gd" id="9_b06ak"]
 [ext_resource type="AudioStream" uid="uid://byf3xayuksdcq" path="res://assets/sound/music/gameOver.ogg" id="10_ravl6"]
 [ext_resource type="Script" uid="uid://6f5fo5f7f82u" path="res://assets/scripts/ui/ui.gd" id="11_1cu6b"]
+[ext_resource type="Script" uid="uid://bob1burcxvaav" path="res://assets/scenes/ui/victory.gd" id="11_7asii"]
 [ext_resource type="Texture2D" uid="uid://cy6iupn2oep41" path="res://assets/sprites/ui/pwr_spread.png" id="12_ayqsg"]
+[ext_resource type="AudioStream" uid="uid://bdbuqwikhtgfi" path="res://assets/sound/music/victory_placeholder.ogg" id="12_fowig"]
 [ext_resource type="Texture2D" uid="uid://dhqn81lhktxkc" path="res://assets/sprites/ui/pwr_laser.png" id="13_qo5b7"]
 [ext_resource type="Texture2D" uid="uid://07oww8c4muqt" path="res://assets/sprites/ui/ui_lives.png" id="14_d3xfo"]
 [ext_resource type="FontFile" uid="uid://biyltwvbkgds7" path="res://assets/fonts/BlackAcute.ttf" id="15_4n2yr"]
@@ -125,6 +127,8 @@ _data = {
 &"new_animation": SubResource("Animation_eu5c6")
 }
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7asii"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_vwv63"]
 font = ExtResource("15_4n2yr")
 font_size = 40
@@ -180,9 +184,9 @@ sfx_pressed = NodePath("../buttonPressed")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3328125
-anchor_top = 0.3148148
+anchor_top = 0.24259259
 anchor_right = 0.6859375
-anchor_bottom = 0.4960648
+anchor_bottom = 0.42384258
 offset_right = -226.0
 offset_bottom = -108.75
 grow_horizontal = 2
@@ -208,7 +212,6 @@ anchor_bottom = 0.8851852
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ig-menus/pause/BoxContainer"]
 layout_mode = 2
@@ -281,7 +284,6 @@ prevOptions = NodePath("../BoxContainer/VBoxContainer")
 yes = NodePath("HBoxContainer/Button")
 no = NodePath("HBoxContainer/Button2")
 sfx_pressed = NodePath("../../buttonPressed")
-metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="ig-menus/pause/returnToMenu"]
 layout_mode = 1
@@ -335,7 +337,6 @@ prevOptions = NodePath("../BoxContainer/VBoxContainer")
 yes = NodePath("HBoxContainer/Button")
 no = NodePath("HBoxContainer/Button2")
 sfx_pressed = NodePath("../../buttonPressed")
-metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="ig-menus/pause/retryLevel"]
 layout_mode = 1
@@ -389,7 +390,6 @@ prevOptions = NodePath("../BoxContainer/VBoxContainer")
 yes = NodePath("HBoxContainer/Button")
 no = NodePath("HBoxContainer/Button2")
 sfx_pressed = NodePath("../../buttonPressed")
-metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="ig-menus/pause/exitGame"]
 layout_mode = 1
@@ -637,7 +637,7 @@ layout_mode = 2
 text = "No"
 flat = true
 
-[node name="victory" type="Control" parent="ig-menus"]
+[node name="victory" type="Control" parent="ig-menus" node_paths=PackedStringArray("music")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -646,6 +646,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("11_7asii")
+music = NodePath("victory_jingle")
+
+[node name="victory_jingle" type="AudioStreamPlayer" parent="ig-menus/victory"]
+stream = ExtResource("12_fowig")
+volume_db = -2.0
+
+[node name="Panel" type="Panel" parent="ig-menus/victory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7asii")
+metadata/_edit_use_anchors_ = true
+
+[node name="victory" type="Label" parent="ig-menus/victory/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.28333333
+anchor_top = 0.1953704
+anchor_right = 0.471875
+anchor_bottom = 0.27592596
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.2900593, 3.1999974)
+text = "Victory!"
+label_settings = SubResource("LabelSettings_dbmw5")
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ig-menus/victory/Panel/victory"]
 
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("spreadSprite", "pierceSprite")]
 z_index = -1

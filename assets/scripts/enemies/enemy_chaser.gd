@@ -76,7 +76,7 @@ func dead(_dead):
 	explosion.reparent(get_tree().get_root())
 	if item_drop <= 15:
 		var item_type: int = randi_range(0,50)
-		if item_type >= 50:
+		if item_type >= 25:
 			var las_item = LAS_ITEM.instantiate()
 			get_parent().add_child(las_item)
 			las_item.global_position = global_position
@@ -86,7 +86,7 @@ func dead(_dead):
 			get_parent().add_child(spr_item)
 			spr_item.global_position = global_position
 			spr_item.reparent(get_tree().get_root())
-	if oneUp_drop <= 5:
+	if oneUp_drop <= 2:
 		var _1up = _1UP_.instantiate()
 		get_parent().add_child(_1up)
 		_1up.global_position = global_position

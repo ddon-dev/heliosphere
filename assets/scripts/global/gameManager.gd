@@ -32,6 +32,7 @@ signal oneUpGet
 signal lasGet
 signal sprGet
 signal gameOver
+signal win
 
 var life_down:= Timer.new()
 

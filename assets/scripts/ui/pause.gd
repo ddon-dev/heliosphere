@@ -40,11 +40,14 @@ func _input(event: InputEvent) -> void:
 		retryLevelChoice.set_process(false)
 		exitGameChoice.visible = false
 		exitGameChoice.set_process(false)
+		currentMenu.visible = true
 
 func continue_game():
+	AudioServer.set_bus_effect_enabled(1,0,false)
 	get_tree().paused = !get_tree().paused
 	sfx_paused.play()
 	visible = !visible
+	paused = !paused
 
 func restart_level():
 	currentMenu.visible = false

@@ -76,7 +76,7 @@ camera = NodePath("..")
 position = Vector2(1215, 150)
 
 [node name="enemy_sh_homing" parent="enemies" instance=ExtResource("19_5ntoj")]
-position = Vector2(448, -54)
+position = Vector2(81, -71)
 
 [node name="enemy_homing_projectile" parent="enemies" instance=ExtResource("20_ih7xk")]
 position = Vector2(189, 246)
@@ -85,10 +85,10 @@ position = Vector2(189, 246)
 position = Vector2(1139, 225)
 
 [node name="enemy_charger" parent="enemies" instance=ExtResource("21_khcfi")]
-position = Vector2(588, -18)
+position = Vector2(960, -18)
 
 [node name="enemy_shooter" parent="enemies" instance=ExtResource("22_1ws7g")]
-position = Vector2(297, -65)
+position = Vector2(1215, -65)
 
 [node name="items" type="Node2D" parent="."]
 

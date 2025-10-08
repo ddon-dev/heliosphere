@@ -129,6 +129,8 @@ func _process(_delta: float) -> void:
 			animation.play("boost")
 		else:
 			animation.play("default")
+	if ultPreFire:
+		GameManager.canShoot = false
 
 #region Shooting logic
 func shoot():

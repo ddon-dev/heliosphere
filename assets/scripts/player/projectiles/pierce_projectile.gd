@@ -17,13 +17,14 @@ func _physics_process(delta: float) -> void:
 	
 func hit():
 	GameManager.enemyHit.emit()
-	GameManager.ultCharge += 3
+	GameManager.ultCharge += 1
 	var particles = PARTICLES.instantiate()
 	get_parent().add_child(particles)
 	particles.global_position = global_position
 	particles.reparent(get_tree().get_root())
-	hit_sfx.hit()
-	hit_sfx.reparent(get_tree().get_root())
+	if is_instance_valid(hit_sfx):
+		hit_sfx.hit()
+		hit_sfx.reparent(get_tree().get_root())
 
 # Deletes projectile when it exits the screen.
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
@@ -32,4 +33,5 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.has_method("hurt"):
 		area.hurt("hurt")
-		hit()
+		if is_instance_valid(area):
+			hit()

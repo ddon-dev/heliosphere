@@ -12,9 +12,15 @@ func go_to_init_level():
 
 func go_to_next_level():
 	var level_idx = level_paths.find(current_level_path)
-	if level_paths.size() > level_idx:
+	if level_idx == -1:
+		go_to_menu()
+	
+	if level_idx + 1 < level_paths.size():
 		var next_level_path = level_paths.get(level_idx + 1)
 		go_to_level(next_level_path)
+	
+	else:
+		go_to_menu()
 
 func go_to_level(level_path):
 	current_level_path = level_path

@@ -15,6 +15,9 @@ run/main_scene="uid://dxfeqhfhgqweb"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="uid://cf54jwbfqcibc"
 run/layer_10=""
+config/stretch/mode="viewport"
+config/size/mode=0
+config/stretch/scale_mode="fractional"
 
 [autoload]
 
@@ -25,8 +28,6 @@ LevelManager="*res://assets/scripts/global/levelManager.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
 window/custom_image=""
 window/default_bus_layout="res://default_bus_layout.tres"
 
