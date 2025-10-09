@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b0posed4t4w5f"]
+[gd_scene load_steps=37 format=3 uid="uid://b0posed4t4w5f"]
 
 [ext_resource type="Theme" uid="uid://b58yfok0gvnar" path="res://assets/themes/menus_theme.tres" id="1_y33o8"]
 [ext_resource type="AudioStream" uid="uid://cucu4k4tf8ws5" path="res://assets/sound/sfx/menuselect.ogg" id="2_0qvux"]
@@ -127,6 +127,8 @@ _data = {
 &"new_animation": SubResource("Animation_eu5c6")
 }
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fowig"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7asii"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vwv63"]
@@ -142,8 +144,7 @@ layer = 4
 [node name="ig-menus" type="Control" parent="."]
 process_mode = 3
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchor_right = 0.99635416
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -168,6 +169,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 7.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -653,81 +655,127 @@ music = NodePath("victory_jingle")
 stream = ExtResource("12_fowig")
 volume_db = -2.0
 
-[node name="Panel" type="Panel" parent="ig-menus/victory"]
+[node name="PanelContainer" type="PanelContainer" parent="ig-menus/victory"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_7asii")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fowig")
 metadata/_edit_use_anchors_ = true
 
-[node name="victory" type="Label" parent="ig-menus/victory/Panel"]
+[node name="Panel" type="Panel" parent="ig-menus/victory/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_y33o8")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7asii")
+
+[node name="victory" type="Label" parent="ig-menus/victory/PanelContainer/Panel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.28333333
-anchor_top = 0.1953704
-anchor_right = 0.471875
-anchor_bottom = 0.27592596
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -408.75
+offset_top = -281.0
+offset_right = -46.75
+offset_bottom = -194.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2.2900593, 3.1999974)
 text = "Victory!"
 label_settings = SubResource("LabelSettings_dbmw5")
-metadata/_edit_use_anchors_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ig-menus/victory/Panel/victory"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ig-menus/victory/PanelContainer/Panel/victory"]
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("spreadSprite", "pierceSprite")]
+[node name="UI" type="Control" parent="."]
 z_index = -1
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchor_right = 0.99635416
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(200, 200)
+pivot_offset = Vector2(988, 566)
 mouse_filter = 2
 script = ExtResource("11_1cu6b")
-spreadSprite = NodePath("SpreadPwr")
-pierceSprite = NodePath("PiercePwr")
 metadata/_edit_use_anchors_ = true
 
-[node name="SpreadPwr" type="Sprite2D" parent="UI"]
+[node name="SpreadPwr" type="TextureRect" parent="UI"]
 texture_filter = 5
-position = Vector2(195.47995, 1034.48)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.171
+anchor_top = 0.97900003
+anchor_right = 0.171
+anchor_bottom = 0.97900003
+offset_left = 16.876984
+offset_top = -46.32007
+offset_right = 83.07709
+offset_bottom = 19.57605
+grow_vertical = 0
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("12_ayqsg")
 
-[node name="PiercePwr" type="Sprite2D" parent="UI"]
+[node name="PiercePwr" type="TextureRect" parent="UI"]
 texture_filter = 5
-position = Vector2(195.47995, 1034.48)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.171
+anchor_top = 0.97900003
+anchor_right = 0.171
+anchor_bottom = 0.97900003
+offset_left = 16.876984
+offset_top = -46.32007
+offset_right = 83.07712
+offset_bottom = 19.57605
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("13_qo5b7")
+metadata/_edit_use_anchors_ = true
 
-[node name="Lives" type="Sprite2D" parent="UI"]
-position = Vector2(69.47996, 1034.48)
-scale = Vector2(0.63999873, 0.63999873)
+[node name="Lives" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025614219
+anchor_top = 0.9743882
+anchor_right = 0.02561422
+anchor_bottom = 0.9743882
+offset_top = -41.339233
+offset_right = 63.999996
+offset_bottom = 22.660767
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("14_d3xfo")
+metadata/_edit_use_anchors_ = true
 
 [node name="livesNumber" type="Label" parent="UI/Lives"]
 unique_name_in_owner = true
-offset_left = 55.35727
-offset_top = -16.071423
-offset_right = 130.35727
-offset_bottom = 29.928577
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.365401
+anchor_top = 0.8983288
+anchor_right = 1.365401
+anchor_bottom = 0.8983288
+offset_top = -41.0
+offset_right = 27.000023
 text = "X"
 label_settings = SubResource("LabelSettings_vwv63")
 script = ExtResource("16_qug2o")
+metadata/_edit_use_anchors_ = true
 
 [node name="ChargeBar" type="MarginContainer" parent="UI"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_left = 0.76400006
+anchor_top = 0.9760001
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -0.5321045
+offset_top = -30.080078
+offset_right = -59.63159
+offset_bottom = -24.105347
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.95, 0.95)
-pivot_offset = Vector2(988, 566)
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxfeqhfhgqweb"]
+[gd_scene load_steps=12 format=3 uid="uid://dxfeqhfhgqweb"]
 
 [ext_resource type="Theme" uid="uid://b58yfok0gvnar" path="res://assets/themes/menus_theme.tres" id="1_ef6ql"]
 [ext_resource type="Script" uid="uid://dmdm4m2k4qwg2" path="res://assets/levels/scripts/main_menu.gd" id="2_7ftig"]
@@ -9,11 +9,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_glbon"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jix8l"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_06t4h"]
-font_size = 160
-shadow_color = Color(0.3254902, 0.7647059, 1, 1)
-shadow_offset = Vector2(-15, 10)
 
 [sub_resource type="Animation" id="Animation_glbon"]
 length = 0.001
@@ -79,19 +74,21 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_jix8l")
 
 [node name="title" type="Label" parent="title"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.058072917
-anchor_top = 0.24537037
-anchor_right = 0.9419271
-anchor_bottom = 0.51342595
-offset_bottom = -96.5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -848.5
+offset_top = -200.0
+offset_right = 848.5
+offset_bottom = -7.0
 grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(1, 1.5)
 size_flags_horizontal = 4
 text = "HELIOSPHERE"
-label_settings = SubResource("LabelSettings_06t4h")
 horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="title/title"]
 libraries = {
@@ -153,6 +150,7 @@ bus = &"SFX"
 
 [node name="Parallax2D" type="Parallax2D" parent="background"]
 z_index = -1
+scroll_offset = Vector2(479, -207)
 repeat_size = Vector2(1920, 851)
 autoscroll = Vector2(-40, 0)
 
