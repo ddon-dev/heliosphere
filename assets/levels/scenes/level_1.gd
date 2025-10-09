@@ -10,6 +10,8 @@ extends Node2D
 @export var tutorial: CanvasLayer
 @export var time_til_fadeout: Timer
 @export var time_til_victory: Timer
+@export var respawn_point: Marker2D
+const PLAYER = preload("uid://ckog1nfv7gj1")
 
 ## Enemies
 @export var enemy_charger: Node
@@ -38,6 +40,12 @@ signal boss
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameManager.canPause = true
+	
+	# Create player
+	var _player = PLAYER.instantiate()
+	_player.position = respawn_point.position
+	add_child(_player)
+	
 	boss.connect(boss_start)
 	tutorial.tutorial_finished.connect(start_stage_1)
 	stage1_duration.timeout.connect(start_stage_2)

@@ -1,7 +1,7 @@
 extends Control
 
-@export var spreadSprite: Sprite2D
-@export var pierceSprite: Sprite2D
+@export var spreadSprite: TextureRect
+@export var pierceSprite: TextureRect
 @onready var lives_label: Label = %livesNumber
 
 func _ready() -> void:

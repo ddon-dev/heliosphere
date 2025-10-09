@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://vga3y0ihxnq5"]
+[gd_scene load_steps=37 format=3 uid="uid://vga3y0ihxnq5"]
 
 [ext_resource type="AudioStream" uid="uid://bnlo75x57221q" path="res://assets/sound/music/geocities.ogg" id="1_hjb4x"]
 [ext_resource type="Script" uid="uid://cxmx4t5et4vkd" path="res://assets/levels/scenes/level_1.gd" id="1_irvpj"]
@@ -16,7 +16,6 @@
 [ext_resource type="Theme" uid="uid://cp0ruqsbx1tap" path="res://assets/levels/scenes/tutorial.tres" id="7_my0cn"]
 [ext_resource type="Texture2D" uid="uid://ep3gh3vrn678" path="res://assets/sprites/ui/tutorial_wasd.png" id="8_vxub8"]
 [ext_resource type="Texture2D" uid="uid://cbifs5lmf3blt" path="res://assets/sprites/ui/tutorial_space.png" id="9_i5vui"]
-[ext_resource type="PackedScene" uid="uid://ckog1nfv7gj1" path="res://assets/scenes/entities/player/player.tscn" id="9_wbbgv"]
 [ext_resource type="Texture2D" uid="uid://t124cnvohoyc" path="res://assets/sprites/ui/tutorial_ctrl.png" id="10_3pclb"]
 [ext_resource type="Texture2D" uid="uid://cbiwpx4g2gw2o" path="res://assets/sprites/ui/tutorial_shift.png" id="11_7lpgf"]
 [ext_resource type="Texture2D" uid="uid://da0cxn7qbiq1k" path="res://assets/sprites/ui/tutorial_f.png" id="12_7lpgf"]
@@ -305,7 +304,7 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i5vui"]
 
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("warning_anim", "bg_anim", "alarm", "warning", "tutorial", "time_til_fadeout", "time_til_victory", "enemy_charger", "enemy_shooter", "enemy_chaser", "chargerFreq", "shooterFreq", "chaserFreq", "chaserSwarm", "stage1_duration", "stage2_duration", "stage3_duration", "boss_fight_duration")]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("warning_anim", "bg_anim", "alarm", "warning", "tutorial", "time_til_fadeout", "time_til_victory", "respawn_point", "enemy_charger", "enemy_shooter", "enemy_chaser", "chargerFreq", "shooterFreq", "chaserFreq", "chaserSwarm", "stage1_duration", "stage2_duration", "stage3_duration", "boss_fight_duration")]
 script = ExtResource("1_irvpj")
 warning_anim = NodePath("vfx/boss_warning/Sprite2D/AnimationPlayer")
 bg_anim = NodePath("background/TextureRect/AnimationPlayer")
@@ -314,6 +313,7 @@ warning = NodePath("vfx/boss_warning/Sprite2D")
 tutorial = NodePath("tutorial")
 time_til_fadeout = NodePath("timers/tilNextLevel")
 time_til_victory = NodePath("timers/tilVictoryScreen")
+respawn_point = NodePath("Respawn Point")
 enemy_charger = NodePath("enemySpawns/spawnCharger")
 enemy_shooter = NodePath("enemySpawns/spawnShooter")
 enemy_chaser = NodePath("enemySpawns/spawnChaser")
@@ -481,12 +481,14 @@ theme = ExtResource("7_my0cn")
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.3078125
-anchor_top = 0.6824074
-anchor_right = 0.4046875
-anchor_bottom = 0.72037035
-offset_top = -211.0
-offset_bottom = -211.0
+anchor_left = 0.356
+anchor_top = 0.5
+anchor_right = 0.356
+anchor_bottom = 0.5
+offset_left = -92.52002
+offset_top = -14.0
+offset_right = 93.47998
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -504,12 +506,14 @@ texture = ExtResource("8_vxub8")
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.60625
-anchor_top = 0.6824074
-anchor_right = 0.71875
-anchor_bottom = 0.72037035
-offset_top = -211.0
-offset_bottom = -211.0
+anchor_left = 0.66200006
+anchor_top = 0.50600004
+anchor_right = 0.66200006
+anchor_bottom = 0.50600004
+offset_left = -107.04016
+offset_top = -20.480042
+offset_right = 108.95984
+offset_bottom = 20.519958
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -526,13 +530,14 @@ texture = ExtResource("9_i5vui")
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.30729166
-anchor_top = 0.67777777
-anchor_right = 0.46145833
-anchor_bottom = 0.79814816
-offset_top = -211.0
-offset_right = -128.0
-offset_bottom = -256.0
+anchor_left = 0.351
+anchor_top = 0.522
+anchor_right = 0.351
+anchor_bottom = 0.522
+offset_left = -83.920044
+offset_top = -42.76001
+offset_right = 84.079956
+offset_bottom = 42.23999
 
 [node name="speed_up" type="Label" parent="tutorial/main/speed"]
 layout_mode = 2
@@ -549,13 +554,14 @@ texture = ExtResource("11_7lpgf")
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.59583336
-anchor_top = 0.67777777
-anchor_right = 0.784375
-anchor_bottom = 0.79814816
-offset_top = -211.0
-offset_right = -161.0
-offset_bottom = -256.0
+anchor_left = 0.648
+anchor_top = 0.522
+anchor_right = 0.648
+anchor_bottom = 0.522
+offset_left = -100.160034
+offset_top = -42.76001
+offset_right = 100.839966
+offset_bottom = 42.23999
 
 [node name="slow_down" type="Label" parent="tutorial/main/slow"]
 layout_mode = 2
@@ -570,11 +576,16 @@ texture = ExtResource("10_3pclb")
 
 [node name="ult_attack" type="CenterContainer" parent="tutorial/main"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 742.0
-offset_top = 395.0
-offset_right = 1171.0
-offset_bottom = 480.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49800003
+anchor_top = 0.40500003
+anchor_right = 0.49800003
+anchor_bottom = 0.40500003
+offset_left = -214.16003
+offset_top = -42.400024
+offset_right = 214.83997
+offset_bottom = 42.599976
 
 [node name="charge_full" type="Label" parent="tutorial/main/ult_attack"]
 layout_mode = 2
@@ -664,6 +675,17 @@ position = Vector2(0, 521)
 rotation = 1.5707941
 shape = SubResource("WorldBoundaryShape2D_i5vui")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
 [node name="Respawn Point" type="Marker2D" parent="." groups=["RespawnPoint"]]
 unique_name_in_owner = true
 position = Vector2(960, 956)
@@ -675,6 +697,3 @@ anchor_mode = 0
 [node name="shaker" type="Node2D" parent="Camera2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("5_7s2p4")
 camera = NodePath("..")
-
-[node name="Player" parent="." instance=ExtResource("9_wbbgv")]
-position = Vector2(960, 956)
