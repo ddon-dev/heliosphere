@@ -1,9 +1,10 @@
-extends Panel
+extends VBoxContainer
 
 @export var prevOptions: VBoxContainer
 @export var yes: Button
 @export var no: Button
 @export var sfx_pressed: AudioStreamPlayer
+@onready var resume: Button = %resume
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,9 +1,10 @@
 extends Control
 
 @export var currentMenu: VBoxContainer
-@export var returnMenuChoice: Panel
-@export var retryLevelChoice: Panel
-@export var exitGameChoice: Panel
+@export var returnMenuChoice: VBoxContainer
+@export var retryLevelChoice: VBoxContainer
+@export var exitGameChoice: VBoxContainer
+@export var opt_menu: PanelContainer
 @onready var paused: bool = false
 @onready var resume: Button = %resume
 @onready var options: Button = %options
@@ -12,6 +13,7 @@ extends Control
 @onready var exit: Button = %exit
 @export var sfx_paused: AudioStreamPlayer
 @export var sfx_pressed: AudioStreamPlayer
+var gamepad_input: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,6 +44,12 @@ func _input(event: InputEvent) -> void:
 			exitGameChoice.visible = false
 			exitGameChoice.set_process(false)
 			currentMenu.visible = true
+			
+	if event is InputEventJoypadMotion or event is InputEventJoypadButton:
+		if !gamepad_input:
+			gamepad_input = true
+		else:
+			gamepad_input = false
 
 func continue_game():
 	AudioServer.set_bus_effect_enabled(1,0,false)
@@ -56,6 +64,9 @@ func restart_level():
 	retryLevelChoice.set_process(true)
 
 func options_open():
+	sfx_pressed.play()
+	opt_menu.visible = true
+	currentMenu.visible = false
 	pass
 
 func go_to_menu():

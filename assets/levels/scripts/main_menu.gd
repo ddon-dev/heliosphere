@@ -1,5 +1,7 @@
 extends PanelContainer
 
+@export var currentMenu: VBoxContainer
+@export var opt_menu: PanelContainer
 @onready var load_game: Button = %load_game
 @onready var new_game: Button = %newGame
 @onready var options: Button = %options
@@ -25,6 +27,8 @@ func start_game():
 
 func options_open():
 	sfx_pressed.play()
+	opt_menu.visible = true
+	currentMenu.visible = false
 	pass
 	
 func exit_game():

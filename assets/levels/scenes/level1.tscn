@@ -1,18 +1,18 @@
 [gd_scene load_steps=37 format=3 uid="uid://vga3y0ihxnq5"]
 
 [ext_resource type="AudioStream" uid="uid://bnlo75x57221q" path="res://assets/sound/music/geocities.ogg" id="1_hjb4x"]
-[ext_resource type="Script" uid="uid://cxmx4t5et4vkd" path="res://assets/levels/scenes/level_1.gd" id="1_irvpj"]
+[ext_resource type="Script" uid="uid://cxmx4t5et4vkd" path="res://assets/levels/scripts/level_1.gd" id="1_irvpj"]
 [ext_resource type="PackedScene" uid="uid://b0posed4t4w5f" path="res://assets/scenes/ui/ui_and_menus.tscn" id="2_01kd4"]
 [ext_resource type="AudioStream" uid="uid://c0wfn6ah5mcxd" path="res://assets/sound/sfx/warning.ogg" id="3_5j6m5"]
 [ext_resource type="Texture2D" uid="uid://d00d8ugvcs8kg" path="res://assets/sprites/bgs/stars4.png" id="3_x62ra"]
-[ext_resource type="Script" uid="uid://b72yotbejwsw" path="res://assets/levels/scenes/spawn_charger.gd" id="3_xcsiy"]
+[ext_resource type="Script" uid="uid://b72yotbejwsw" path="res://assets/scripts/enemies/spawn_charger.gd" id="3_xcsiy"]
 [ext_resource type="AudioStream" uid="uid://bjglygjwyggo5" path="res://assets/sound/music/bumblebee.ogg" id="4_4hl74"]
-[ext_resource type="Script" uid="uid://1w7gvcqa2heg" path="res://assets/levels/scenes/spawn_shooter.gd" id="4_5l5p5"]
+[ext_resource type="Script" uid="uid://1w7gvcqa2heg" path="res://assets/scripts/enemies/spawn_shooter.gd" id="4_5l5p5"]
 [ext_resource type="Texture2D" uid="uid://b47e17vdcom42" path="res://assets/sprites/bgs/stars2.png" id="4_8auou"]
 [ext_resource type="Texture2D" uid="uid://buoa3fi7ph0vd" path="res://assets/sprites/ui/ui_WARNING.png" id="4_ecf7m"]
 [ext_resource type="Script" uid="uid://ytorwbopj43" path="res://assets/scripts/vfx/shaker.gd" id="5_7s2p4"]
-[ext_resource type="Script" uid="uid://71f66kewlif" path="res://assets/levels/scenes/spawn_chaser.gd" id="5_p67qd"]
-[ext_resource type="Script" uid="uid://hakmkqd645rg" path="res://assets/levels/scenes/tutorial.gd" id="7_hsqp5"]
+[ext_resource type="Script" uid="uid://71f66kewlif" path="res://assets/scripts/enemies/spawn_chaser.gd" id="5_p67qd"]
+[ext_resource type="Script" uid="uid://hakmkqd645rg" path="res://assets/levels/scripts/tutorial.gd" id="7_hsqp5"]
 [ext_resource type="Theme" uid="uid://cp0ruqsbx1tap" path="res://assets/levels/scenes/tutorial.tres" id="7_my0cn"]
 [ext_resource type="Texture2D" uid="uid://ep3gh3vrn678" path="res://assets/sprites/ui/tutorial_wasd.png" id="8_vxub8"]
 [ext_resource type="Texture2D" uid="uid://cbifs5lmf3blt" path="res://assets/sprites/ui/tutorial_space.png" id="9_i5vui"]
@@ -307,13 +307,13 @@ _data = {
 [node name="Level1" type="Node2D" node_paths=PackedStringArray("warning_anim", "bg_anim", "alarm", "warning", "tutorial", "time_til_fadeout", "time_til_victory", "respawn_point", "enemy_charger", "enemy_shooter", "enemy_chaser", "chargerFreq", "shooterFreq", "chaserFreq", "chaserSwarm", "stage1_duration", "stage2_duration", "stage3_duration", "boss_fight_duration")]
 script = ExtResource("1_irvpj")
 warning_anim = NodePath("vfx/boss_warning/Sprite2D/AnimationPlayer")
-bg_anim = NodePath("background/TextureRect/AnimationPlayer")
+bg_anim = NodePath("CanvasLayer/background/TextureRect/AnimationPlayer")
 alarm = NodePath("sfxs/AudioStreamPlayer")
 warning = NodePath("vfx/boss_warning/Sprite2D")
-tutorial = NodePath("tutorial")
+tutorial = NodePath("CanvasLayer/tutorial")
 time_til_fadeout = NodePath("timers/tilNextLevel")
 time_til_victory = NodePath("timers/tilVictoryScreen")
-respawn_point = NodePath("Respawn Point")
+respawn_point = NodePath("CanvasLayer/Respawn Point")
 enemy_charger = NodePath("enemySpawns/spawnCharger")
 enemy_shooter = NodePath("enemySpawns/spawnShooter")
 enemy_chaser = NodePath("enemySpawns/spawnChaser")
@@ -461,13 +461,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_4hl74")
 }
 
-[node name="ui_and_menus" parent="." instance=ExtResource("2_01kd4")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -5
 
-[node name="tutorial" type="CanvasLayer" parent="." node_paths=PackedStringArray("start_fadein")]
+[node name="ui_and_menus" parent="CanvasLayer" instance=ExtResource("2_01kd4")]
+
+[node name="tutorial" type="CanvasLayer" parent="CanvasLayer" node_paths=PackedStringArray("start_fadein")]
 script = ExtResource("7_hsqp5")
-start_fadein = NodePath("../timers/startTutorial")
+start_fadein = NodePath("../../timers/startTutorial")
 
-[node name="main" type="Control" parent="tutorial"]
+[node name="main" type="Control" parent="CanvasLayer/tutorial"]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -477,7 +480,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_my0cn")
 
-[node name="movement" type="CenterContainer" parent="tutorial/main"]
+[node name="movement" type="CenterContainer" parent="CanvasLayer/tutorial/main"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -492,17 +495,17 @@ offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="move_with" type="Label" parent="tutorial/main/movement"]
+[node name="move_with" type="Label" parent="CanvasLayer/tutorial/main/movement"]
 layout_mode = 2
 text = "Move with"
 
-[node name="wasd" type="Sprite2D" parent="tutorial/main/movement/move_with"]
+[node name="wasd" type="Sprite2D" parent="CanvasLayer/tutorial/main/movement/move_with"]
 texture_filter = 1
 position = Vector2(93, 105)
 scale = Vector2(2.9599977, 2.9599977)
 texture = ExtResource("8_vxub8")
 
-[node name="attack" type="CenterContainer" parent="tutorial/main"]
+[node name="attack" type="CenterContainer" parent="CanvasLayer/tutorial/main"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -517,16 +520,16 @@ offset_bottom = 20.519958
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="fire" type="Label" parent="tutorial/main/attack"]
+[node name="fire" type="Label" parent="CanvasLayer/tutorial/main/attack"]
 layout_mode = 2
 text = "Attack with"
 
-[node name="space" type="Sprite2D" parent="tutorial/main/attack/fire"]
+[node name="space" type="Sprite2D" parent="CanvasLayer/tutorial/main/attack/fire"]
 position = Vector2(108, 119)
 scale = Vector2(3.6799974, 3.6799974)
 texture = ExtResource("9_i5vui")
 
-[node name="speed" type="CenterContainer" parent="tutorial/main"]
+[node name="speed" type="CenterContainer" parent="CanvasLayer/tutorial/main"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -539,18 +542,18 @@ offset_top = -42.76001
 offset_right = 84.079956
 offset_bottom = 42.23999
 
-[node name="speed_up" type="Label" parent="tutorial/main/speed"]
+[node name="speed_up" type="Label" parent="CanvasLayer/tutorial/main/speed"]
 layout_mode = 2
 text = "Speed up
 with"
 horizontal_alignment = 1
 
-[node name="shift" type="Sprite2D" parent="tutorial/main/speed/speed_up"]
+[node name="shift" type="Sprite2D" parent="CanvasLayer/tutorial/main/speed/speed_up"]
 position = Vector2(84, 121)
 scale = Vector2(3.2000048, 3.2000048)
 texture = ExtResource("11_7lpgf")
 
-[node name="slow" type="CenterContainer" parent="tutorial/main"]
+[node name="slow" type="CenterContainer" parent="CanvasLayer/tutorial/main"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -563,18 +566,18 @@ offset_top = -42.76001
 offset_right = 100.839966
 offset_bottom = 42.23999
 
-[node name="slow_down" type="Label" parent="tutorial/main/slow"]
+[node name="slow_down" type="Label" parent="CanvasLayer/tutorial/main/slow"]
 layout_mode = 2
 text = "Slow down
 with"
 horizontal_alignment = 1
 
-[node name="ctrl" type="Sprite2D" parent="tutorial/main/slow/slow_down"]
+[node name="ctrl" type="Sprite2D" parent="CanvasLayer/tutorial/main/slow/slow_down"]
 position = Vector2(101, 122)
 scale = Vector2(3.2, 3.2)
 texture = ExtResource("10_3pclb")
 
-[node name="ult_attack" type="CenterContainer" parent="tutorial/main"]
+[node name="ult_attack" type="CenterContainer" parent="CanvasLayer/tutorial/main"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -587,52 +590,52 @@ offset_top = -42.400024
 offset_right = 214.83997
 offset_bottom = 42.599976
 
-[node name="charge_full" type="Label" parent="tutorial/main/ult_attack"]
+[node name="charge_full" type="Label" parent="CanvasLayer/tutorial/main/ult_attack"]
 layout_mode = 2
 text = "When CHARGE is full,
 fire a super attack with"
 horizontal_alignment = 1
 
-[node name="f_key" type="Sprite2D" parent="tutorial/main/ult_attack/charge_full"]
+[node name="f_key" type="Sprite2D" parent="CanvasLayer/tutorial/main/ult_attack/charge_full"]
 position = Vector2(218, 139)
 scale = Vector2(3.5815446, 3.5815446)
 texture = ExtResource("12_7lpgf")
 
-[node name="tutorial" type="AnimationPlayer" parent="tutorial/main"]
+[node name="tutorial" type="AnimationPlayer" parent="CanvasLayer/tutorial/main"]
 libraries = {
 &"": SubResource("AnimationLibrary_ra1k7")
 }
 
-[node name="background" type="Node" parent="."]
+[node name="background" type="Node" parent="CanvasLayer"]
 
-[node name="stars_front" type="Parallax2D" parent="background"]
+[node name="stars_front" type="Parallax2D" parent="CanvasLayer/background"]
 z_index = -3
 repeat_size = Vector2(1600, 2700)
 autoscroll = Vector2(0, 100)
 repeat_times = 3
 
-[node name="TextureRect" type="TextureRect" parent="background/stars_front"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/background/stars_front"]
 z_index = -3
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("3_x62ra")
 metadata/_edit_use_anchors_ = true
 
-[node name="stars_back" type="Parallax2D" parent="background"]
+[node name="stars_back" type="Parallax2D" parent="CanvasLayer/background"]
 z_index = -3
 scroll_scale = Vector2(0.5, 0.5)
 repeat_size = Vector2(1600, 2700)
 autoscroll = Vector2(0, 80)
 repeat_times = 3
 
-[node name="TextureRect" type="TextureRect" parent="background/stars_back"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/background/stars_back"]
 z_index = -3
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_8auou")
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="background"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/background"]
 z_index = -7
 anchors_preset = 15
 anchor_right = 1.0
@@ -645,55 +648,44 @@ mouse_filter = 2
 texture = SubResource("GradientTexture2D_7s2p4")
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="background/TextureRect"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/background/TextureRect"]
 libraries = {
 &"": SubResource("AnimationLibrary_5j6m5")
 }
 
-[node name="level_borders" type="Node2D" parent="."]
+[node name="level_borders" type="Node" parent="CanvasLayer"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="level_borders"]
+[node name="StaticBody2D" type="StaticBody2D" parent="CanvasLayer/level_borders"]
 collision_layer = 256
 collision_mask = 512
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/level_borders/StaticBody2D"]
 position = Vector2(960, 1080)
 shape = SubResource("WorldBoundaryShape2D_4hl74")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/level_borders/StaticBody2D"]
 position = Vector2(1920, 549)
 rotation = -1.5707941
 shape = SubResource("WorldBoundaryShape2D_my0cn")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CanvasLayer/level_borders/StaticBody2D"]
 position = Vector2(960, 0)
 rotation = 3.1415882
 shape = SubResource("WorldBoundaryShape2D_vxub8")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="level_borders/StaticBody2D"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/level_borders/StaticBody2D"]
 position = Vector2(0, 521)
 rotation = 1.5707941
 shape = SubResource("WorldBoundaryShape2D_i5vui")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Respawn Point" type="Marker2D" parent="." groups=["RespawnPoint"]]
+[node name="Respawn Point" type="Marker2D" parent="CanvasLayer" groups=["RespawnPoint"]]
 unique_name_in_owner = true
 position = Vector2(960, 956)
 gizmo_extents = 130.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
 anchor_mode = 0
 
-[node name="shaker" type="Node2D" parent="Camera2D" node_paths=PackedStringArray("camera")]
+[node name="shaker" type="Node2D" parent="CanvasLayer/Camera2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("5_7s2p4")
 camera = NodePath("..")

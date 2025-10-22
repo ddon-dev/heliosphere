@@ -1,17 +1,23 @@
-[gd_scene load_steps=37 format=3 uid="uid://b0posed4t4w5f"]
+[gd_scene load_steps=40 format=3 uid="uid://b0posed4t4w5f"]
 
 [ext_resource type="Theme" uid="uid://b58yfok0gvnar" path="res://assets/themes/menus_theme.tres" id="1_y33o8"]
 [ext_resource type="AudioStream" uid="uid://cucu4k4tf8ws5" path="res://assets/sound/sfx/menuselect.ogg" id="2_0qvux"]
 [ext_resource type="AudioStream" uid="uid://fmnxui0y6tsi" path="res://assets/sound/sfx/pause.ogg" id="3_7asii"]
+[ext_resource type="Theme" uid="uid://cb8t2b5nu2a1o" path="res://assets/themes/option_theme.tres" id="4_63d3b"]
 [ext_resource type="Script" uid="uid://cjrnayadudr7r" path="res://assets/scripts/ui/pause.gd" id="4_fowig"]
 [ext_resource type="Script" uid="uid://11nsae48wfx7" path="res://assets/scripts/ui/p_return_menu.gd" id="5_63d3b"]
+[ext_resource type="Script" uid="uid://bn8k8tg0v5dvg" path="res://assets/scripts/settings/settings.gd" id="6_b06ak"]
 [ext_resource type="FontFile" uid="uid://ckcf1ufa4ixa5" path="res://assets/fonts/ChunkyDunk.ttf" id="6_kxghv"]
 [ext_resource type="Script" uid="uid://b5wlrnlkm0gs" path="res://assets/scripts/ui/retry_level_button.gd" id="7_8fu6n"]
+[ext_resource type="Script" uid="uid://bqx7obs7s1osg" path="res://assets/scripts/settings/resolution.gd" id="8_ravl6"]
 [ext_resource type="Script" uid="uid://bkyqg6h6mlhoc" path="res://assets/scripts/ui/p_exit_menu.gd" id="8_xl5sn"]
+[ext_resource type="Script" uid="uid://bgavxvk2m3gmy" path="res://assets/scripts/settings/screen_mode.gd" id="9_1cu6b"]
 [ext_resource type="Script" uid="uid://btwy3b714emgb" path="res://assets/scripts/ui/gameover.gd" id="9_b06ak"]
+[ext_resource type="Script" uid="uid://cys314ow1lw4x" path="res://assets/scripts/settings/volume_options.gd" id="10_ayqsg"]
 [ext_resource type="AudioStream" uid="uid://byf3xayuksdcq" path="res://assets/sound/music/gameOver.ogg" id="10_ravl6"]
 [ext_resource type="Script" uid="uid://6f5fo5f7f82u" path="res://assets/scripts/ui/ui.gd" id="11_1cu6b"]
 [ext_resource type="Script" uid="uid://bob1burcxvaav" path="res://assets/scripts/ui/victory.gd" id="11_7asii"]
+[ext_resource type="FontFile" uid="uid://cf1h0wqf1xivc" path="res://assets/fonts/UpheavalPro.otf" id="11_qo5b7"]
 [ext_resource type="Texture2D" uid="uid://cy6iupn2oep41" path="res://assets/sprites/ui/pwr_spread.png" id="12_ayqsg"]
 [ext_resource type="AudioStream" uid="uid://bdbuqwikhtgfi" path="res://assets/sound/music/victory_placeholder.ogg" id="12_fowig"]
 [ext_resource type="Texture2D" uid="uid://dhqn81lhktxkc" path="res://assets/sprites/ui/pwr_laser.png" id="13_qo5b7"]
@@ -23,10 +29,22 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vl7hk"]
 bg_color = Color(0.08078333, 0.08078336, 0.08078327, 0.39607844)
 
+[sub_resource type="LabelSettings" id="LabelSettings_07ahp"]
+font = ExtResource("6_kxghv")
+font_size = 90
+
+[sub_resource type="LabelSettings" id="LabelSettings_pc1i5"]
+font = ExtResource("6_kxghv")
+font_size = 90
+
+[sub_resource type="LabelSettings" id="LabelSettings_fvrvr"]
+font = ExtResource("6_kxghv")
+font_size = 90
+
 [sub_resource type="LabelSettings" id="LabelSettings_dbmw5"]
-font_size = 72
+font_size = 240
 shadow_color = Color(0.3254902, 0.7647059, 1, 1)
-shadow_offset = Vector2(-7, 5)
+shadow_offset = Vector2(-14, 10)
 
 [sub_resource type="Animation" id="Animation_c7w7h"]
 length = 0.001
@@ -66,24 +84,10 @@ _data = {
 &"color_pulse": SubResource("Animation_w6q4n")
 }
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4e3ho"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_07ahp"]
-font = ExtResource("6_kxghv")
-font_size = 90
-
-[sub_resource type="LabelSettings" id="LabelSettings_pc1i5"]
-font = ExtResource("6_kxghv")
-font_size = 90
-
-[sub_resource type="LabelSettings" id="LabelSettings_fvrvr"]
-font = ExtResource("6_kxghv")
-font_size = 90
-
 [sub_resource type="LabelSettings" id="LabelSettings_m7j03"]
-font_size = 90
+font_size = 150
 shadow_color = Color(0.77254903, 0, 0.07450981, 1)
-shadow_offset = Vector2(-7, 5)
+shadow_offset = Vector2(-14, 10)
 
 [sub_resource type="Animation" id="Animation_mpw6h"]
 length = 0.001
@@ -127,10 +131,6 @@ _data = {
 &"new_animation": SubResource("Animation_eu5c6")
 }
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fowig"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7asii"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_vwv63"]
 font = ExtResource("15_4n2yr")
 font_size = 40
@@ -162,7 +162,7 @@ stream = ExtResource("3_7asii")
 volume_db = -6.0
 bus = &"SFX"
 
-[node name="pause" type="Panel" parent="ig-menus" node_paths=PackedStringArray("currentMenu", "returnMenuChoice", "retryLevelChoice", "exitGameChoice", "sfx_paused", "sfx_pressed")]
+[node name="pause" type="Panel" parent="ig-menus" node_paths=PackedStringArray("currentMenu", "returnMenuChoice", "retryLevelChoice", "exitGameChoice", "opt_menu", "sfx_paused", "sfx_pressed")]
 process_mode = 3
 texture_filter = 1
 layout_mode = 1
@@ -173,60 +173,353 @@ offset_right = 7.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("4_63d3b")
 theme_override_styles/panel = SubResource("StyleBoxFlat_vl7hk")
 script = ExtResource("4_fowig")
-currentMenu = NodePath("BoxContainer/VBoxContainer")
-returnMenuChoice = NodePath("returnToMenu")
-retryLevelChoice = NodePath("retryLevel")
-exitGameChoice = NodePath("exitGame")
+currentMenu = NodePath("MarginContainer/VBoxContainer")
+returnMenuChoice = NodePath("MarginContainer/returnToMenu")
+retryLevelChoice = NodePath("MarginContainer/retryLevel")
+exitGameChoice = NodePath("MarginContainer/exitGame")
+opt_menu = NodePath("MarginContainer/settings")
 sfx_paused = NodePath("../paused")
 sfx_pressed = NodePath("../buttonPressed")
 
-[node name="Label" type="Label" parent="ig-menus/pause"]
+[node name="MarginContainer" type="MarginContainer" parent="ig-menus/pause"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.509
-anchor_top = 0.29040742
-anchor_right = 0.509
-anchor_bottom = 0.29040742
-offset_left = -338.28003
-offset_top = -97.640015
-offset_right = 113.71997
-offset_bottom = -10.640015
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.5, 2.25)
-text = "PAUSED"
-label_settings = SubResource("LabelSettings_dbmw5")
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ig-menus/pause/Label"]
+[node name="settings" type="PanelContainer" parent="ig-menus/pause/MarginContainer" node_paths=PackedStringArray("prevOptions", "sfx_pressed")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_63d3b")
+script = ExtResource("6_b06ak")
+prevOptions = NodePath("../VBoxContainer")
+sfx_pressed = NodePath("../../../buttonPressed")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ig-menus/pause/MarginContainer/settings"]
+custom_minimum_size = Vector2(1300, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_bottom = 35
+
+[node name="menu" type="BoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_63d3b")
+theme_override_constants/separation = 62
+vertical = true
+
+[node name="Options" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 140
+text = "Options"
+
+[node name="graphOptions" type="VBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu"]
+layout_mode = 2
+theme = ExtResource("4_63d3b")
+theme_override_constants/separation = 40
+
+[node name="graphics" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 110
+text = "Graphics"
+horizontal_alignment = 1
+
+[node name="res" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 72
+
+[node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/res"]
+custom_minimum_size = Vector2(620, 0)
+layout_mode = 2
+theme = ExtResource("4_63d3b")
+text = "Resolution"
+
+[node name="resolution" type="OptionButton" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/res"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("4_63d3b")
+theme_override_fonts/font = ExtResource("6_kxghv")
+script = ExtResource("8_ravl6")
+
+[node name="mode" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions"]
+layout_mode = 2
+theme_override_constants/separation = 72
+
+[node name="scrMode" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/mode"]
+custom_minimum_size = Vector2(620, 0)
+layout_mode = 2
+text = "Screen Mode"
+
+[node name="screenMode" type="OptionButton" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/mode"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+item_count = 2
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+script = ExtResource("9_1cu6b")
+
+[node name="volumeOptions" type="VBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu" node_paths=PackedStringArray("sfx_pressed")]
+layout_mode = 2
+theme_override_constants/separation = 40
+script = ExtResource("10_ayqsg")
+sfx_pressed = NodePath("../../../../../../buttonPressed")
+
+[node name="audio" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 110
+text = "audio"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 72
+
+[node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+text = "Master"
+horizontal_alignment = 2
+
+[node name="vol_mas" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 72
+
+[node name="Label2" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 2
+
+[node name="vol_mus" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 72
+
+[node name="Label3" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SFX"
+horizontal_alignment = 2
+
+[node name="vol_sfx" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="buttons" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 150
+
+[node name="accept" type="Button" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("11_qo5b7")
+text = "Apply"
+flat = true
+
+[node name="return" type="Button" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/buttons"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("11_qo5b7")
+text = "Return"
+flat = true
+
+[node name="returnToMenu" type="VBoxContainer" parent="ig-menus/pause/MarginContainer" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("5_63d3b")
+prevOptions = NodePath("../VBoxContainer")
+yes = NodePath("HBoxContainer/Button")
+no = NodePath("HBoxContainer/Button2")
+sfx_pressed = NodePath("../../../buttonPressed")
+
+[node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/returnToMenu"]
+layout_mode = 2
+text = "Return to menu?"
+label_settings = SubResource("LabelSettings_07ahp")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/returnToMenu"]
+layout_mode = 2
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/returnToMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="ig-menus/pause/MarginContainer/returnToMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "No"
+flat = true
+
+[node name="retryLevel" type="VBoxContainer" parent="ig-menus/pause/MarginContainer" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("7_8fu6n")
+prevOptions = NodePath("../VBoxContainer")
+yes = NodePath("HBoxContainer/Button")
+no = NodePath("HBoxContainer/Button2")
+sfx_pressed = NodePath("../../../buttonPressed")
+
+[node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/retryLevel"]
+layout_mode = 2
+text = "Are you sure?"
+label_settings = SubResource("LabelSettings_pc1i5")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/retryLevel"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/retryLevel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="ig-menus/pause/MarginContainer/retryLevel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "No"
+flat = true
+
+[node name="exitGame" type="VBoxContainer" parent="ig-menus/pause/MarginContainer" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
+process_mode = 3
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("8_xl5sn")
+prevOptions = NodePath("../VBoxContainer")
+yes = NodePath("HBoxContainer/Button")
+no = NodePath("HBoxContainer/Button2")
+sfx_pressed = NodePath("../../../buttonPressed")
+
+[node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/exitGame"]
+layout_mode = 2
+text = "Exit game?"
+label_settings = SubResource("LabelSettings_fvrvr")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/exitGame"]
+layout_mode = 2
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/exitGame/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="ig-menus/pause/MarginContainer/exitGame/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "No"
+flat = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ig-menus/pause/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 72
+
+[node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_dbmw5")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ig-menus/pause/MarginContainer/VBoxContainer/Label"]
 libraries = {
 &"": SubResource("AnimationLibrary_7334d")
 }
 autoplay = "color_pulse"
 
-[node name="BoxContainer" type="BoxContainer" parent="ig-menus/pause"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.70000005
-anchor_right = 0.5
-anchor_bottom = 0.70000005
-offset_left = -236.0
-offset_top = -201.00006
-offset_right = 237.0
-offset_bottom = 199.99994
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ig-menus/pause/BoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ig-menus/pause/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_mode = 2
 
-[node name="resume" type="Button" parent="ig-menus/pause/BoxContainer/VBoxContainer"]
+[node name="resume" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 process_mode = 3
 z_index = 3
@@ -236,7 +529,7 @@ size_flags_vertical = 4
 text = "Continue"
 flat = true
 
-[node name="options" type="Button" parent="ig-menus/pause/BoxContainer/VBoxContainer"]
+[node name="options" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 process_mode = 3
 z_index = 3
@@ -246,7 +539,7 @@ size_flags_vertical = 4
 text = "Options"
 flat = true
 
-[node name="retry_stage" type="Button" parent="ig-menus/pause/BoxContainer/VBoxContainer"]
+[node name="retry_stage" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 process_mode = 3
 z_index = 3
@@ -256,7 +549,7 @@ size_flags_vertical = 4
 text = "Retry Stage"
 flat = true
 
-[node name="menu" type="Button" parent="ig-menus/pause/BoxContainer/VBoxContainer"]
+[node name="menu" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 process_mode = 3
 z_index = 3
@@ -266,7 +559,7 @@ size_flags_vertical = 4
 text = "Return to Menu"
 flat = true
 
-[node name="exit" type="Button" parent="ig-menus/pause/BoxContainer/VBoxContainer"]
+[node name="exit" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 process_mode = 3
 layout_mode = 2
@@ -275,190 +568,7 @@ size_flags_vertical = 8
 text = "Exit Game"
 flat = true
 
-[node name="returnToMenu" type="Panel" parent="ig-menus/pause" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
-process_mode = 3
-z_index = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxEmpty_4e3ho")
-script = ExtResource("5_63d3b")
-prevOptions = NodePath("../BoxContainer/VBoxContainer")
-yes = NodePath("HBoxContainer/Button")
-no = NodePath("HBoxContainer/Button2")
-sfx_pressed = NodePath("../../buttonPressed")
-
-[node name="Label" type="Label" parent="ig-menus/pause/returnToMenu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.508
-anchor_top = 0.545
-anchor_right = 0.508
-anchor_bottom = 0.545
-offset_left = -322.36005
-offset_top = -44.600037
-offset_right = 320.63995
-offset_bottom = 44.399963
-grow_horizontal = 2
-grow_vertical = 2
-text = "Return to menu?"
-label_settings = SubResource("LabelSettings_07ahp")
-metadata/_edit_use_anchors_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/returnToMenu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.508
-anchor_top = 0.647
-anchor_right = 0.508
-anchor_bottom = 0.647
-offset_left = -251.36005
-offset_top = -38.76001
-offset_right = 249.63995
-offset_bottom = 38.23999
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 300
-metadata/_edit_use_anchors_ = true
-
-[node name="Button" type="Button" parent="ig-menus/pause/returnToMenu/HBoxContainer"]
-layout_mode = 2
-text = "Yes"
-flat = true
-
-[node name="Button2" type="Button" parent="ig-menus/pause/returnToMenu/HBoxContainer"]
-layout_mode = 2
-text = "No"
-flat = true
-
-[node name="retryLevel" type="Panel" parent="ig-menus/pause" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
-process_mode = 3
-z_index = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxEmpty_4e3ho")
-script = ExtResource("7_8fu6n")
-prevOptions = NodePath("../BoxContainer/VBoxContainer")
-yes = NodePath("HBoxContainer/Button")
-no = NodePath("HBoxContainer/Button2")
-sfx_pressed = NodePath("../../buttonPressed")
-
-[node name="Label" type="Label" parent="ig-menus/pause/retryLevel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.51000005
-anchor_top = 0.545
-anchor_right = 0.51000005
-anchor_bottom = 0.545
-offset_left = -277.20007
-offset_top = -44.600037
-offset_right = 275.79993
-offset_bottom = 44.399963
-grow_horizontal = 2
-grow_vertical = 2
-text = "Are you sure?"
-label_settings = SubResource("LabelSettings_pc1i5")
-metadata/_edit_use_anchors_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/retryLevel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.508
-anchor_top = 0.647
-anchor_right = 0.508
-anchor_bottom = 0.647
-offset_left = -251.36005
-offset_top = -38.76001
-offset_right = 249.63995
-offset_bottom = 38.23999
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 300
-metadata/_edit_use_anchors_ = true
-
-[node name="Button" type="Button" parent="ig-menus/pause/retryLevel/HBoxContainer"]
-layout_mode = 2
-text = "Yes"
-flat = true
-
-[node name="Button2" type="Button" parent="ig-menus/pause/retryLevel/HBoxContainer"]
-layout_mode = 2
-text = "No"
-flat = true
-
-[node name="exitGame" type="Panel" parent="ig-menus/pause" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
-process_mode = 3
-z_index = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxEmpty_4e3ho")
-script = ExtResource("8_xl5sn")
-prevOptions = NodePath("../BoxContainer/VBoxContainer")
-yes = NodePath("HBoxContainer/Button")
-no = NodePath("HBoxContainer/Button2")
-sfx_pressed = NodePath("../../buttonPressed")
-
-[node name="Label" type="Label" parent="ig-menus/pause/exitGame"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.545
-anchor_right = 0.5
-anchor_bottom = 0.545
-offset_left = -218.0
-offset_top = -44.600037
-offset_right = 219.0
-offset_bottom = 44.399963
-grow_horizontal = 2
-grow_vertical = 2
-text = "Exit game?"
-label_settings = SubResource("LabelSettings_fvrvr")
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/exitGame"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.508
-anchor_top = 0.647
-anchor_right = 0.508
-anchor_bottom = 0.647
-offset_left = -251.36005
-offset_top = -38.76001
-offset_right = 249.63995
-offset_bottom = 38.23999
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 300
-metadata/_edit_use_anchors_ = true
-
-[node name="Button" type="Button" parent="ig-menus/pause/exitGame/HBoxContainer"]
-layout_mode = 2
-text = "Yes"
-flat = true
-
-[node name="Button2" type="Button" parent="ig-menus/pause/exitGame/HBoxContainer"]
-layout_mode = 2
-text = "No"
-flat = true
-
-[node name="gameover" type="Control" parent="ig-menus" node_paths=PackedStringArray("retry_stage", "return_menu", "exit", "currentMenu", "returnMenuChoice", "exitGameChoice", "sfx_pressed", "music")]
+[node name="gameover" type="Control" parent="ig-menus" node_paths=PackedStringArray("retry_stage", "return_menu", "exit", "currentMenu", "sfx_pressed", "music")]
 visible = false
 texture_filter = 1
 layout_mode = 1
@@ -469,78 +579,130 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("9_b06ak")
-retry_stage = NodePath("Panel/BoxContainer/lose_options/retry_stage")
-return_menu = NodePath("Panel/BoxContainer/lose_options/menu")
-exit = NodePath("Panel/BoxContainer/lose_options/exit")
-currentMenu = NodePath("Panel/BoxContainer/lose_options")
-returnMenuChoice = NodePath("Panel/go_menu")
-exitGameChoice = NodePath("Panel/game_exit")
+retry_stage = NodePath("MarginContainer/VBoxContainer/lose_options/retry_stage")
+return_menu = NodePath("MarginContainer/VBoxContainer/lose_options/menu")
+exit = NodePath("MarginContainer/VBoxContainer/lose_options/exit")
+currentMenu = NodePath("MarginContainer/VBoxContainer/lose_options")
 sfx_pressed = NodePath("../buttonPressed")
 music = NodePath("gameOverJingle")
+metadata/_edit_use_anchors_ = true
 
 [node name="gameOverJingle" type="AudioStreamPlayer" parent="ig-menus/gameover"]
 stream = ExtResource("10_ravl6")
 volume_db = -6.0
 bus = &"Music"
 
-[node name="Panel" type="Panel" parent="ig-menus/gameover"]
-process_mode = 3
-texture_filter = 1
+[node name="MarginContainer" type="MarginContainer" parent="ig-menus/gameover"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = -1
+anchor_right = 1.0036591
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_vl7hk")
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_edit_use_anchors_ = true
 
-[node name="game_over" type="Label" parent="ig-menus/gameover/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.499
-anchor_top = 0.40100002
-anchor_right = 0.499
-anchor_bottom = 0.40100002
-offset_left = -608.8522
-offset_top = -123.08002
-offset_right = 202.6853
-offset_bottom = -14.080017
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.5, 2.25)
+[node name="go_menu" type="VBoxContainer" parent="ig-menus/gameover/MarginContainer" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("5_63d3b")
+prevOptions = NodePath("../VBoxContainer/lose_options")
+yes = NodePath("HBoxContainer/Button")
+no = NodePath("HBoxContainer/Button2")
+sfx_pressed = NodePath("../../../buttonPressed")
+
+[node name="Label" type="Label" parent="ig-menus/gameover/MarginContainer/go_menu"]
+layout_mode = 2
+text = "Return to menu?"
+label_settings = SubResource("LabelSettings_07ahp")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/gameover/MarginContainer/go_menu"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="ig-menus/gameover/MarginContainer/go_menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="ig-menus/gameover/MarginContainer/go_menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "No"
+flat = true
+
+[node name="game_exit" type="VBoxContainer" parent="ig-menus/gameover/MarginContainer" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("8_xl5sn")
+prevOptions = NodePath("../VBoxContainer/lose_options")
+yes = NodePath("HBoxContainer/Button")
+no = NodePath("HBoxContainer/Button2")
+sfx_pressed = NodePath("../../../buttonPressed")
+
+[node name="Label" type="Label" parent="ig-menus/gameover/MarginContainer/game_exit"]
+layout_mode = 2
+text = "Exit game?"
+label_settings = SubResource("LabelSettings_fvrvr")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/gameover/MarginContainer/game_exit"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ig-menus/gameover/MarginContainer/game_exit/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="ig-menus/gameover/MarginContainer/game_exit/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "No"
+flat = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ig-menus/gameover/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 150
+
+[node name="game_over" type="Label" parent="ig-menus/gameover/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 14.51
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_m7j03")
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ig-menus/gameover/Panel/game_over"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ig-menus/gameover/MarginContainer/VBoxContainer/game_over"]
 process_mode = 3
 libraries = {
 &"": SubResource("AnimationLibrary_mpw6h")
 }
 autoplay = "color_pulse"
 
-[node name="BoxContainer" type="BoxContainer" parent="ig-menus/gameover/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.72200006
-anchor_right = 0.5
-anchor_bottom = 0.72200006
-offset_left = -237.6305
-offset_top = -200.76007
-offset_right = 237.6305
-offset_bottom = 200.23993
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="lose_options" type="VBoxContainer" parent="ig-menus/gameover/Panel/BoxContainer"]
+[node name="lose_options" type="VBoxContainer" parent="ig-menus/gameover/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
 
-[node name="retry_stage" type="Button" parent="ig-menus/gameover/Panel/BoxContainer/lose_options"]
+[node name="retry_stage" type="Button" parent="ig-menus/gameover/MarginContainer/VBoxContainer/lose_options"]
 process_mode = 3
 z_index = 3
 layout_mode = 2
@@ -549,7 +711,7 @@ size_flags_vertical = 4
 text = "Retry Stage"
 flat = true
 
-[node name="menu" type="Button" parent="ig-menus/gameover/Panel/BoxContainer/lose_options"]
+[node name="menu" type="Button" parent="ig-menus/gameover/MarginContainer/VBoxContainer/lose_options"]
 process_mode = 3
 z_index = 3
 layout_mode = 2
@@ -558,133 +720,12 @@ size_flags_vertical = 4
 text = "Return to Menu"
 flat = true
 
-[node name="exit" type="Button" parent="ig-menus/gameover/Panel/BoxContainer/lose_options"]
+[node name="exit" type="Button" parent="ig-menus/gameover/MarginContainer/VBoxContainer/lose_options"]
 process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Exit Game"
-flat = true
-
-[node name="go_menu" type="Panel" parent="ig-menus/gameover/Panel" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
-z_index = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxEmpty_4e3ho")
-script = ExtResource("5_63d3b")
-prevOptions = NodePath("../BoxContainer/lose_options")
-yes = NodePath("HBoxContainer/Button")
-no = NodePath("HBoxContainer/Button2")
-sfx_pressed = NodePath("../../../buttonPressed")
-
-[node name="Label" type="Label" parent="ig-menus/gameover/Panel/go_menu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.508
-anchor_top = 0.545
-anchor_right = 0.508
-anchor_bottom = 0.545
-offset_left = -321.18475
-offset_top = -44.600037
-offset_right = 319.471
-offset_bottom = 44.399963
-grow_horizontal = 2
-grow_vertical = 2
-text = "Return to menu?"
-label_settings = SubResource("LabelSettings_07ahp")
-metadata/_edit_use_anchors_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/gameover/Panel/go_menu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.508
-anchor_top = 0.647
-anchor_right = 0.508
-anchor_bottom = 0.647
-offset_left = -250.4436
-offset_top = -38.76001
-offset_right = 248.7298
-offset_bottom = 38.23999
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 300
-metadata/_edit_use_anchors_ = true
-
-[node name="Button" type="Button" parent="ig-menus/gameover/Panel/go_menu/HBoxContainer"]
-layout_mode = 2
-text = "Yes"
-flat = true
-
-[node name="Button2" type="Button" parent="ig-menus/gameover/Panel/go_menu/HBoxContainer"]
-layout_mode = 2
-text = "No"
-flat = true
-
-[node name="game_exit" type="Panel" parent="ig-menus/gameover/Panel" node_paths=PackedStringArray("prevOptions", "yes", "no", "sfx_pressed")]
-z_index = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxEmpty_4e3ho")
-script = ExtResource("8_xl5sn")
-prevOptions = NodePath("../BoxContainer/lose_options")
-yes = NodePath("HBoxContainer/Button")
-no = NodePath("HBoxContainer/Button2")
-sfx_pressed = NodePath("../../../buttonPressed")
-
-[node name="Label" type="Label" parent="ig-menus/gameover/Panel/game_exit"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.545
-anchor_right = 0.5
-anchor_bottom = 0.545
-offset_left = -217.2052
-offset_top = -44.600037
-offset_right = 218.20154
-offset_bottom = 44.399963
-grow_horizontal = 2
-grow_vertical = 2
-text = "Exit game?"
-label_settings = SubResource("LabelSettings_fvrvr")
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/gameover/Panel/game_exit"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.508
-anchor_top = 0.647
-anchor_right = 0.508
-anchor_bottom = 0.647
-offset_left = -250.4436
-offset_top = -38.76001
-offset_right = 248.7298
-offset_bottom = 38.23999
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 300
-metadata/_edit_use_anchors_ = true
-
-[node name="Button" type="Button" parent="ig-menus/gameover/Panel/game_exit/HBoxContainer"]
-layout_mode = 2
-text = "Yes"
-flat = true
-
-[node name="Button2" type="Button" parent="ig-menus/gameover/Panel/game_exit/HBoxContainer"]
-layout_mode = 2
-text = "No"
 flat = true
 
 [node name="victory" type="Control" parent="ig-menus" node_paths=PackedStringArray("music")]
@@ -698,44 +739,36 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("11_7asii")
 music = NodePath("victory_jingle")
+metadata/_edit_use_anchors_ = true
 
 [node name="victory_jingle" type="AudioStreamPlayer" parent="ig-menus/victory"]
 stream = ExtResource("12_fowig")
 volume_db = -2.0
 
-[node name="PanelContainer" type="PanelContainer" parent="ig-menus/victory"]
+[node name="MarginContainer" type="MarginContainer" parent="ig-menus/victory"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_fowig")
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="ig-menus/victory/PanelContainer"]
+[node name="PanelContainer" type="VBoxContainer" parent="ig-menus/victory/MarginContainer"]
 layout_mode = 2
-theme = ExtResource("1_y33o8")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_7asii")
 
-[node name="victory" type="Label" parent="ig-menus/victory/PanelContainer/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.36900002
-anchor_right = 0.5
-anchor_bottom = 0.36900002
-offset_left = -408.75
-offset_top = -139.52002
-offset_right = -46.75
-offset_bottom = -52.52002
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2.2900593, 3.1999974)
+[node name="victory" type="Label" parent="ig-menus/victory/MarginContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 text = "Victory!"
 label_settings = SubResource("LabelSettings_dbmw5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ig-menus/victory/PanelContainer/Panel/victory"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ig-menus/victory/MarginContainer/PanelContainer/victory"]
 
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("spreadSprite", "pierceSprite")]
 z_index = -1
@@ -747,57 +780,36 @@ grow_vertical = 2
 pivot_offset = Vector2(988, 566)
 mouse_filter = 2
 script = ExtResource("11_1cu6b")
-spreadSprite = NodePath("SpreadPwr")
-pierceSprite = NodePath("PiercePwr")
-metadata/_edit_use_anchors_ = true
+spreadSprite = NodePath("MarginContainer/HBoxContainer/SpreadPwr")
+pierceSprite = NodePath("MarginContainer/HBoxContainer/PiercePwr")
 
-[node name="SpreadPwr" type="TextureRect" parent="UI"]
-texture_filter = 5
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.171
-anchor_top = 0.97900003
-anchor_right = 0.171
-anchor_bottom = 0.97900003
-offset_left = 16.876984
-offset_top = -46.32007
-offset_right = 83.07709
-offset_bottom = 19.57605
-grow_vertical = 0
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("12_ayqsg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="PiercePwr" type="TextureRect" parent="UI"]
-texture_filter = 5
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.171
-anchor_top = 0.97900003
-anchor_right = 0.171
-anchor_bottom = 0.97900003
-offset_left = 16.876984
-offset_top = -46.32007
-offset_right = 83.07712
-offset_bottom = 19.57605
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("13_qo5b7")
-metadata/_edit_use_anchors_ = true
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = 160
 
-[node name="Lives" type="TextureRect" parent="UI"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.025614219
-anchor_top = 0.9743882
-anchor_right = 0.02561422
-anchor_bottom = 0.9743882
-offset_top = -41.339233
-offset_right = 63.999996
-offset_bottom = 22.660767
-scale = Vector2(0.8, 0.8)
+[node name="Lives" type="TextureRect" parent="UI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 texture = ExtResource("14_d3xfo")
 metadata/_edit_use_anchors_ = true
 
-[node name="livesNumber" type="Label" parent="UI/Lives"]
+[node name="livesNumber" type="Label" parent="UI/MarginContainer/HBoxContainer/Lives"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -812,23 +824,32 @@ label_settings = SubResource("LabelSettings_vwv63")
 script = ExtResource("16_qug2o")
 metadata/_edit_use_anchors_ = true
 
-[node name="ChargeBar" type="MarginContainer" parent="UI"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.76400006
-anchor_top = 0.9760001
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -0.5321045
-offset_top = -30.080078
-offset_right = -59.63159
-offset_bottom = -24.105347
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.95, 0.95)
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureProgressBar" parent="UI/ChargeBar" instance=ExtResource("17_7k4j0")]
+[node name="SpreadPwr" type="TextureRect" parent="UI/MarginContainer/HBoxContainer"]
+texture_filter = 5
+custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("12_ayqsg")
+stretch_mode = 4
+
+[node name="PiercePwr" type="TextureRect" parent="UI/MarginContainer/HBoxContainer"]
+texture_filter = 5
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("13_qo5b7")
+stretch_mode = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="TextureProgressBar" parent="UI/MarginContainer/HBoxContainer2" instance=ExtResource("17_7k4j0")]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
 mouse_filter = 2

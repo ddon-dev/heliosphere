@@ -1,4 +1,4 @@
-extends Panel
+extends VBoxContainer
 
 @export var prevOptions: VBoxContainer
 @export var yes: Button

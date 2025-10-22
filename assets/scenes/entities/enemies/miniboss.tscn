@@ -332,7 +332,7 @@ sfx_charge_shot = NodePath("sfx/chargeShot")
 sfx_fire = NodePath("sfx/fire")
 sfx_death = NodePath("sfx/death")
 particles = NodePath("GPUParticles2D")
-healthbar = NodePath("CanvasLayer/healthBar")
+healthbar = NodePath("CanvasLayer/MarginContainer/HBoxContainer/healthBar")
 
 [node name="timers" type="Node" parent="."]
 
@@ -441,19 +441,24 @@ debug_color = Color(4.6205523e-06, 0.6356486, 0.41845912, 0.41960785)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="healthBar" type="ProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("health_drag", "damageBar")]
-z_index = 3
-anchors_preset = -1
-anchor_left = 0.48200002
-anchor_top = 0.95600003
-anchor_right = 0.48200002
-anchor_bottom = 0.95600003
-offset_left = -598.44006
-offset_top = -21.47998
-offset_right = 598.55994
-offset_bottom = 20.52002
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+theme_override_constants/margin_bottom = 35
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="healthBar" type="ProgressBar" parent="CanvasLayer/MarginContainer/HBoxContainer" node_paths=PackedStringArray("health_drag", "damageBar")]
+z_index = 3
+custom_minimum_size = Vector2(1200, 42)
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxEmpty_1jf1o")
@@ -467,39 +472,34 @@ health_drag = NodePath("Timer")
 damageBar = NodePath("damageBar")
 metadata/_edit_use_anchors_ = true
 
-[node name="damageBar" type="ProgressBar" parent="CanvasLayer/healthBar"]
+[node name="damageBar" type="ProgressBar" parent="CanvasLayer/MarginContainer/HBoxContainer/healthBar"]
 z_index = -1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -598.5
-offset_top = -21.0
-offset_right = 598.5
-offset_bottom = 21.0
+anchor_left = 0.00125
+anchor_right = 0.99875
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_1jf1o")
 theme_override_styles/fill = SubResource("StyleBoxFlat_j5cl2")
 value = 80.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
-[node name="Timer" type="Timer" parent="CanvasLayer/healthBar"]
+[node name="Timer" type="Timer" parent="CanvasLayer/MarginContainer/HBoxContainer/healthBar"]
 wait_time = 0.2
 one_shot = true
 
-[node name="Label" type="Label" parent="CanvasLayer/healthBar"]
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/healthBar"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.037
-anchor_top = 0.81000006
-anchor_right = 0.037
-anchor_bottom = 0.81000006
-offset_left = -0.28900146
-offset_top = -24.020004
-offset_right = 95.711
-offset_bottom = -0.020004272
+anchor_left = 0.036759164
+anchor_top = 0.23809524
+anchor_right = 0.11675916
+anchor_bottom = 0.8095238
+grow_horizontal = 2
+grow_vertical = 2
 text = "BOSS"
 label_settings = SubResource("LabelSettings_rvl6n")
+metadata/_edit_use_anchors_ = true
