@@ -13,7 +13,6 @@ extends Control
 @onready var exit: Button = %exit
 @export var sfx_paused: AudioStreamPlayer
 @export var sfx_pressed: AudioStreamPlayer
-var gamepad_input: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,8 +26,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if GameManager.canPause:
+		checkInput()
 		if event.is_action_pressed("pause") or event.is_action_pressed("cancel"):
-			checkInput()
 			paused = !paused
 			sfx_paused.play()
 			visible = !visible
@@ -45,12 +44,6 @@ func _input(event: InputEvent) -> void:
 			exitGameChoice.visible = false
 			exitGameChoice.set_process(false)
 			currentMenu.visible = true
-			
-	if event is InputEventJoypadMotion or event is InputEventJoypadButton:
-		if !gamepad_input:
-			gamepad_input = true
-		else:
-			gamepad_input = false
 
 func continue_game():
 	AudioServer.set_bus_effect_enabled(1,0,false)
@@ -104,6 +97,8 @@ func checkInput():
 					button.mouse_filter = 0
 	elif Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		if visible:
+			%resume.grab_focus()
 		for button in get_tree().get_nodes_in_group("Buttons"):
 			if button is Button or OptionButton or HSlider:
 				button.mouse_filter = 2

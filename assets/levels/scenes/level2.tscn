@@ -324,6 +324,7 @@ position = Vector2(960, 956)
 gizmo_extents = 130.0
 
 [node name="ui_and_menus" parent="CanvasLayer" instance=ExtResource("4_chel8")]
+process_mode = 3
 
 [node name="background" type="Node" parent="CanvasLayer"]
 

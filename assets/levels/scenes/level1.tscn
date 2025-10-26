@@ -473,6 +473,7 @@ libraries = {
 layer = -5
 
 [node name="ui_and_menus" parent="CanvasLayer" instance=ExtResource("2_01kd4")]
+process_mode = 3
 
 [node name="tutorial" type="CanvasLayer" parent="CanvasLayer" node_paths=PackedStringArray("start_fadein")]
 script = ExtResource("7_hsqp5")

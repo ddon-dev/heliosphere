@@ -71,7 +71,6 @@ func fire():
 		var projectile = projectile_type.instantiate()
 		projectile.position = projectile_spawn.global_position
 		get_tree().root.call_deferred("add_child", projectile)
-		print ("Fire!")
 
 func hurt(_hurt):
 	if hp <= 0 && isAlive:

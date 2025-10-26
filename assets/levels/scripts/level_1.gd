@@ -39,8 +39,8 @@ var finished_level: bool = false
 
 signal boss
 
-func _input(event: InputEvent) -> void:
-	checkInput()
+#func _input(event: InputEvent) -> void:
+	#checkInput()
 
 func _ready() -> void:
 	GameManager.canPause = true

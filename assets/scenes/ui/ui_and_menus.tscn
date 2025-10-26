@@ -185,6 +185,7 @@ sfx_paused = NodePath("../paused")
 sfx_pressed = NodePath("../buttonPressed")
 
 [node name="MarginContainer" type="MarginContainer" parent="ig-menus/pause"]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -199,6 +200,7 @@ theme_override_constants/margin_bottom = 8
 metadata/_edit_use_anchors_ = true
 
 [node name="settings" type="PanelContainer" parent="ig-menus/pause/MarginContainer" node_paths=PackedStringArray("prevOptions", "sfx_pressed")]
+process_mode = 3
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
@@ -210,12 +212,14 @@ sfx_pressed = NodePath("../../../buttonPressed")
 metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="ig-menus/pause/MarginContainer/settings"]
+process_mode = 3
 custom_minimum_size = Vector2(1300, 0)
 layout_mode = 2
 theme_override_constants/margin_top = 35
 theme_override_constants/margin_bottom = 35
 
 [node name="menu" type="BoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_63d3b")
@@ -223,29 +227,34 @@ theme_override_constants/separation = 62
 vertical = true
 
 [node name="Options" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 140
 text = "Options"
 
 [node name="graphOptions" type="VBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu"]
+process_mode = 3
 layout_mode = 2
 theme = ExtResource("4_63d3b")
 theme_override_constants/separation = 40
 
 [node name="graphics" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions"]
+process_mode = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 110
 text = "Graphics"
 horizontal_alignment = 1
 
 [node name="res" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 72
 
 [node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/res"]
+process_mode = 3
 custom_minimum_size = Vector2(620, 0)
 layout_mode = 2
 theme = ExtResource("4_63d3b")
@@ -253,6 +262,7 @@ text = "Resolution"
 
 [node name="resolution" type="OptionButton" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/res" groups=["Buttons"]]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("4_63d3b")
@@ -260,16 +270,19 @@ theme_override_fonts/font = ExtResource("6_kxghv")
 script = ExtResource("8_ravl6")
 
 [node name="mode" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions"]
+process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 72
 
 [node name="scrMode" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/mode"]
+process_mode = 3
 custom_minimum_size = Vector2(620, 0)
 layout_mode = 2
 text = "Screen Mode"
 
 [node name="screenMode" type="OptionButton" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/mode" groups=["Buttons"]]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -281,28 +294,33 @@ popup/item_1/id = 1
 script = ExtResource("9_1cu6b")
 
 [node name="volumeOptions" type="VBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu" node_paths=PackedStringArray("sfx_pressed")]
+process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 40
 script = ExtResource("10_ayqsg")
 sfx_pressed = NodePath("../../../../../../buttonPressed")
 
 [node name="audio" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions"]
+process_mode = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 110
 text = "audio"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions"]
+process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 32
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 72
 
 [node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer2"]
+process_mode = 3
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 text = "Master"
@@ -310,6 +328,7 @@ horizontal_alignment = 2
 
 [node name="vol_mas" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer2" groups=["Buttons"]]
 unique_name_in_owner = true
+process_mode = 3
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -319,12 +338,14 @@ step = 0.01
 value = 1.0
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 72
 
 [node name="Label2" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer4"]
+process_mode = 3
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 text = "Music"
@@ -332,6 +353,7 @@ horizontal_alignment = 2
 
 [node name="vol_mus" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer4" groups=["Buttons"]]
 unique_name_in_owner = true
+process_mode = 3
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -341,12 +363,14 @@ step = 0.01
 value = 1.0
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 72
 
 [node name="Label3" type="Label" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer3"]
+process_mode = 3
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -355,6 +379,7 @@ horizontal_alignment = 2
 
 [node name="vol_sfx" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer3" groups=["Buttons"]]
 unique_name_in_owner = true
+process_mode = 3
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -364,12 +389,14 @@ step = 0.01
 value = 1.0
 
 [node name="buttons" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 150
 
 [node name="accept" type="Button" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/buttons" groups=["Buttons"]]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -379,6 +406,7 @@ flat = true
 
 [node name="return" type="Button" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/buttons" groups=["Buttons"]]
 unique_name_in_owner = true
+process_mode = 3
 visible = false
 layout_mode = 2
 size_flags_horizontal = 8
@@ -400,17 +428,20 @@ no = NodePath("HBoxContainer/returnMenuNo")
 sfx_pressed = NodePath("../../../buttonPressed")
 
 [node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/returnToMenu"]
+process_mode = 3
 layout_mode = 2
 text = "Return to menu?"
 label_settings = SubResource("LabelSettings_07ahp")
 metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/returnToMenu"]
+process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/returnToMenu/HBoxContainer" groups=["Buttons"]]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Yes"
@@ -418,6 +449,7 @@ flat = true
 
 [node name="returnMenuNo" type="Button" parent="ig-menus/pause/MarginContainer/returnToMenu/HBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "No"
@@ -436,16 +468,19 @@ no = NodePath("HBoxContainer/retryLevelNo")
 sfx_pressed = NodePath("../../../buttonPressed")
 
 [node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/retryLevel"]
+process_mode = 3
 layout_mode = 2
 text = "Are you sure?"
 label_settings = SubResource("LabelSettings_pc1i5")
 metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/retryLevel"]
+process_mode = 3
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/retryLevel/HBoxContainer" groups=["Buttons"]]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Yes"
@@ -453,6 +488,7 @@ flat = true
 
 [node name="retryLevelNo" type="Button" parent="ig-menus/pause/MarginContainer/retryLevel/HBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "No"
@@ -471,17 +507,20 @@ no = NodePath("HBoxContainer/exitGameNo")
 sfx_pressed = NodePath("../../../buttonPressed")
 
 [node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/exitGame"]
+process_mode = 3
 layout_mode = 2
 text = "Exit game?"
 label_settings = SubResource("LabelSettings_fvrvr")
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ig-menus/pause/MarginContainer/exitGame"]
+process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/exitGame/HBoxContainer" groups=["Buttons"]]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -490,6 +529,7 @@ flat = true
 
 [node name="exitGameNo" type="Button" parent="ig-menus/pause/MarginContainer/exitGame/HBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -497,12 +537,14 @@ text = "No"
 flat = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ig-menus/pause/MarginContainer"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 72
 
 [node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -517,6 +559,7 @@ libraries = {
 autoplay = "color_pulse"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ig-menus/pause/MarginContainer/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
