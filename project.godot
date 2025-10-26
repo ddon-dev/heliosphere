@@ -24,6 +24,7 @@ config/stretch/scale_mode="fractional"
 
 GameManager="*res://assets/scripts/global/gameManager.gd"
 LevelManager="*res://assets/scripts/global/levelManager.tscn"
+InputCheck="*res://assets/scenes/ui/input_check.tscn"
 
 [display]
 
@@ -41,6 +42,7 @@ Player=""
 RespawnPoint=""
 Levels=""
 music=""
+Buttons=""
 
 [input]
 

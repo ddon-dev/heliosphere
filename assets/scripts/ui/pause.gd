@@ -27,7 +27,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if GameManager.canPause:
-		if event.is_action_pressed("pause"):
+		if event.is_action_pressed("pause") or event.is_action_pressed("cancel"):
+			checkInput()
 			paused = !paused
 			sfx_paused.play()
 			visible = !visible
@@ -62,19 +63,47 @@ func restart_level():
 	currentMenu.visible = false
 	retryLevelChoice.visible = true
 	retryLevelChoice.set_process(true)
+	if !checkInputDevice.isMouse:
+		%retryLevelNo.grab_focus()
 
 func options_open():
 	sfx_pressed.play()
 	opt_menu.visible = true
 	currentMenu.visible = false
-	pass
+	if !checkInputDevice.isMouse:
+		%resolution.grab_focus()
 
 func go_to_menu():
 	currentMenu.visible = false
 	returnMenuChoice.set_process(true)
 	returnMenuChoice.visible = true
+	if !checkInputDevice.isMouse:
+		%returnMenuNo.grab_focus()
 
 func exit_game():
 	currentMenu.visible = false
 	exitGameChoice.set_process(true)
 	exitGameChoice.visible = true
+	if !checkInputDevice.isMouse:
+		%exitGameNo.grab_focus()
+
+
+func _on_v_box_container_visibility_changed() -> void:
+	if visible && !checkInputDevice.isMouse:
+		%resume.grab_focus()
+	elif visible && checkInputDevice.isMouse:
+		pass
+
+func checkInput():
+	if checkInputDevice.get_input_type():
+		if Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			get_viewport().gui_release_focus()
+			for button in get_tree().get_nodes_in_group("Buttons"):
+				if button is Button or OptionButton or HSlider:
+					button.mouse_filter = 0
+	elif Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		for button in get_tree().get_nodes_in_group("Buttons"):
+			if button is Button or OptionButton or HSlider:
+				button.mouse_filter = 2

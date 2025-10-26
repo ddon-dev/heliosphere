@@ -251,7 +251,7 @@ layout_mode = 2
 theme = ExtResource("4_63d3b")
 text = "Resolution"
 
-[node name="resolution" type="OptionButton" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/res"]
+[node name="resolution" type="OptionButton" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/res" groups=["Buttons"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -268,7 +268,7 @@ custom_minimum_size = Vector2(620, 0)
 layout_mode = 2
 text = "Screen Mode"
 
-[node name="screenMode" type="OptionButton" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/mode"]
+[node name="screenMode" type="OptionButton" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/graphOptions/mode" groups=["Buttons"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -308,7 +308,7 @@ layout_mode = 2
 text = "Master"
 horizontal_alignment = 2
 
-[node name="vol_mas" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer2"]
+[node name="vol_mas" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer2" groups=["Buttons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
@@ -330,7 +330,7 @@ layout_mode = 2
 text = "Music"
 horizontal_alignment = 2
 
-[node name="vol_mus" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer4"]
+[node name="vol_mus" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer4" groups=["Buttons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
@@ -353,7 +353,7 @@ size_flags_horizontal = 4
 text = "SFX"
 horizontal_alignment = 2
 
-[node name="vol_sfx" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer3"]
+[node name="vol_sfx" type="HSlider" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer3" groups=["Buttons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
@@ -368,7 +368,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 150
 
-[node name="accept" type="Button" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/buttons"]
+[node name="accept" type="Button" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/buttons" groups=["Buttons"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -377,7 +377,7 @@ theme_override_fonts/font = ExtResource("11_qo5b7")
 text = "Apply"
 flat = true
 
-[node name="return" type="Button" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/buttons"]
+[node name="return" type="Button" parent="ig-menus/pause/MarginContainer/settings/MarginContainer/menu/buttons" groups=["Buttons"]]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -396,7 +396,7 @@ size_flags_vertical = 4
 script = ExtResource("5_63d3b")
 prevOptions = NodePath("../VBoxContainer")
 yes = NodePath("HBoxContainer/Button")
-no = NodePath("HBoxContainer/Button2")
+no = NodePath("HBoxContainer/returnMenuNo")
 sfx_pressed = NodePath("../../../buttonPressed")
 
 [node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/returnToMenu"]
@@ -410,13 +410,14 @@ layout_mode = 2
 size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/returnToMenu/HBoxContainer"]
+[node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/returnToMenu/HBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Yes"
 flat = true
 
-[node name="Button2" type="Button" parent="ig-menus/pause/MarginContainer/returnToMenu/HBoxContainer"]
+[node name="returnMenuNo" type="Button" parent="ig-menus/pause/MarginContainer/returnToMenu/HBoxContainer" groups=["Buttons"]]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "No"
@@ -431,7 +432,7 @@ size_flags_vertical = 4
 script = ExtResource("7_8fu6n")
 prevOptions = NodePath("../VBoxContainer")
 yes = NodePath("HBoxContainer/Button")
-no = NodePath("HBoxContainer/Button2")
+no = NodePath("HBoxContainer/retryLevelNo")
 sfx_pressed = NodePath("../../../buttonPressed")
 
 [node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/retryLevel"]
@@ -444,13 +445,14 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/retryLevel/HBoxContainer"]
+[node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/retryLevel/HBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Yes"
 flat = true
 
-[node name="Button2" type="Button" parent="ig-menus/pause/MarginContainer/retryLevel/HBoxContainer"]
+[node name="retryLevelNo" type="Button" parent="ig-menus/pause/MarginContainer/retryLevel/HBoxContainer" groups=["Buttons"]]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "No"
@@ -465,7 +467,7 @@ size_flags_vertical = 4
 script = ExtResource("8_xl5sn")
 prevOptions = NodePath("../VBoxContainer")
 yes = NodePath("HBoxContainer/Button")
-no = NodePath("HBoxContainer/Button2")
+no = NodePath("HBoxContainer/exitGameNo")
 sfx_pressed = NodePath("../../../buttonPressed")
 
 [node name="Label" type="Label" parent="ig-menus/pause/MarginContainer/exitGame"]
@@ -479,14 +481,15 @@ layout_mode = 2
 size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/exitGame/HBoxContainer"]
+[node name="Button" type="Button" parent="ig-menus/pause/MarginContainer/exitGame/HBoxContainer" groups=["Buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Yes"
 flat = true
 
-[node name="Button2" type="Button" parent="ig-menus/pause/MarginContainer/exitGame/HBoxContainer"]
+[node name="exitGameNo" type="Button" parent="ig-menus/pause/MarginContainer/exitGame/HBoxContainer" groups=["Buttons"]]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -519,7 +522,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_mode = 2
 
-[node name="resume" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="resume" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
 process_mode = 3
 z_index = 3
@@ -529,7 +532,7 @@ size_flags_vertical = 4
 text = "Continue"
 flat = true
 
-[node name="options" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="options" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
 process_mode = 3
 z_index = 3
@@ -539,7 +542,7 @@ size_flags_vertical = 4
 text = "Options"
 flat = true
 
-[node name="retry_stage" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="retry_stage" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
 process_mode = 3
 z_index = 3
@@ -549,7 +552,7 @@ size_flags_vertical = 4
 text = "Retry Stage"
 flat = true
 
-[node name="menu" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="menu" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
 process_mode = 3
 z_index = 3
@@ -559,7 +562,7 @@ size_flags_vertical = 4
 text = "Return to Menu"
 flat = true
 
-[node name="exit" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="exit" type="Button" parent="ig-menus/pause/MarginContainer/VBoxContainer/VBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
 process_mode = 3
 layout_mode = 2
@@ -744,6 +747,7 @@ metadata/_edit_use_anchors_ = true
 [node name="victory_jingle" type="AudioStreamPlayer" parent="ig-menus/victory"]
 stream = ExtResource("12_fowig")
 volume_db = -2.0
+bus = &"Music"
 
 [node name="MarginContainer" type="MarginContainer" parent="ig-menus/victory"]
 layout_mode = 1
@@ -853,3 +857,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
 mouse_filter = 2
+
+[connection signal="visibility_changed" from="ig-menus/pause/MarginContainer/VBoxContainer" to="ig-menus/pause" method="_on_v_box_container_visibility_changed"]

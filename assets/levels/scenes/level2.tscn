@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://o05mrw3iqvoj"]
+[gd_scene load_steps=28 format=3 uid="uid://o05mrw3iqvoj"]
 
 [ext_resource type="Script" uid="uid://ixv54lvx2i0" path="res://assets/levels/scripts/level_2.gd" id="1_tt1eg"]
 [ext_resource type="AudioStream" uid="uid://c0wfn6ah5mcxd" path="res://assets/sound/sfx/warning.ogg" id="2_tt1eg"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://c7k0kqaff7118" path="res://assets/scripts/enemies/spawn_sh_homing.gd" id="6_u152o"]
 [ext_resource type="Script" uid="uid://86eg5fefrjwf" path="res://assets/scripts/enemies/miniboss_spawn.gd" id="7_ma7cw"]
 [ext_resource type="Texture2D" uid="uid://dypgqthqf18gv" path="res://assets/sprites/bgs/stars3.png" id="7_udwk7"]
+[ext_resource type="PackedScene" uid="uid://ci11jba0cpd3y" path="res://assets/levels/scenes/scene_transition.tscn" id="10_1vcco"]
 
 [sub_resource type="Animation" id="Animation_wbbgv"]
 length = 0.001
@@ -189,8 +190,9 @@ parameters/looping = true
 
 [node name="boss_music" type="AudioStreamPlayer" parent="music"]
 unique_name_in_owner = true
+process_mode = 3
 stream = ExtResource("4_doer1")
-volume_db = -6.0
+volume_db = -2.0
 bus = &"Music"
 
 [node name="enemySpawns" type="Node" parent="."]
@@ -265,6 +267,14 @@ stream = ExtResource("2_tt1eg")
 bus = &"SFX"
 
 [node name="vfx" type="Node" parent="."]
+
+[node name="sceneTransition" parent="vfx" instance=ExtResource("10_1vcco")]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+size_flags_horizontal = 4
+mouse_filter = 2
+script = null
+metadata/_edit_use_anchors_ = true
 
 [node name="boss_warning" type="Node" parent="vfx"]
 
@@ -368,3 +378,5 @@ anchor_mode = 0
 [node name="shaker" type="Node2D" parent="CanvasLayer/Camera2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("6_b7m4j")
 camera = NodePath("..")
+
+[editable path="vfx/sceneTransition"]

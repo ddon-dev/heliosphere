@@ -1,6 +1,8 @@
 extends Node2D
 
 # Resources
+@onready var scene_transition: AnimationPlayer = %sceneTransition/animation
+@onready var scene_transition_color: ColorRect = %sceneTransition/fadeColor
 @export var warning_anim: AnimationPlayer
 @export var bg_anim: AnimationPlayer
 @export var alarm: AudioStreamPlayer
@@ -40,9 +42,13 @@ var boss_fight_ended: bool = false
 var stage3_reached: bool = false
 var finished_level: bool = false
 
-# Called when the node enters the scene tree for the first time.
+func _input(event: InputEvent) -> void:
+	checkInput()
+
 func _ready() -> void:
 	GameManager.canPause = true
+	scene_transition_color.color = Color(0.0, 0.0, 0.0, 1.0)
+	scene_transition.play("fade_in")
 	# Create player
 	var _player = PLAYER.instantiate()
 	_player.position = respawn_point.position
@@ -167,6 +173,8 @@ func victory_screen():
 	time_til_fadeout.start()
 
 func next_level():
+	scene_transition.play("fade_out")
+	await scene_transition.animation_finished
 	LevelManager.go_to_next_level()
 	
 #region Music controls
@@ -193,3 +201,9 @@ func boss_fade_out():
 	)
 	fade_out.tween_callback(music_off)
 #endregion
+
+func checkInput():
+	if checkInputDevice.get_input_type():
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

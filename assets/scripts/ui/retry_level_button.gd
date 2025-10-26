@@ -1,5 +1,7 @@
 extends VBoxContainer
 
+@onready var scene_transition: AnimationPlayer = $"../../../../../../vfx/sceneTransition/animation"
+@onready var scene_transition_color: ColorRect = $"../../../../../../vfx/sceneTransition/fadeColor"
 @export var prevOptions: VBoxContainer
 @export var yes: Button
 @export var no: Button

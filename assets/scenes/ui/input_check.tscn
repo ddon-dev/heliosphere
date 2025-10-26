@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://duly7wovhrdx5"]
+
+[ext_resource type="Script" uid="uid://b8qpuavfecgib" path="res://check_input_device.gd" id="1_ry331"]
+
+[node name="inputCheck" type="Node"]
+process_mode = 3
+script = ExtResource("1_ry331")

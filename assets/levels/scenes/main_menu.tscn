@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxfeqhfhgqweb"]
+[gd_scene load_steps=20 format=3 uid="uid://dxfeqhfhgqweb"]
 
 [ext_resource type="Theme" uid="uid://b58yfok0gvnar" path="res://assets/themes/menus_theme.tres" id="1_ef6ql"]
 [ext_resource type="Script" uid="uid://dmdm4m2k4qwg2" path="res://assets/levels/scripts/main_menu.gd" id="2_7ftig"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://bqx7obs7s1osg" path="res://assets/scripts/settings/resolution.gd" id="7_0cvrm"]
 [ext_resource type="Script" uid="uid://bgavxvk2m3gmy" path="res://assets/scripts/settings/screen_mode.gd" id="8_3iibe"]
 [ext_resource type="Script" uid="uid://cys314ow1lw4x" path="res://assets/scripts/settings/volume_options.gd" id="9_rftia"]
+[ext_resource type="PackedScene" uid="uid://ci11jba0cpd3y" path="res://assets/levels/scenes/scene_transition.tscn" id="13_qtekq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_glbon"]
 
@@ -57,7 +58,7 @@ _data = {
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fu7sn"]
 
-[node name="Main Menu" type="PanelContainer" node_paths=PackedStringArray("currentMenu", "opt_menu", "sfx_pressed")]
+[node name="Main Menu" type="PanelContainer" node_paths=PackedStringArray("currentMenu", "opt_menu", "level_music", "sfx_pressed")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -70,7 +71,14 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_glbon")
 script = ExtResource("2_7ftig")
 currentMenu = NodePath("options/VBoxContainer")
 opt_menu = NodePath("options/margins/settings")
+level_music = NodePath("music")
 sfx_pressed = NodePath("menu_select_sfx")
+
+[node name="sceneTransition" parent="." instance=ExtResource("13_qtekq")]
+unique_name_in_owner = true
+z_index = 5
+layout_mode = 2
+mouse_filter = 2
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_bx52v")
@@ -177,7 +185,7 @@ layout_mode = 2
 theme = ExtResource("4_7ftig")
 text = "Resolution"
 
-[node name="resolution" type="OptionButton" parent="options/margins/settings/MarginContainer/menu/graphOptions/res"]
+[node name="resolution" type="OptionButton" parent="options/margins/settings/MarginContainer/menu/graphOptions/res" groups=["Buttons"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -194,7 +202,7 @@ custom_minimum_size = Vector2(620, 0)
 layout_mode = 2
 text = "Screen Mode"
 
-[node name="screenMode" type="OptionButton" parent="options/margins/settings/MarginContainer/menu/graphOptions/mode"]
+[node name="screenMode" type="OptionButton" parent="options/margins/settings/MarginContainer/menu/graphOptions/mode" groups=["Buttons"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -234,7 +242,7 @@ layout_mode = 2
 text = "Master"
 horizontal_alignment = 2
 
-[node name="vol_mas" type="HSlider" parent="options/margins/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer2"]
+[node name="vol_mas" type="HSlider" parent="options/margins/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer2" groups=["Buttons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
@@ -256,7 +264,7 @@ layout_mode = 2
 text = "Music"
 horizontal_alignment = 2
 
-[node name="vol_mus" type="HSlider" parent="options/margins/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer4"]
+[node name="vol_mus" type="HSlider" parent="options/margins/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer4" groups=["Buttons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
@@ -279,7 +287,7 @@ size_flags_horizontal = 4
 text = "SFX"
 horizontal_alignment = 2
 
-[node name="vol_sfx" type="HSlider" parent="options/margins/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer3"]
+[node name="vol_sfx" type="HSlider" parent="options/margins/settings/MarginContainer/menu/volumeOptions/VBoxContainer/HBoxContainer3" groups=["Buttons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
@@ -294,7 +302,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 150
 
-[node name="accept" type="Button" parent="options/margins/settings/MarginContainer/menu/buttons"]
+[node name="accept" type="Button" parent="options/margins/settings/MarginContainer/menu/buttons" groups=["Buttons"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -303,7 +311,7 @@ theme_override_fonts/font = ExtResource("5_omu1q")
 text = "Apply"
 flat = true
 
-[node name="return" type="Button" parent="options/margins/settings/MarginContainer/menu/buttons"]
+[node name="return" type="Button" parent="options/margins/settings/MarginContainer/menu/buttons" groups=["Buttons"]]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -326,7 +334,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="load_game" type="Button" parent="options/VBoxContainer"]
+[node name="load_game" type="Button" parent="options/VBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -334,21 +342,21 @@ focus_neighbor_bottom = NodePath("../newGame")
 text = "Continue"
 flat = true
 
-[node name="newGame" type="Button" parent="options/VBoxContainer"]
+[node name="newGame" type="Button" parent="options/VBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../options")
 text = "New Game"
 flat = true
 
-[node name="options" type="Button" parent="options/VBoxContainer"]
+[node name="options" type="Button" parent="options/VBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../exit")
 text = "Options"
 flat = true
 
-[node name="exit" type="Button" parent="options/VBoxContainer"]
+[node name="exit" type="Button" parent="options/VBoxContainer" groups=["Buttons"]]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../load_game")
@@ -365,12 +373,12 @@ bus = &"SFX"
 [node name="Parallax2D" type="Parallax2D" parent="background"]
 z_index = -1
 scroll_offset = Vector2(479, -207)
-repeat_size = Vector2(1920, 851)
+repeat_size = Vector2(3200, 880)
 autoscroll = Vector2(-40, 0)
 
 [node name="TextureRect" type="TextureRect" parent="background/Parallax2D"]
-offset_right = 3200.0
-offset_bottom = 900.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 8
 mouse_filter = 2
 texture = ExtResource("5_0cvrm")
@@ -389,3 +397,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+
+[connection signal="visibility_changed" from="options/margins/settings" to="options/margins/settings" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="options/VBoxContainer" to="." method="_on_v_box_container_visibility_changed"]
+
+[editable path="sceneTransition"]

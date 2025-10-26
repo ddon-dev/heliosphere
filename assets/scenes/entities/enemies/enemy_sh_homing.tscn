@@ -333,7 +333,7 @@ bus = &"SFX"
 
 [node name="fire" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("5_tmguf")
-volume_db = 3.0
+volume_db = 6.0
 bus = &"SFX"
 
 [node name="death" type="AudioStreamPlayer2D" parent="sfx"]

@@ -700,20 +700,22 @@ position = Vector2(0, -37)
 
 [node name="shoot" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("3_jrwbg")
+volume_db = 4.0
 bus = &"SFX"
 
 [node name="ultCharge" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("4_wckgd")
-volume_db = 1.0
+volume_db = 6.0
 bus = &"SFX"
 
 [node name="ultFire" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("5_otpad")
-volume_db = 1.0
+volume_db = 6.0
 bus = &"SFX"
 
 [node name="death" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("6_d1uob")
+volume_db = 5.0
 bus = &"SFX"
 
 [node name="vfx" type="Node2D" parent="." node_paths=PackedStringArray("vfx_fire", "animation", "ultCharging", "chargeAnim", "loop_duration")]

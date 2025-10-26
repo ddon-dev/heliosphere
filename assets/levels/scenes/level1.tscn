@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://vga3y0ihxnq5"]
+[gd_scene load_steps=38 format=3 uid="uid://vga3y0ihxnq5"]
 
 [ext_resource type="AudioStream" uid="uid://bnlo75x57221q" path="res://assets/sound/music/geocities.ogg" id="1_hjb4x"]
 [ext_resource type="Script" uid="uid://cxmx4t5et4vkd" path="res://assets/levels/scripts/level_1.gd" id="1_irvpj"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://t124cnvohoyc" path="res://assets/sprites/ui/tutorial_ctrl.png" id="10_3pclb"]
 [ext_resource type="Texture2D" uid="uid://cbiwpx4g2gw2o" path="res://assets/sprites/ui/tutorial_shift.png" id="11_7lpgf"]
 [ext_resource type="Texture2D" uid="uid://da0cxn7qbiq1k" path="res://assets/sprites/ui/tutorial_f.png" id="12_7lpgf"]
+[ext_resource type="PackedScene" uid="uid://ci11jba0cpd3y" path="res://assets/levels/scenes/scene_transition.tscn" id="20_xcsiy"]
 
 [sub_resource type="Animation" id="Animation_wbbgv"]
 length = 0.001
@@ -447,6 +448,13 @@ bus = &"SFX"
 
 [node name="vfx" type="Node" parent="."]
 
+[node name="sceneTransition" parent="vfx" instance=ExtResource("20_xcsiy")]
+unique_name_in_owner = true
+size_flags_horizontal = 4
+mouse_filter = 2
+script = null
+metadata/_edit_use_anchors_ = true
+
 [node name="boss_warning" type="Node" parent="vfx"]
 
 [node name="Sprite2D" type="Sprite2D" parent="vfx/boss_warning"]
@@ -689,3 +697,5 @@ anchor_mode = 0
 [node name="shaker" type="Node2D" parent="CanvasLayer/Camera2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("5_7s2p4")
 camera = NodePath("..")
+
+[editable path="vfx/sceneTransition"]
