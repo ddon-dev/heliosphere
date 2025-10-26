@@ -42,10 +42,10 @@ func checkInput():
 					button.mouse_filter = 0
 	elif Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		focus_first_button()
 		for button in get_tree().get_nodes_in_group("Buttons"):
 			if button is Button or OptionButton or HSlider:
 				button.mouse_filter = 2
-		call_deferred("focus_first_button")	
 
 func continue_game():
 	sfx_pressed.play()

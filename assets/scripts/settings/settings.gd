@@ -14,7 +14,6 @@ func _ready() -> void:
 	
 func _input(event: InputEvent) -> void:
 	if GameManager.canPause:
-		checkInput()
 		if event.is_action_pressed("pause") or event.is_action_pressed("cancel"):
 			if visible:
 				sfx_pressed.play()
