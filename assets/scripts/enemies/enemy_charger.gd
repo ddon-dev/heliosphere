@@ -81,24 +81,24 @@ func dead(_dead):
 	var explosion = EXPLOSION.instantiate()
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position
-	explosion.reparent(get_tree().get_root())
+	explosion.reparent(get_tree().current_scene)
 	if item_drop <= 15:
 		var item_type: int = randi_range(0,50)
 		if item_type >= 25:
 			var las_item = LAS_ITEM.instantiate()
 			get_parent().add_child(las_item)
 			las_item.global_position = global_position
-			las_item.reparent(get_tree().get_root())
+			las_item.reparent(get_tree().current_scene)
 		else:
 			var spr_item = SPR_ITEM.instantiate()
 			get_parent().add_child(spr_item)
 			spr_item.global_position = global_position
-			spr_item.reparent(get_tree().get_root())
+			spr_item.reparent(get_tree().current_scene)
 	if oneUp_drop <= 2:
 		var _1up = _1UP_.instantiate()
 		get_parent().add_child(_1up)
 		_1up.global_position = global_position
-		_1up.reparent(get_tree().get_root())
+		_1up.reparent(get_tree().current_scene)
 	particles.emitting = true
-	particles.reparent(get_tree().get_root())
+	particles.reparent(get_tree().current_scene)
 	queue_free()

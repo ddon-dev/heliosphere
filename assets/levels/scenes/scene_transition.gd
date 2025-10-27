@@ -1,7 +1,7 @@
 extends Control
 
-@onready var animation: AnimationPlayer = $AnimationPlayer
-@onready var fade_color: ColorRect = $fadeColor
+@export var animation: AnimationPlayer
+@export var fade_color: ColorRect
 
 func fade_in():
 	fade_color.color = Color(0.0, 0.0, 0.0, 1.0)

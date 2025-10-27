@@ -84,19 +84,19 @@ func fire():
 		shoot_cooldown.start()
 		var projectile = projectile_type.instantiate()
 		projectile.position = projectile_spawn.global_position
-		get_tree().root.call_deferred("add_child", projectile)
+		get_tree().current_scene.call_deferred("add_child", projectile)
 		rateOfFire.start()
 		await rateOfFire.timeout
 		sfx_fire.play()
 		var projectile1 = projectile_type.instantiate()
 		projectile1.position = projectile_spawn.global_position
-		get_tree().root.call_deferred("add_child", projectile1)
+		get_tree().current_scene.call_deferred("add_child", projectile1)
 		rateOfFire.start()
 		await rateOfFire.timeout
 		sfx_fire.play()
 		var projectile2 = projectile_type.instantiate()
 		projectile2.position = projectile_spawn.global_position
-		get_tree().root.call_deferred("add_child", projectile2)
+		get_tree().current_scene.call_deferred("add_child", projectile2)
 
 func hurt(_hurt):
 	if hp <= 0 && isAlive:
@@ -135,7 +135,7 @@ func dead(_dead):
 	var explosion = EXPLOSION.instantiate()
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position
-	explosion.reparent(get_tree().get_root())
+	explosion.reparent(get_tree().current_scene)
 	particles.emitting = true
-	particles.reparent(get_tree().get_root())
+	particles.reparent(get_tree().current_scene)
 	queue_free()

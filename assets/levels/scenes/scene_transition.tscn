@@ -38,7 +38,7 @@ _data = {
 &"fade_out": SubResource("Animation_2ptao")
 }
 
-[node name="sceneTransition" type="Control"]
+[node name="sceneTransition" type="Control" node_paths=PackedStringArray("animation", "fade_color")]
 z_index = 10
 layout_mode = 3
 anchors_preset = 15
@@ -47,6 +47,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2dk26")
+animation = NodePath("animation")
+fade_color = NodePath("fadeColor")
 
 [node name="fadeColor" type="ColorRect" parent="."]
 layout_mode = 1

@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 func _on_lifetime_timeout() -> void:
 	if is_instance_valid(timeout_particles):
 		timeout_particles.emitting = true
-		timeout_particles.reparent(get_tree().get_root())
+		timeout_particles.reparent(get_tree().current_scene)
 		queue_free()
 
 # If the Ultimate/Super Attack collides with it, the projectile is deleted

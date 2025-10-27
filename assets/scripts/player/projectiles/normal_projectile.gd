@@ -22,9 +22,9 @@ func hit():
 	var particles = PARTICLES.instantiate()
 	get_parent().add_child(particles)
 	particles.global_position = global_position
-	particles.reparent(get_tree().get_root())
+	particles.reparent(get_tree().current_scene)
 	hit_sfx.hit()
-	hit_sfx.reparent(get_tree().get_root())
+	hit_sfx.reparent(get_tree().current_scene)
 	queue_free()
 
 # Deletes projectile when it exits the screen.
@@ -37,6 +37,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			area.hurt("hurt")
 			hasHit = true
 			hit_sfx.hit()
-			hit_sfx.reparent(get_tree().get_root())
+			hit_sfx.reparent(get_tree().current_scene)
 			if is_instance_valid(area):
 				hit()

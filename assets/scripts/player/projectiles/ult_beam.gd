@@ -23,11 +23,11 @@ func _on_time_between_hits_timeout() -> void:
 				if area.has_method("hurt"):
 					area.hurt("hurt")
 					hit_sfx.play()
-					hit_sfx.reparent(get_tree().get_root())
+					hit_sfx.reparent(get_tree().current_scene)
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if is_instance_valid(area):
 		if area.has_method("hurt"):
 			area.hurt("hurt")
 			hit_sfx.play()
-			hit_sfx.reparent(get_tree().get_root())
+			hit_sfx.reparent(get_tree().current_scene)

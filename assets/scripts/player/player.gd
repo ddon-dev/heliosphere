@@ -198,7 +198,7 @@ func death(_death):
 		var big_boom = EXPLOSION_BIG.instantiate()
 		get_parent().add_child(big_boom)
 		big_boom.global_position = global_position
-		big_boom.reparent(get_tree().get_root())
+		big_boom.reparent(get_tree().current_scene)
 		deathExplosionsTimer.stop()
 		visible = false
 		await sfx_death.finished
@@ -211,7 +211,7 @@ func death_explosions():
 	var small_boom = EXPLOSION_SMALL.instantiate()
 	get_parent().add_child(small_boom)
 	small_boom.global_position = global_position
-	small_boom.reparent(get_tree().get_root())
+	small_boom.reparent(get_tree().current_scene)
 # Makes the player invincible while respawning and making its sprite blink.
 # Prevents charge gain while respawning.
 func respawn():
