@@ -202,6 +202,7 @@ metadata/_edit_use_anchors_ = true
 [node name="settings" type="PanelContainer" parent="ig-menus/pause/MarginContainer" node_paths=PackedStringArray("prevOptions", "sfx_pressed")]
 process_mode = 3
 visible = false
+z_index = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -901,4 +902,5 @@ size_flags_horizontal = 4
 size_flags_vertical = 1
 mouse_filter = 2
 
+[connection signal="visibility_changed" from="ig-menus/pause/MarginContainer/settings" to="ig-menus/pause/MarginContainer/settings" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="ig-menus/pause/MarginContainer/VBoxContainer" to="ig-menus/pause" method="_on_v_box_container_visibility_changed"]

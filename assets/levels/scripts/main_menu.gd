@@ -12,13 +12,16 @@ extends PanelContainer
 @export var sfx_pressed: AudioStreamPlayer
 
 func _input(event: InputEvent) -> void:
-	checkInput()
+	if visible:
+		checkInput()
 
 func focus_first_button():
-	if load_game.visible:
-		%load_game.grab_focus()
+	if %load_game.visible:
+		if is_instance_valid(%load_game) and %load_game.is_inside_tree():
+			%load_game.grab_focus()
 	else:
-		%newGame.grab_focus()
+		if is_instance_valid(%newGame) and %newGame.is_inside_tree():
+			%newGame.grab_focus()
 		
 
 func _ready() -> void:
@@ -42,7 +45,7 @@ func checkInput():
 					button.mouse_filter = 0
 	elif Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		focus_first_button()
+		call_deferred("focus_first_button")
 		for button in get_tree().get_nodes_in_group("Buttons"):
 			if button is Button or OptionButton or HSlider:
 				button.mouse_filter = 2
@@ -82,13 +85,13 @@ func music_fade_out():
 	fade_out.tween_property(
 		level_music,
 		"volume_db",
-		-80,
+		-150,
 		7
 	)
 
 
 func _on_v_box_container_visibility_changed() -> void:
 	if visible && !checkInputDevice.isMouse:
-		focus_first_button()
+		call_deferred("focus_first_button")
 	elif visible && checkInputDevice.isMouse:
 		pass

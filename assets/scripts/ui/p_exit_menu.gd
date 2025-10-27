@@ -7,7 +7,8 @@ extends VBoxContainer
 
 
 func _input(event: InputEvent) -> void:
-	checkInput()
+	if visible:
+		checkInput()
 
 func _ready() -> void:
 	visible = false

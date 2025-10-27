@@ -34,9 +34,9 @@ func fire():
 				increment * i -
 				arc_rad / 2
 			)
-			get_tree().root.call_deferred("add_child", projectile)
+			get_tree().current_scene.call_deferred("add_child", projectile)
 	else:
 		var projectile = projectileType.instantiate()
 		bullet_count = 1
 		projectile.position = spawn_point.global_position
-		get_tree().root.call_deferred("add_child", projectile)
+		get_tree().current_scene.call_deferred("add_child", projectile)
